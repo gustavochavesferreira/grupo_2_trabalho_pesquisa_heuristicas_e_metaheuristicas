@@ -14,6 +14,7 @@ from executar_experimentos import RAIZ, PROPOSTAS, configuracao, conferir, exclu
 from piloto import executar_com_progresso, conferir_prazo
 from validar_execucao import exigir, linha_csv
 from verificar_congelamento import verificar
+from tabela_comparacao import gravar_tabela
 
 IDS = ['A14', 'cl_07_060_02', 'cl_09_060_02']
 EXTRAS = ['A23', 'cl_03_060_02']
@@ -115,6 +116,12 @@ def main():
             w=csv.DictWriter(f,fieldnames=list(resumos[0]));w.writeheader();w.writerows(resumos)
         (SAIDA/'integridade_ampliado.json').write_text(json.dumps(dict(valido=True,execucoes=60,
             uso='preliminar_TA_nao_seleciona_H_estrela',contratos_sha256=contratos),indent=2)+'\n')
+        linhas=[]
+        for (ids,saida),p in zip(blocos,planos):
+            for t in p['tarefas']:
+                d=saida/'calibration/congelada_v2/execucoes'/'__'.join(str(t[k]) for k in ['instancia','metodo','semente'])
+                linhas.append(linha_csv(next(f for f in d.glob('*.csv') if not f.name.endswith('.solucao.csv'))))
+        gravar_tabela(SAIDA/'tabela_comparacao.csv',linhas,PROPOSTAS,IDS+EXTRAS,SEMENTES)
         print(f'Piloto V1 ampliado concluído: 60 soluções validadas. Tabela: {SAIDA / "resumo_ampliado.csv"}')
     except TimeoutError as e:
         print(str(e),file=sys.stderr);return 124

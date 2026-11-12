@@ -1,0 +1,35 @@
+{
+  "arquivos": {
+    "cl_07_060_02__Hext__1003__congelada_v2.csv": "385e46aacf3046343be12d41fc3e2f6f3ed0c4f22c245b287c339fcc8668a4ce",
+    "cl_07_060_02__Hext__1003__congelada_v2.solucao.csv": "118db1af5170c5124b3babbff8e21fff0f97203f979ef66073abde790d62706f"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/bin/tp3",
+    "--instancia",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+    "--metodo",
+    "Hext",
+    "--config",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/ta_v1/calibration/congelada_v2/config.cfg",
+    "--semente",
+    "1003",
+    "--cpu",
+    "60",
+    "--saida",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/ta_v1/calibration/congelada_v2/.pendentes/cl_07_060_02__Hext__1003__6r6pan4w",
+    "--salvar-solucao"
+  ],
+  "contrato_sha256": "34805efeec063a0ba12b86d2ec47706f65229ab6c27ea5ddabd8e6465255b617",
+  "fim_utc": "2026-11-12T22:58:37.664865+00:00",
+  "inicio_utc": "2026-11-12T22:58:30.154490+00:00",
+  "tarefa": {
+    "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+    "familia": "CLASS",
+    "instancia": "cl_07_060_02",
+    "metodo": "Hext",
+    "semente": 1003,
+    "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+  },
+  "versao": 1
+}

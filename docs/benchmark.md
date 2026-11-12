@@ -25,6 +25,12 @@ arquivos exportados gera integridade_familias.json nesse mesmo diretório.
 Esse relatório confere as matrizes por família, sem realizar a análise
 estatística das Tarefas 27 e 28.
 
+Também gera tabela_comparacao.csv, com uma linha por método, após validar as
+9180 soluções. --analisar audita os completos e gera a tabela sem executar.
+--max-minutos N define um teto de parede por chamada; por padrão não há teto
+total. O limite por execução permanece 60 s de CPU. --planejar pode ser usado
+antes de existir H*, mas executar/analisar o completo exige o piloto formal.
+
 Mantenha o terminal aberto, desative a suspensão e deixe a máquina ligada à
 tomada. Não execute outros lotes dos algoritmos em paralelo. O teto nominal é
 153 horas de CPU (6 dias e 9 horas), mais preparação/auditoria; paradas por

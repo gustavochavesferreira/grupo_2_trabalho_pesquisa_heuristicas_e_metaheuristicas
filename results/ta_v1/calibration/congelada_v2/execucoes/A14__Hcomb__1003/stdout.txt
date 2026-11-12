@@ -1,0 +1,1 @@
+Resultado validado: /home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/ta_v1/calibration/congelada_v2/.pendentes/A14__Hcomb__1003__6qz_1qwq/A14__Hcomb__1003__congelada_v2.csv

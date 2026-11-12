@@ -1,0 +1,9 @@
+{
+  "valido": true,
+  "execucoes": 60,
+  "uso": "preliminar_TA_nao_seleciona_H_estrela",
+  "contratos_sha256": [
+    "34805efeec063a0ba12b86d2ec47706f65229ab6c27ea5ddabd8e6465255b617",
+    "a86fa6962ceb31e29ef40c8efd976f9a7ffe10e300031f7bb5da6d97ddb6d5ce"
+  ]
+}

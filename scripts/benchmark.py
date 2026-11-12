@@ -5,10 +5,13 @@ from collections import Counter
 import json
 import subprocess
 import sys
+import math
+import time
 
 from executar_experimentos import RAIZ, METODOS, SEMENTES, sha, conferir, configuracao, ler_manifesto
-from piloto import executar_com_progresso
-from validar_execucao import exigir
+from piloto import executar_com_progresso, conferir_prazo
+from validar_execucao import exigir, linha_csv
+from tabela_comparacao import gravar_tabela
 from verificar_congelamento import verificar
 
 
@@ -23,7 +26,7 @@ def preparar():
     return selo
 
 
-def auditar(selo):
+def auditar(selo, prazo=None):
     lote = RAIZ / 'results/final/congelada_v2'
     contrato_path = lote / 'contrato.json'
     contrato = json.loads(contrato_path.read_text())
@@ -37,13 +40,17 @@ def auditar(selo):
     nomes = {'__'.join(str(t[k]) for k in ['instancia', 'metodo', 'semente']) for t in tarefas}
     exigir({p.name for p in (lote / 'execucoes').iterdir()} == nomes, 'Resultados finais ausentes ou excedentes.')
     digest = sha(contrato_path)
+    linhas = []
     for i, t in enumerate(tarefas, 1):
+        conferir_prazo(prazo)
         pasta = lote / 'execucoes' / '__'.join(str(t[k]) for k in ['instancia', 'metodo', 'semente'])
         conferir(pasta, t, lote / 'config.cfg', config, 60, digest)
+        linhas.append(linha_csv(next(p for p in pasta.glob('*.csv') if not p.name.endswith('.solucao.csv'))))
         if i % 500 == 0 or i == len(tarefas):
             print(f'Auditoria final: {i}/9180.', flush=True)
     contagens = dict(Counter(t['familia'] for t in tarefas))
     exigir(contagens == {'A': 2280, 'BENG': 600, 'CLASS': 6300}, 'Contagens por família divergentes.')
+    gravar_tabela(lote/'tabela_comparacao.csv',linhas,METODOS,{r['identificador'] for r in final},SEMENTES)
     relatorio = {'valido': True, 'execucoes': 9180, 'familias': contagens,
                  'contrato_sha256': digest, 'h_estrela_sha256': sha(RAIZ / 'config/h_estrela_v2.json')}
     (lote / 'integridade_familias.json').write_text(json.dumps(relatorio, indent=2)+'\n')
@@ -53,10 +60,16 @@ def auditar(selo):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--planejar', action='store_true', help='Confere o plano sem executar algoritmos.')
+    grupo = parser.add_mutually_exclusive_group()
+    grupo.add_argument('--planejar', action='store_true', help='Confere o plano sem executar algoritmos.')
+    grupo.add_argument('--analisar', action='store_true', help='Audita resultados completos e gera tabela sem executar.')
+    parser.add_argument('--max-minutos',type=float,help='Teto total desta chamada; padrão sem teto de parede.')
     args = parser.parse_args()
+    if args.max_minutos is not None and (not math.isfinite(args.max_minutos) or args.max_minutos<=0):
+        parser.error('Teto deve ser positivo e finito.')
+    prazo = None if args.max_minutos is None else time.monotonic()+60*args.max_minutos
     try:
-        selo = preparar()
+        verificar()
         comando = [sys.executable, '-u', str(RAIZ / 'scripts/executar_experimentos.py'),
                    '--modo', 'final', '--config', str(RAIZ / 'config/congelada_v2.cfg')]
         if args.planejar:
@@ -65,9 +78,14 @@ def main():
             print('Plano: 153 instâncias × 6 métodos × 10 sementes × 60 s de CPU.')
             print('A: 2280; BENG: 600; CLASS: 6300. Total: 9180 execuções.')
             return 0
+        selo = preparar()
         print('Iniciando/retomando benchmark: 9180 execuções sequenciais.', flush=True)
-        executar_com_progresso(comando)
-        auditar(selo)
+        if not args.analisar:
+            executar_com_progresso(comando,prazo)
+        auditar(selo,prazo)
+    except TimeoutError as erro:
+        print(str(erro),file=sys.stderr)
+        return 124
     except KeyboardInterrupt:
         print('Interrompido. Repita python3 scripts/benchmark.py para retomar.', file=sys.stderr)
         return 130

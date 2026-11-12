@@ -1,5 +1,13 @@
 # Decisões de implementação — registro ativo
 
+- Para colaboração e TA, adicionado benchmark reduzido de 108 execuções: seis
+  métodos, seis instâncias finais selecionadas por regra documentada e três
+  sementes. Teto 60 s CPU por execução e 120 min de parede por chamada, retomável.
+  Não usa H* nem altera o piloto. A tabela geral é descritiva e exige matriz
+  completa; não substitui testes das hipóteses. Os dados do piloto concluído
+  permanecem intactos. Cada lote mantém ambiente único; colegas compartilham
+  a pasta completa e não misturam resultados entre computadores.
+
 - A pedido de ampliar o piloto preliminar para cerca de uma hora, adicionados
   A23 e CLASS 3/60/02 em bloco separado de 24 execuções (results/ta_v1_extra/),
   sem modificar o contrato original de 36. O mesmo comando completa os dois e

@@ -1,0 +1,20 @@
+{
+  "build": {
+    "CPPFLAGS": "-Iinclude",
+    "CXX": "g++",
+    "CXXFLAGS": "-std=c++20 -O2 -Wall -Wextra -Wpedantic",
+    "LDFLAGS": "",
+    "LDLIBS": ""
+  },
+  "compilador": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "cpu": "AMD Ryzen 3 5300U with Radeon Graphics",
+  "data_utc": "2026-11-12T23:13:38.500786+00:00",
+  "executavel_sha256": "dbfbf64cffe4a55f6da13610e14919d8254debad9893fb5926c8c3844f3001f0",
+  "fontes_sha256": "37564b72b02f29162acca2b77eee33a93895134206eb91f291965cfc6ea2f80f",
+  "kernel": "6.8.0-149-generic",
+  "orquestrador_sha256": "3ce281edd62ddc851cb07dcd449c794a9c80135f456428fb1dd9de0731959ba5",
+  "python": "3.12.3",
+  "ram": "MemTotal:        7460736 kB",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+  "validador_sha256": "d30e3b2813044b8245857310aaf81d97f6a9d24b16f049beb5c49ecf8e240afb"
+}
