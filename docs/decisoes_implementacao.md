@@ -50,3 +50,34 @@ Ainda não há decisões de implementação registradas.
   Descartou-se restringir o catálogo às 163 selecionadas, pois isso ocultaria
   dados fornecidos. Arquivos auxiliares README e descrição de formato são
   ignorados explicitamente; outros nomes não reconhecidos causam erro.
+
+## Tarefa 4 — Solução e verificação independente
+
+- **Representação:** chapas são identificadas por posição no vetor, a partir de
+  zero. Cada posicionamento guarda também esse índice, conferido pelo verificador,
+  além do ID da cópia, coordenadas, dimensões usadas e indicador de rotação.
+  O tipo é consultado na instância, evitando uma segunda atribuição de tipo que
+  possa divergir da origem. Rejeitam-se chapas vazias para que o tamanho do vetor
+  corresponda ao número de chapas efetivamente usadas. Testes cobrem índices
+  inconsistentes, cópias ausentes/duplicadas/desconhecidas e demandas por tipo.
+- **Verificação:** retorna o primeiro erro, compara todos os pares dentro de cada
+  chapa e usa desigualdades estritas para sobreposição. A contenção é verificada
+  antes das somas de coordenadas, evitando estouro mesmo em entradas malformadas.
+  Não se usa uma rotina de posicionamento como verificador. Os testes incluem
+  rotação, quadrados, bordas, vértices, chapas distintas e coordenadas extremas.
+- **Persistência:** CSV versão 1, documentado em `docs/formato_solucao.md`, uma
+  linha por cópia e interpretação junto da instância. A solução é validada antes
+  de abrir a saída; descartou-se gravar estados parciais ou inviáveis neste formato.
+  Testes conferem o conteúdo, falha de abertura e preservação do arquivo existente
+  quando a solução é inválida. A interface experimental continua reservada à Tarefa 18.
+
+## Ajuste de estilo solicitado pelo usuário
+
+Usar `using namespace std`, seguindo o código de exemplo, e passar valores simples
+por valor, sem acrescentar `const` ou referências por padrão. Referências ficam
+restritas a motivos concretos: evitar cópias de instâncias, soluções e vetores;
+operar sobre streams; modificar elementos existentes; e capturar exceções sem
+perder seu tipo dinâmico. Os parâmetros de entrada grandes permanecem `const`
+para permitir consulta sem cópia nem alteração. Esse padrão vale para as próximas
+tarefas. A revisão modifica somente o estilo; os testes existentes verificam a
+preservação do comportamento.

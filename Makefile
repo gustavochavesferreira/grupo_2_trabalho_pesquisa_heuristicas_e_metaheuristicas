@@ -2,12 +2,13 @@ CXX := g++
 CPPFLAGS := -Iinclude
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wpedantic
 
-COMMON_OBJS := obj/apresentacao.o obj/instancia.o
-OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/metadados_instancia.o
+COMMON_OBJS := obj/apresentacao.o obj/instancia.o obj/solucao.o obj/verificador_solucao.o
+OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/test_solucao.o obj/metadados_instancia.o
 DEPS := $(OBJS:.o=.d)
 EXE := bin/tp3
 TEST_EXE := bin/test_inicio
 INSTANCE_TEST_EXE := bin/test_instancia
+SOLUTION_TEST_EXE := bin/test_solucao
 
 .PHONY: all test clean catalog catalog-test
 
@@ -20,6 +21,9 @@ $(TEST_EXE): $(COMMON_OBJS) obj/test_inicio.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 $(INSTANCE_TEST_EXE): obj/instancia.o obj/test_instancia.o | bin
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+$(SOLUTION_TEST_EXE): obj/instancia.o obj/solucao.o obj/verificador_solucao.o obj/test_solucao.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 obj/%.o: src/%.cpp | obj
@@ -43,12 +47,13 @@ catalog: bin/metadados_instancia
 catalog-test: bin/metadados_instancia
 	python3 tests/test_catalogo.py
 
-test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE)
+test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE)
 	./$(TEST_EXE)
 	./$(INSTANCE_TEST_EXE)
+	./$(SOLUTION_TEST_EXE)
 	./$(EXE)
 
 clean:
-	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
+	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
 
 -include $(DEPS)
