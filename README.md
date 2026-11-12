@@ -25,9 +25,10 @@ make
 ./bin/tp3
 ```
 
-O executável apresenta o projeto. `Hbase` está disponível pela função C++
-`executa_hbase`, declarada em `include/hbase.h`; a interface experimental ainda
-não está implementada. Seus parâmetros padrão são provisórios, para calibração.
+O executável apresenta o projeto. As funções C++ `executa_hbase`, `executa_hext`,
+`executa_hint`, `executa_hcomb` e `executa_haleat` estão em `include/hbase.h`;
+`Haleat` é um controle auxiliar. A interface experimental ainda não está
+implementada e os parâmetros padrão são provisórios, para calibração.
 
 Para executar os testes e limpar os artefatos de compilação:
 

@@ -11,6 +11,7 @@ struct ResultadoEmpacotaBase {
     int64_t excesso_area = 0;
     vector<ResultadoDecodificacao> tentativas;
     int indice_melhor = -1;
+    bool contabilizado = false;
 };
 
 bool melhora_empacotamento(const ResultadoDecodificacao& candidata, const ResultadoDecodificacao& atual);

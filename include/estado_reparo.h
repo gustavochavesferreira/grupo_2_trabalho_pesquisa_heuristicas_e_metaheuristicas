@@ -1,7 +1,7 @@
 #ifndef ESTADO_REPARO_H
 #define ESTADO_REPARO_H
 
-#include "empacotador_base.h"
+#include "orientacao_externa.h"
 
 using namespace std;
 
@@ -26,8 +26,8 @@ Inviabilidade calcula_inviabilidade(const EstadoReparo& estado);
 bool menor_inviabilidade(Inviabilidade candidata, Inviabilidade atual);
 bool melhora_estado(const EstadoReparo& candidato, const EstadoReparo& atual);
 EstadoReparo cria_estado_reparo(const Instancia& instancia, const Solucao& solucao);
-void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador, CronometroCpu* relogio = nullptr);
-EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio = nullptr);
+void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador, CronometroCpu* relogio = nullptr, MecanismosBusca* mecanismos = nullptr);
+EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio = nullptr, MecanismosBusca* mecanismos = nullptr);
 Solucao solucao_do_reparo(const Instancia& instancia, const EstadoReparo& estado);
 
 #endif

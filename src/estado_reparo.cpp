@@ -44,13 +44,21 @@ EstadoReparo cria_estado_reparo(const Instancia& instancia, const Solucao& soluc
     return estado;
 }
 
-void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador, CronometroCpu* relogio) {
+void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador, CronometroCpu* relogio, MecanismosBusca* mecanismos) {
     ChapaReparo& chapa = estado.chapas.at(indice);
     auto anterior = chapa.resultado.sequencia;
     auto empacotamento = empacota_base(instancia, chapa.pecas, gerador, anterior, indice, relogio);
+    if (mecanismos != nullptr && mecanismos->eventos != nullptr) mecanismos->eventos->push_back(empacotamento.tentativas.empty() ? "excesso_area" : "tentativas_basicas");
+    if (mecanismos != nullptr && mecanismos->orientacao_externa) atualiza_historico(instancia, chapa.pecas, empacotamento, mecanismos->historico);
+    if (mecanismos != nullptr && mecanismos->eventos != nullptr && empacotamento.contabilizado) mecanismos->eventos->push_back("historico_atualizado");
     ResultadoDecodificacao resultado;
     if (empacotamento.indice_melhor >= 0) {
         resultado = empacotamento.tentativas[empacotamento.indice_melhor];
+        if (mecanismos != nullptr && mecanismos->orientacao_interna && !resultado.rejeitadas.empty()) {
+            if (mecanismos->eventos != nullptr) mecanismos->eventos->push_back("busca_interna");
+            if (mecanismos->controle_aleatorio) resultado = busca_interna_aleatoria(instancia, resultado, indice, mecanismos->metricas_internas, gerador, relogio);
+            else resultado = busca_interna(instancia, resultado, indice, mecanismos->metricas_internas, relogio);
+        }
     } else {
         // Sem decodificação por excesso de área: não se inventam rejeições nem posições.
         resultado.sequencia = anterior;
@@ -59,7 +67,7 @@ void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t i
     chapa.resultado = resultado;
 }
 
-EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio) {
+EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio, MecanismosBusca* mecanismos) {
     verifica_tempo(relogio);
     auto estado = cria_estado_reparo(instancia, solucao);
     if (estado.chapas.size() < 2) throw invalid_argument("Remoção exige pelo menos duas chapas.");
@@ -96,7 +104,7 @@ EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& sol
         alteradas[receptora] = true;
     }
     for (size_t c = 0; c < estado.chapas.size(); c++) {
-        if (alteradas[c]) reempacota_chapa(instancia, estado, c, gerador, relogio);
+        if (alteradas[c]) reempacota_chapa(instancia, estado, c, gerador, relogio, mecanismos);
     }
     return estado;
 }

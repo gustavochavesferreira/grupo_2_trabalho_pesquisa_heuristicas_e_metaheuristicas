@@ -91,7 +91,7 @@ void retira_peca(vector<int64_t>& pecas, int64_t id) {
     pecas.erase(posicao);
 }
 
-EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& estado, MovimentoExterno movimento, mt19937& gerador, CronometroCpu* relogio) {
+EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& estado, MovimentoExterno movimento, mt19937& gerador, CronometroCpu* relogio, MecanismosBusca* mecanismos) {
     if (movimento.vizinhanca < 1 || movimento.vizinhanca > 3 || movimento.origem == movimento.receptora ||
         movimento.origem >= estado.chapas.size() || movimento.receptora >= estado.chapas.size()) throw invalid_argument("Movimento externo inválido.");
     if (movimento.vizinhanca == 3 && movimento.base == movimento.parceiro) throw invalid_argument("O par precisa de duas cópias distintas.");
@@ -108,12 +108,12 @@ EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& es
     }
     destino.push_back(movimento.base);
     // A ordem crescente mantém o consumo do gerador independente de qual chapa é origem.
-    reempacota_chapa(instancia, candidato, min(movimento.origem, movimento.receptora), gerador, relogio);
-    reempacota_chapa(instancia, candidato, max(movimento.origem, movimento.receptora), gerador, relogio);
+    reempacota_chapa(instancia, candidato, min(movimento.origem, movimento.receptora), gerador, relogio, mecanismos);
+    reempacota_chapa(instancia, candidato, max(movimento.origem, movimento.receptora), gerador, relogio, mecanismos);
     return candidato;
 }
 
-ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoReparo& estado, int vizinhanca, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento) {
+ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoReparo& estado, int vizinhanca, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento, MecanismosBusca* mecanismos) {
     if (vizinhanca < 1 || vizinhanca > 3) throw invalid_argument("Vizinhança deve ser 1, 2 ou 3.");
     ResultadoVizinhanca resultado;
     resultado.estado = estado;
@@ -124,24 +124,33 @@ ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoR
         resultado.interrompida = true;
         return resultado;
     }
-    resultado.bases = amostra_bases_uniforme(estado, origem, instancia.copias.size(), gerador);
+    if (mecanismos != nullptr && mecanismos->orientacao_externa) resultado.bases = amostra_bases_ponderada(instancia, estado.chapas[origem].pecas, tamanho_amostra, mecanismos->historico, gerador);
+    else resultado.bases = amostra_bases_uniforme(estado, origem, instancia.copias.size(), gerador);
+    bool escolhida_orientada = false;
+    vector<bool> bases_orientadas;
+    for (int64_t base : resultado.bases) bases_orientadas.push_back(mecanismos != nullptr && mecanismos->orientacao_externa && peso_externo(instancia, composicao_chapa(instancia, estado.chapas[origem].pecas), base, mecanismos->historico) > 1);
+    size_t indice_base = 0;
     for (int64_t base : resultado.bases) {
         verifica_tempo(relogio);
+        bool orientada = bases_orientadas[indice_base++];
         auto movimento = cria_movimento(instancia, estado, origem, base, vizinhanca, gerador);
         if (movimento.receptora == estado.chapas.size()) continue;
-        auto candidato = aplica_movimento(instancia, estado, movimento, gerador, relogio);
+        auto candidato = aplica_movimento(instancia, estado, movimento, gerador, relogio, mecanismos);
+        if (orientada) mecanismos->historico.metricas.movimentos_orientados++;
         resultado.avaliados++;
         if (orcamento != nullptr) orcamento->usadas++;
         if (melhora_estado(candidato, resultado.estado)) {
             resultado.estado = candidato;
             resultado.escolhido = movimento;
             resultado.melhorou = true;
+            escolhida_orientada = orientada;
         }
     }
+    if (resultado.melhorou && escolhida_orientada) mecanismos->historico.metricas.melhorias_aceitas++;
     return resultado;
 }
 
-ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento) {
+ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento, MecanismosBusca* mecanismos) {
     verifica_tempo(relogio);
     vector<bool> vistas(instancia.copias.size(), false);
     size_t quantidade = 0;
@@ -161,7 +170,7 @@ ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado,
     resultado.estado = estado;
     int vizinhanca = 1;
     while (vizinhanca <= 3 && calcula_inviabilidade(resultado.estado).chapas_inviaveis > 0) {
-        auto passo = explora_vizinhanca(instancia, resultado.estado, vizinhanca, gerador, relogio, orcamento);
+        auto passo = explora_vizinhanca(instancia, resultado.estado, vizinhanca, gerador, relogio, orcamento, mecanismos);
         if (passo.interrompida) { resultado.limite_reparo = true; break; }
         resultado.avaliacoes[vizinhanca - 1] += passo.avaliados;
         if (passo.melhorou) {

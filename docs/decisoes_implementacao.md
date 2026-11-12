@@ -280,3 +280,81 @@ preservação do comportamento.
   a busca, perturbação reproduzível e casos bidimensionais. A reprodução exata é
   conferida com limite de CPU folgado e parada por critérios de operações/LBref.
   Não foram executados calibração, piloto ou benchmark.
+
+## Tarefa 12 — Hext
+
+- O histórico usa um vetor de multiplicidades por índice de tipo como chave da
+  composição, independente da ordem/IDs das cópias. O e F contam cópias por
+  tentativa (inclusive demandas repetidas), somente nas oito falhas sem excesso.
+  A marca `contabilizado` acompanha o resultado e suas cópias. A atualização ocorre
+  na geração do empacotamento, antes de ele ser armazenado ou copiado; consultas
+  de pesos não atualizam nada. Resultados de candidatos rejeitados também alimentam
+  o histórico: são oportunidades observadas na mesma tentativa de redução.
+- O contexto compartilhado transporta histórico e métricas por VND, remoção e
+  perturbação. A arquitetura de Hbase é reutilizada por Hext; somente a seleção
+  de bases muda. A cada nova redução limpa-se o mapa, preservando os contadores
+  acumulados da execução. Não se recontam resultados anteriores após esse reinício.
+- A amostragem ponderada usa `discrete_distribution`, removendo cópia e peso após
+  cada sorteio. Peso é 1+F/max(1,O), sem excluir tipos. Conta-se movimento orientado
+  quando a base tinha peso maior que 1 no instante da amostragem; a melhoria aceita
+  usa esse mesmo indicador, congelado antes de avaliar os candidatos.
+- Testes: O=16/F=8 para duas cópias do mesmo tipo em oito falhas, contagem única
+  após cópia/consulta, composição independente da ordem, pesos, amostra sem
+  reposição e reproduzível, reinício, exclusão de chamadas completas/excessivas
+  e integração com a arquitetura. Hbase mantém seus testes e seleção uniforme.
+
+## Tarefa 13 — Hint
+
+- A busca adicional inicia na melhor tentativa básica incompleta e antecipa a
+  primeira rejeitada por inserção; esgotadas as até oito posições anteriores,
+  tenta trocas nas mesmas posições, sempre da mais próxima à mais distante.
+  Aceita a primeira melhoria lexicográfica (área, quantidade rejeitada), reinicia
+  pela nova primeira rejeição e encerra em sucesso, ausência de melhoria ou 16
+  decodificações adicionais no total da ativação, sem renovar o teto após melhorar.
+- As métricas contam ativações, decodificações concluídas, melhorias aceitas e
+  ativações que terminam completas. Chamadas já completas/excessivas não ativam
+  o mecanismo. O contexto integra o mesmo empacotador aos fluxos de remoção,
+  movimentos e perturbação, preservando as oito tentativas básicas separadas do
+  resultado final. Hint mantém seleção externa uniforme e não coleta histórico.
+- Uma trilha opcional de movimentos (origem, destino, operação), desativada na
+  execução normal, permite verificar a ordem efetiva sem guardar cópias de todas
+  as sequências. Os testes cobrem ordem de inserções/trocas, reinício após melhoria,
+  teto de 16, conservação e integração. Um caso de oito tentativas falhas melhora
+  área rejeitada de 5 para 4; dez quadrados 3x3 em chapa 10x10 exercitam exatamente
+  16 avaliações sem melhoria, com área total que cabe na chapa.
+
+## Tarefa 14 — Controle auxiliar Haleat
+
+- Haleat reutiliza a mesma função interna de Hint: mesmos operadores, comparação,
+  oito posições no máximo por rodada, teto global de 16 decodificações e mesmas
+  condições de aceitação/parada. A diferença é sortear a peça e a ordem das posições.
+  Sorteia-se uma posição entre 1 e n-1, pois a posição zero não tem predecessoras;
+  as até oito posições são amostradas sem reposição entre todas as anteriores,
+  mantendo o operador de antecipação. Inserção e troca usam a mesma lista sorteada.
+  Após melhorar, sorteiam-se novamente peça e posições. O esforço efetivamente
+  usado pode variar, como em Hint; o orçamento máximo é idêntico.
+- O gerador é o mesmo da execução, passado explicitamente, sem sementes locais.
+  O resultado identifica método Haleat e `controle_auxiliar=true`; a seleção externa
+  continua uniforme e não há coleta de histórico. Não é uma quinta proposta.
+- Testes cobrem 30 sementes, reprodução dos movimentos e do estado do gerador,
+  orçamento, conservação, distinção das escolhas guiadas e integração validada.
+
+## Tarefa 15 — Hcomb
+
+- Hcomb ativa os dois mecanismos na arquitetura comum, sem duplicar VND, VNS
+  ou empacotamento. Cada chamada termina as oito tentativas básicas, contabiliza
+  suas falhas no histórico externo e só então chama a busca interna guiada.
+  A busca recebe a melhor tentativa por cópia e preserva os resultados básicos;
+  suas decodificações adicionais alteram apenas o resultado usado no reparo e as
+  métricas internas. Uma nova chamada básica é uma nova observação; consultas
+  repetidas ao mesmo resultado continuam protegidas pela marca `contabilizado`.
+- Um registro opcional de eventos, desativado normalmente, protege a ordem de
+  integração nos testes. No caso dirigido de chapa 8x7, oito falhas básicas
+  alimentam O/F uma vez e a busca interna completa o empacotamento após onze
+  decodificações adicionais. Os contadores externos são comparados aos obtidos
+  diretamente das oito tentativas, incluindo após cópias e novas consultas.
+- Os testes também conferem o caso de excesso de área sem histórico nem busca
+  interna, a diferença entre Hext e Hcomb no mesmo empacotamento básico e duas
+  execuções reproduzíveis da configuração combinada. Toda solução final passa
+  pelo verificador independente. Não foram executados experimentos formais;
+  os parâmetros seguem provisórios e a interface de execução pertence à Tarefa 18.

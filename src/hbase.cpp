@@ -8,7 +8,7 @@
 
 using namespace std;
 
-EstadoReparo perturba_estado(const Instancia& instancia, const EstadoReparo& estado, size_t quantidade_chapas, mt19937& gerador, CronometroCpu* relogio) {
+EstadoReparo perturba_estado(const Instancia& instancia, const EstadoReparo& estado, size_t quantidade_chapas, mt19937& gerador, CronometroCpu* relogio, MecanismosBusca* mecanismos) {
     if (quantidade_chapas < 2 || estado.chapas.size() < 2) throw invalid_argument("Perturbação exige duas ou mais chapas.");
     verifica_tempo(relogio);
     auto candidato = estado;
@@ -32,7 +32,7 @@ EstadoReparo perturba_estado(const Instancia& instancia, const EstadoReparo& est
     uniform_int_distribution<size_t> inicio(0, quantidade - 1);
     size_t deslocamento = inicio(gerador);
     for (size_t i = 0; i < pecas.size(); i++) candidato.chapas[selecionadas[(i + deslocamento) % quantidade]].pecas.push_back(pecas[i]);
-    for (size_t c : selecionadas) reempacota_chapa(instancia, candidato, c, gerador, relogio);
+    for (size_t c : selecionadas) reempacota_chapa(instancia, candidato, c, gerador, relogio, mecanismos);
     return candidato;
 }
 
@@ -46,11 +46,17 @@ bool aceita_reducao(const Instancia& instancia, const EstadoReparo& estado, Resu
     return true;
 }
 
-ResultadoHbase executa_hbase(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config, bool orientacao_externa, bool orientacao_interna, bool controle_aleatorio) {
     CronometroCpu relogio(limite_cpu);
     if (config.chapas_perturbadas < 2) throw invalid_argument("Configure pelo menos duas chapas perturbadas.");
     mt19937 gerador(semente);
     ResultadoHbase resultado;
+    MecanismosBusca mecanismos;
+    mecanismos.orientacao_externa = orientacao_externa;
+    mecanismos.orientacao_interna = orientacao_interna;
+    mecanismos.controle_aleatorio = controle_aleatorio;
+    resultado.controle_auxiliar = controle_aleatorio;
+    resultado.metodo = controle_aleatorio ? "Haleat" : (orientacao_interna ? (orientacao_externa ? "Hcomb" : "Hint") : (orientacao_externa ? "Hext" : "Hbase"));
     // Sem solução inicial completa não há resultado factível para devolver.
     resultado.solucao = constroi_solucao_inicial(instancia, &relogio);
     resultado.tempo_melhor = relogio.decorrido();
@@ -63,21 +69,22 @@ ResultadoHbase executa_hbase(const Instancia& instancia, uint32_t semente, doubl
             relogio.verifica();
             if (config.max_avaliacoes_reparo == 0) break;
             resultado.tentativas_reducao++;
-            auto estado = remove_e_redistribui(instancia, resultado.solucao, gerador, &relogio);
+            if (orientacao_externa) reinicia_historico(mecanismos.historico);
+            auto estado = remove_e_redistribui(instancia, resultado.solucao, gerador, &relogio, &mecanismos);
             size_t reinicios = 0;
             bool reduziu = false;
             // O orçamento é compartilhado por todas as descidas desta redução.
             while (true) {
                 relogio.verifica();
-                auto descida = executa_vnd(instancia, estado, gerador, &relogio, &orcamento);
+                auto descida = executa_vnd(instancia, estado, gerador, &relogio, &orcamento, &mecanismos);
                 estado = descida.estado;
                 if (aceita_reducao(instancia, estado, resultado, relogio)) { reduziu = true; break; }
                 if (descida.limite_reparo || reinicios >= config.max_reinicios || estado.chapas.size() < 2) break;
                 relogio.verifica();
-                auto perturbado = perturba_estado(instancia, estado, config.chapas_perturbadas, gerador, &relogio);
+                auto perturbado = perturba_estado(instancia, estado, config.chapas_perturbadas, gerador, &relogio, &mecanismos);
                 resultado.perturbacoes++;
                 reinicios++;
-                auto reparado = executa_vnd(instancia, perturbado, gerador, &relogio, &orcamento);
+                auto reparado = executa_vnd(instancia, perturbado, gerador, &relogio, &orcamento, &mecanismos);
                 if (melhora_estado(reparado.estado, estado)) estado = reparado.estado;
                 if (aceita_reducao(instancia, estado, resultado, relogio)) { reduziu = true; break; }
                 if (reparado.limite_reparo) break;
@@ -94,6 +101,28 @@ ResultadoHbase executa_hbase(const Instancia& instancia, uint32_t semente, doubl
     resultado.avaliacoes = acumuladas + orcamento.usadas;
     auto verificacao = verifica_solucao(instancia, resultado.solucao);
     if (!verificacao.valido) throw runtime_error("Hbase terminou com solução inválida: " + verificacao.erro);
+    resultado.orientacao_externa = mecanismos.historico.metricas;
+    resultado.orientacao_interna = mecanismos.metricas_internas;
     resultado.tempo_total = relogio.decorrido();
     return resultado;
+}
+
+ResultadoHbase executa_hbase(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+    return executa_arquitetura(instancia, semente, limite_cpu, config, false, false, false);
+}
+
+ResultadoHbase executa_hext(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+    return executa_arquitetura(instancia, semente, limite_cpu, config, true, false, false);
+}
+
+ResultadoHbase executa_hint(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+    return executa_arquitetura(instancia, semente, limite_cpu, config, false, true, false);
+}
+
+ResultadoHbase executa_haleat(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+    return executa_arquitetura(instancia, semente, limite_cpu, config, false, true, true);
+}
+
+ResultadoHbase executa_hcomb(const Instancia& instancia, uint32_t semente, double limite_cpu, ConfigHbase config) {
+    return executa_arquitetura(instancia, semente, limite_cpu, config, true, true, false);
 }
