@@ -15,6 +15,6 @@ struct ResultadoEmpacotaBase {
 
 bool melhora_empacotamento(const ResultadoDecodificacao& candidata, const ResultadoDecodificacao& atual);
 ResultadoEmpacotaBase empacota_base(const Instancia& instancia, const vector<int64_t>& pecas, mt19937& gerador,
-                                  const vector<int64_t>& sequencia_anterior = {}, size_t indice_chapa = 0);
+                                  const vector<int64_t>& sequencia_anterior = {}, size_t indice_chapa = 0, CronometroCpu* relogio = nullptr);
 
 #endif

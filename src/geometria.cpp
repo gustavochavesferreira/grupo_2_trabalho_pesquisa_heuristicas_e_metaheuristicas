@@ -29,7 +29,7 @@ bool posicao_livre(Posicionamento p, const Chapa& chapa, int64_t largura, int64_
     return true;
 }
 
-vector<PontoCanto> pontos_canto(const Chapa& chapa, int64_t largura, int64_t altura) {
+vector<PontoCanto> pontos_canto(const Chapa& chapa, int64_t largura, int64_t altura, CronometroCpu* relogio) {
     vector<int64_t> xs{0}, ys{0};
     for (Posicionamento p : chapa.posicionamentos) {
         if (!contido_na_chapa(p, largura, altura)) throw invalid_argument("Chapa contém posicionamento fora dos limites.");
@@ -44,6 +44,7 @@ vector<PontoCanto> pontos_canto(const Chapa& chapa, int64_t largura, int64_t alt
     // Projeções cruzadas incluem cantos criados por bordas de peças diferentes.
     for (int64_t y : ys) {
         for (int64_t x : xs) {
+            verifica_tempo(relogio);
             bool ocupado = false;
             for (Posicionamento p : chapa.posicionamentos) {
                 if (x >= p.x && x < p.x + p.largura && y >= p.y && y < p.y + p.altura) {

@@ -7,13 +7,15 @@
 
 using namespace std;
 
-bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa& chapa, size_t indice_chapa) {
+bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa& chapa, size_t indice_chapa, CronometroCpu* relogio) {
+    verifica_tempo(relogio);
     TipoPeca tipo = instancia.tipos.at(copia.indice_tipo);
     int64_t id = copia.id;
     bool encontrou = false;
     Posicionamento melhor{};
-    auto pontos = pontos_canto(chapa, instancia.largura, instancia.altura);
+    auto pontos = pontos_canto(chapa, instancia.largura, instancia.altura, relogio);
     for (PontoCanto ponto : pontos) {
+        verifica_tempo(relogio);
         for (bool gira : {false, true}) {
             if (gira && tipo.largura == tipo.altura) continue;
             Posicionamento p{id, indice_chapa, ponto.x, ponto.y,
@@ -36,7 +38,7 @@ bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa
     return encontrou;
 }
 
-ResultadoDecodificacao decodifica_inferior_esquerdo(const Instancia& instancia, const vector<int64_t>& sequencia, size_t indice_chapa) {
+ResultadoDecodificacao decodifica_inferior_esquerdo(const Instancia& instancia, const vector<int64_t>& sequencia, size_t indice_chapa, CronometroCpu* relogio) {
     unordered_map<int64_t, size_t> tipos;
     for (CopiaPeca copia : instancia.copias) tipos.emplace(copia.id, copia.indice_tipo);
     unordered_set<int64_t> vistas;
@@ -48,7 +50,7 @@ ResultadoDecodificacao decodifica_inferior_esquerdo(const Instancia& instancia, 
     for (size_t i = 0; i < sequencia.size(); ++i) {
         int64_t id = sequencia[i];
         TipoPeca tipo = instancia.tipos.at(tipos.at(id));
-        if (!insere_inferior_esquerdo(instancia, {id, tipos.at(id)}, resultado.chapa, indice_chapa)) {
+        if (!insere_inferior_esquerdo(instancia, {id, tipos.at(id)}, resultado.chapa, indice_chapa, relogio)) {
             resultado.rejeitadas.push_back(id);
             resultado.area_rejeitada += tipo.largura * tipo.altura;
             if (resultado.primeira_rejeitada == -1) {

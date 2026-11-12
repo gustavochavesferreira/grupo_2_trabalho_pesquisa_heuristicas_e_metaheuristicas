@@ -44,10 +44,10 @@ EstadoReparo cria_estado_reparo(const Instancia& instancia, const Solucao& soluc
     return estado;
 }
 
-void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador) {
+void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t indice, mt19937& gerador, CronometroCpu* relogio) {
     ChapaReparo& chapa = estado.chapas.at(indice);
     auto anterior = chapa.resultado.sequencia;
-    auto empacotamento = empacota_base(instancia, chapa.pecas, gerador, anterior, indice);
+    auto empacotamento = empacota_base(instancia, chapa.pecas, gerador, anterior, indice, relogio);
     ResultadoDecodificacao resultado;
     if (empacotamento.indice_melhor >= 0) {
         resultado = empacotamento.tentativas[empacotamento.indice_melhor];
@@ -59,7 +59,8 @@ void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t i
     chapa.resultado = resultado;
 }
 
-EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador) {
+EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio) {
+    verifica_tempo(relogio);
     auto estado = cria_estado_reparo(instancia, solucao);
     if (estado.chapas.size() < 2) throw invalid_argument("Remoção exige pelo menos duas chapas.");
     size_t removida = 0;
@@ -95,7 +96,7 @@ EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& sol
         alteradas[receptora] = true;
     }
     for (size_t c = 0; c < estado.chapas.size(); c++) {
-        if (alteradas[c]) reempacota_chapa(instancia, estado, c, gerador);
+        if (alteradas[c]) reempacota_chapa(instancia, estado, c, gerador, relogio);
     }
     return estado;
 }

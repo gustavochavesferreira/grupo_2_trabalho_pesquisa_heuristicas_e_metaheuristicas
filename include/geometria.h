@@ -2,6 +2,7 @@
 #define GEOMETRIA_H
 
 #include "solucao.h"
+#include "tempo_cpu.h"
 
 using namespace std;
 
@@ -13,6 +14,6 @@ struct PontoCanto {
 bool contido_na_chapa(Posicionamento p, int64_t largura, int64_t altura);
 bool sobrepoe(Posicionamento a, Posicionamento b);
 bool posicao_livre(Posicionamento p, const Chapa& chapa, int64_t largura, int64_t altura);
-vector<PontoCanto> pontos_canto(const Chapa& chapa, int64_t largura, int64_t altura);
+vector<PontoCanto> pontos_canto(const Chapa& chapa, int64_t largura, int64_t altura, CronometroCpu* relogio = nullptr);
 
 #endif

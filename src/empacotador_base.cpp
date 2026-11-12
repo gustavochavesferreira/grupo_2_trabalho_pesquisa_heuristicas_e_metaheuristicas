@@ -14,7 +14,8 @@ bool melhora_empacotamento(const ResultadoDecodificacao& candidata, const Result
 }
 
 ResultadoEmpacotaBase empacota_base(const Instancia& instancia, const vector<int64_t>& pecas, mt19937& gerador,
-                                  const vector<int64_t>& sequencia_anterior, size_t indice_chapa) {
+                                  const vector<int64_t>& sequencia_anterior, size_t indice_chapa, CronometroCpu* relogio) {
+    verifica_tempo(relogio);
     unordered_map<int64_t, size_t> tipos;
     for (CopiaPeca copia : instancia.copias) tipos.emplace(copia.id, copia.indice_tipo);
     unordered_set<int64_t> conjunto;
@@ -50,6 +51,7 @@ ResultadoEmpacotaBase empacota_base(const Instancia& instancia, const vector<int
 
     size_t limite_escolha = static_cast<size_t>(ceil(sqrt(static_cast<long double>(pecas.size()))));
     for (int tentativa = 0; tentativa < 8; tentativa++) {
+        verifica_tempo(relogio);
         vector<int64_t> sequencia;
         if (tentativa == 0) {
             sequencia = ordenadas;
@@ -65,7 +67,7 @@ ResultadoEmpacotaBase empacota_base(const Instancia& instancia, const vector<int
                 restantes.erase(restantes.begin() + escolhida);
             }
         }
-        resultado.tentativas.push_back(decodifica_inferior_esquerdo(instancia, sequencia, indice_chapa));
+        resultado.tentativas.push_back(decodifica_inferior_esquerdo(instancia, sequencia, indice_chapa, relogio));
         if (resultado.indice_melhor == -1 || melhora_empacotamento(resultado.tentativas.back(), resultado.tentativas[resultado.indice_melhor])) {
             resultado.indice_melhor = tentativa;
         }

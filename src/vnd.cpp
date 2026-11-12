@@ -91,7 +91,7 @@ void retira_peca(vector<int64_t>& pecas, int64_t id) {
     pecas.erase(posicao);
 }
 
-EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& estado, MovimentoExterno movimento, mt19937& gerador) {
+EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& estado, MovimentoExterno movimento, mt19937& gerador, CronometroCpu* relogio) {
     if (movimento.vizinhanca < 1 || movimento.vizinhanca > 3 || movimento.origem == movimento.receptora ||
         movimento.origem >= estado.chapas.size() || movimento.receptora >= estado.chapas.size()) throw invalid_argument("Movimento externo inválido.");
     if (movimento.vizinhanca == 3 && movimento.base == movimento.parceiro) throw invalid_argument("O par precisa de duas cópias distintas.");
@@ -108,23 +108,30 @@ EstadoReparo aplica_movimento(const Instancia& instancia, const EstadoReparo& es
     }
     destino.push_back(movimento.base);
     // A ordem crescente mantém o consumo do gerador independente de qual chapa é origem.
-    reempacota_chapa(instancia, candidato, min(movimento.origem, movimento.receptora), gerador);
-    reempacota_chapa(instancia, candidato, max(movimento.origem, movimento.receptora), gerador);
+    reempacota_chapa(instancia, candidato, min(movimento.origem, movimento.receptora), gerador, relogio);
+    reempacota_chapa(instancia, candidato, max(movimento.origem, movimento.receptora), gerador, relogio);
     return candidato;
 }
 
-ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoReparo& estado, int vizinhanca, mt19937& gerador) {
+ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoReparo& estado, int vizinhanca, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento) {
     if (vizinhanca < 1 || vizinhanca > 3) throw invalid_argument("Vizinhança deve ser 1, 2 ou 3.");
     ResultadoVizinhanca resultado;
     resultado.estado = estado;
     size_t origem = escolhe_origem(estado);
     if (origem == estado.chapas.size() || estado.chapas.size() < 2) return resultado;
+    size_t tamanho_amostra = min(estado.chapas[origem].pecas.size(), static_cast<size_t>(ceil(sqrt(static_cast<long double>(instancia.copias.size())))));
+    if (orcamento != nullptr && (orcamento->usadas >= orcamento->limite_avaliacoes || orcamento->limite_avaliacoes - orcamento->usadas < tamanho_amostra)) {
+        resultado.interrompida = true;
+        return resultado;
+    }
     resultado.bases = amostra_bases_uniforme(estado, origem, instancia.copias.size(), gerador);
     for (int64_t base : resultado.bases) {
+        verifica_tempo(relogio);
         auto movimento = cria_movimento(instancia, estado, origem, base, vizinhanca, gerador);
         if (movimento.receptora == estado.chapas.size()) continue;
-        auto candidato = aplica_movimento(instancia, estado, movimento, gerador);
+        auto candidato = aplica_movimento(instancia, estado, movimento, gerador, relogio);
         resultado.avaliados++;
+        if (orcamento != nullptr) orcamento->usadas++;
         if (melhora_estado(candidato, resultado.estado)) {
             resultado.estado = candidato;
             resultado.escolhido = movimento;
@@ -134,7 +141,8 @@ ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoR
     return resultado;
 }
 
-ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado, mt19937& gerador) {
+ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado, mt19937& gerador, CronometroCpu* relogio, OrcamentoVnd* orcamento) {
+    verifica_tempo(relogio);
     vector<bool> vistas(instancia.copias.size(), false);
     size_t quantidade = 0;
     for (const ChapaReparo& chapa : estado.chapas) {
@@ -153,7 +161,8 @@ ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado,
     resultado.estado = estado;
     int vizinhanca = 1;
     while (vizinhanca <= 3 && calcula_inviabilidade(resultado.estado).chapas_inviaveis > 0) {
-        auto passo = explora_vizinhanca(instancia, resultado.estado, vizinhanca, gerador);
+        auto passo = explora_vizinhanca(instancia, resultado.estado, vizinhanca, gerador, relogio, orcamento);
+        if (passo.interrompida) { resultado.limite_reparo = true; break; }
         resultado.avaliacoes[vizinhanca - 1] += passo.avaliados;
         if (passo.melhorou) {
             resultado.estado = passo.estado;

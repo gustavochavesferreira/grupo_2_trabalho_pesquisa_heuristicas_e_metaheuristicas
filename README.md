@@ -25,8 +25,9 @@ make
 ./bin/tp3
 ```
 
-Neste estágio, o executável apenas apresenta o projeto; as heurísticas ainda
-não estão implementadas.
+O executável apresenta o projeto. `Hbase` está disponível pela função C++
+`executa_hbase`, declarada em `include/hbase.h`; a interface experimental ainda
+não está implementada. Seus parâmetros padrão são provisórios, para calibração.
 
 Para executar os testes e limpar os artefatos de compilação:
 

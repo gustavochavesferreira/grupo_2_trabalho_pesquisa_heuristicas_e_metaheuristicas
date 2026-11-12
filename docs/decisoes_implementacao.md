@@ -240,3 +240,43 @@ preservação do comportamento.
   e reprodução. Outros 60 estados com semente fixa passam pela descida; a
   geometria é conferida independentemente, completando rejeitadas em chapas
   individuais somente nos testes. Estados reparados passam pela conversão validada.
+
+## Tarefa 11 — VNS, orçamento e Hbase
+
+- **Perturbação:** sorteiam-se sem reposição `min(chapas_perturbadas, K)` chapas,
+  juntam-se suas cópias, embaralha-se o conjunto e redistribui-se circularmente
+  entre as selecionadas, com deslocamento inicial uniforme. Reempacotam-se somente
+  essas chapas, em ordem crescente de índice. A distribuição pode repetir uma
+  composição anterior; não se força uma mudança por tentativas ilimitadas. Esse
+  procedimento mantém K e todas as cópias, sem acrescentar um critério de aceitação
+  à perturbação. A aceitação ocorre depois do VND, como no Algoritmo 1.
+- **Configuração provisória:** duas chapas perturbadas, até cinco perturbações/reinícios
+  e 1000 avaliações de candidatos por tentativa de redução. São valores
+  explícitos em `ConfigHbase`, ainda não calibrados nem congelados. `max_reinicios`
+  limita as chamadas de perturbação; os reinícios internos do VND não o consomem.
+  O orçamento de avaliações é compartilhado por todas as descidas da redução e
+  reiniciado após uma redução aceita. Valor zero desliga a tentativa de reparo.
+  Antes de iniciar uma vizinhança, reserva-se capacidade para toda a amostra;
+  se ela não couber, interrompe-se o reparo sem aceitar amostra parcial.
+- **Integração:** constrói-se uma solução validada, calcula-se LBref e tenta-se
+  reduzir K. Executa-se VND(X); se continuar inviável e houver orçamento, executa-se
+  VND(Perturba(X)). O estado perturbado só substitui X por melhoria estrita.
+  Soluções globais só mudam após conversão e validação independente, com menos
+  chapas. Após aceitar uma redução, começa nova tentativa; a primeira redução
+  não reparada encerra Hbase. A semente inicializa um único `mt19937` por execução.
+- **CPU:** `clock_gettime(CLOCK_PROCESS_CPUTIME_ID)` mede o processo desde antes
+  da construção, incluindo limites inferiores, validações e busca. O mesmo relógio
+  opcional atravessa VND, perturbação, empacotamento, decodificação e geração de
+  cantos; chamadas antigas sem relógio preservam seu comportamento. Se o prazo
+  expirar durante um candidato ou uma amostra, eles não são aceitos parcialmente;
+  devolve-se a última solução factível. Se ainda não houver solução inicial
+  completa, lança-se `TempoEsgotado`, sem fabricar resultado. As checagens são
+  cooperativas: uma operação atômica, como validação ou ordenação, pode terminar
+  após o prazo; o tempo efetivo é informado sem truncamento. A parada por CPU não
+  garante o mesmo número de operações entre máquinas.
+- **Verificação:** redução conhecida de três para duas chapas, alcance inicial de
+  LBref, falha de reparo sem perda da incumbente, limites de reinícios e avaliações,
+  rejeição de configurações inválidas, interrupção antes da construção e durante
+  a busca, perturbação reproduzível e casos bidimensionais. A reprodução exata é
+  conferida com limite de CPU folgado e parada por critérios de operações/LBref.
+  Não foram executados calibração, piloto ou benchmark.

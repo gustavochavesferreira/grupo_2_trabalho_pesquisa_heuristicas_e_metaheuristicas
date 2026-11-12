@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Solucao constroi_solucao_inicial(const Instancia& instancia) {
+Solucao constroi_solucao_inicial(const Instancia& instancia, CronometroCpu* relogio) {
+    verifica_tempo(relogio);
     vector<CopiaPeca> ordenadas = instancia.copias;
     sort(ordenadas.begin(), ordenadas.end(), [&](CopiaPeca a, CopiaPeca b) {
         TipoPeca ta = instancia.tipos.at(a.indice_tipo);
@@ -32,7 +33,7 @@ Solucao constroi_solucao_inicial(const Instancia& instancia) {
         });
         bool inseriu = false;
         for (size_t c : candidatas) {
-            if (insere_inferior_esquerdo(instancia, copia, solucao.chapas[c], c)) {
+            if (insere_inferior_esquerdo(instancia, copia, solucao.chapas[c], c, relogio)) {
                 areas_ocupadas[c] += area;
                 inseriu = true;
                 break;
@@ -40,7 +41,7 @@ Solucao constroi_solucao_inicial(const Instancia& instancia) {
         }
         if (!inseriu) {
             Chapa nova;
-            if (!insere_inferior_esquerdo(instancia, copia, nova, solucao.chapas.size())) {
+            if (!insere_inferior_esquerdo(instancia, copia, nova, solucao.chapas.size(), relogio)) {
                 throw runtime_error("Cópia não cabe em uma chapa vazia: " + to_string(copia.id));
             }
             solucao.chapas.push_back(nova);
