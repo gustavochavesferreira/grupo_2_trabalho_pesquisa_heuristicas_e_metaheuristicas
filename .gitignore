@@ -25,3 +25,8 @@ __pycache__/
 !/results/pilot/
 /results/pilot/**/.pendentes/
 /results/pilot/**/invalidos/
+
+# Resultados preliminares para o TA.
+!/results/ta_v1/
+/results/ta_v1/**/.pendentes/
+/results/ta_v1/**/invalidos/

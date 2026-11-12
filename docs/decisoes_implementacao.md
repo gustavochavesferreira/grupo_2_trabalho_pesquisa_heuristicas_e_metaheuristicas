@@ -1,5 +1,11 @@
 # Decisões de implementação — registro ativo
 
+- Para a entrega preliminar V1, o usuário pediu três sementes e menos instâncias.
+  Criado piloto_v1.py com A14 e CLASS 7/60/02 e 9/60/02, quatro métodos e três
+  sementes: 36 execuções com até 60 s de CPU e 45 min de parede por chamada.
+  Não escolhe H* oficial. O parcial formal foi movido sob trava livre para
+  /tmp/tp3_piloto_parcial.qedoXN, preservando recuperação. Ver docs/piloto_v1.md.
+
 - Por solicitação do usuário, fixados 1 milhão de candidatos e 50000 reinícios
   por tentativa de redução, duas chapas perturbadas e 60 segundos de CPU.
   A escolha sucede exploração que incluiu instâncias finais; não se reivindica
