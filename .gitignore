@@ -30,3 +30,6 @@ __pycache__/
 !/results/ta_v1/
 /results/ta_v1/**/.pendentes/
 /results/ta_v1/**/invalidos/
+!/results/ta_v1_extra/
+/results/ta_v1_extra/**/.pendentes/
+/results/ta_v1_extra/**/invalidos/

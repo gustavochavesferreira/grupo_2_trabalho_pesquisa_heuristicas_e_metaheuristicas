@@ -1,5 +1,11 @@
 # Decisões de implementação — registro ativo
 
+- A pedido de ampliar o piloto preliminar para cerca de uma hora, adicionados
+  A23 e CLASS 3/60/02 em bloco separado de 24 execuções (results/ta_v1_extra/),
+  sem modificar o contrato original de 36. O mesmo comando completa os dois e
+  publica resumo_ampliado.csv com as 60 execuções, exigindo mesmo ambiente.
+  O teto de parede padrão passou a 75 minutos; CPU permanece 60 s por execução.
+
 - Para a entrega preliminar V1, o usuário pediu três sementes e menos instâncias.
   Criado piloto_v1.py com A14 e CLASS 7/60/02 e 9/60/02, quatro métodos e três
   sementes: 36 execuções com até 60 s de CPU e 45 min de parede por chamada.

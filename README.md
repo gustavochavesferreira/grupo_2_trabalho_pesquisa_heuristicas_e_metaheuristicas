@@ -61,7 +61,7 @@ Piloto com progresso, retomada e teto total de sete horas:
 `python3 scripts/piloto.py --max-minutos 420`.
 Veja [docs/piloto.md](docs/piloto.md).
 
-Piloto preliminar reduzido para a V1 do TA (36 execuções):
+Piloto preliminar para a V1 do TA (60 execuções, até uma hora de CPU):
 `python3 scripts/piloto_v1.py`. Veja [docs/piloto_v1.md](docs/piloto_v1.md).
 
 Benchmark final completo com progresso e retomada: `python3 scripts/benchmark.py`.
