@@ -427,3 +427,62 @@ preservação do comportamento.
   reprodução em 30 sementes. Há testes de CPU real, validação independente,
   configurações inválidas e marcos sintéticos com instantes conhecidos.
   Não foram executados calibração, piloto ou benchmark.
+
+## Tarefa 18 — Interface e registro
+
+- A CLI exige instância, método, configuração chave=valor, semente, CPU positiva e
+  diretório de saída; exportar a solução é uma opção. Rejeita opções/chaves extras,
+  duplicadas, ausentes ou numericamente inválidas, sem escolher sementes implícitas.
+  A configuração fornecida contém os valores provisórios existentes. Estado/ID e
+  todos os parâmetros carregados são registrados; não se declara congelamento
+  científico antes da Tarefa 21. Menores tetos da RLS servem para testes.
+- Um módulo de evolução agora é compartilhado pelas seis configurações. A função
+  anterior da RLS permanece como delegação compatível. A arquitetura registra
+  disponibilidade da construção e cada redução aceita, com as mesmas regras
+  temporais da Tarefa 17. Não se alteraram movimentos, aceitação ou parâmetros;
+  somente acrescentaram-se registros. O motivo de CPU também considera as
+  operações finais cronometradas, como já ocorria na RLS.
+- CSV versão 1, com uma linha por execução, precisão de double, f7 decimal exato
+  de 128 bits e escape de caminhos/nome. Métricas inaplicáveis e marcos anteriores
+  à inicial ficam vazios, distinguindo-os de zero. Unidades de avaliações diferem
+  explicitamente entre candidatos externos e f7. Família segue os nomes do
+  catálogo; arquivos fora do padrão ficam OUTRA. Nenhum manifesto é alterado.
+- A camada de saída valida novamente a solução antes de criar arquivos e confere
+  limites, tempos, evolução, parada e f7/perfil. A exportação reutiliza o formato
+  da Tarefa 4. Nomes determinísticos incluem instância/método/semente/config_id;
+  recusa-se sobrescrita, em vez de apagar ou substituir resultados. Retomada,
+  coordenação de processos e publicação por arquivo temporário ficam na Tarefa 20.
+- Preservou-se a fronteira de CPU das Tarefas 11/17: leitura/configuração e saída
+  em disco ficam fora do método; construção, limites, busca, validações internas
+  e evolução estão dentro. As checagens cooperativas e a ausência de resultado
+  antes da inicial continuam explícitas. A interface usa código 3 nesse caso,
+  código 1 para outros erros e 0 no sucesso.
+- Testes C++ e da CLI real cobrem argumentos/configurações inválidos, evolução
+  com tempos conhecidos, rejeição de resultados inválidos antes de criar saída,
+  proteção contra sobrescrita, CSV/solução, escape e f7 acima de uint64. Não
+  houve calibração, piloto ou benchmark. Detalhes em docs/execucao.md.
+
+## Tarefa 19 — Integração das seis configurações
+
+- Um alvo separado `make integration-test` mantém a integração explícita, sem
+  iniciar experimentos. A Tarefa 18 passou em `make -j2 test` antes deste trabalho.
+  Usam-se seis casos pequenos, quatro em tests/data/integracao/ e dois já
+  existentes, cobrindo LBref inicial, redução conhecida, falha de reparo/teto da
+  RLS, orientação interna, demandas repetidas, rotação e áreas acima de 32 bits.
+- A matriz C++ faz 144 execuções (seis métodos, seis instâncias, duas sementes,
+  duas repetições). Confere solução pelo verificador independente, cópias/tipos,
+  reprodução de posicionamentos e contadores, isolamento dos mecanismos,
+  evolução, orçamentos e paradas. Mais seis execuções verificam interrupção por
+  CPU real sem perder a incumbente. Comparações reproduzíveis usam teto de
+  operações e CPU folgada; contagens sob interrupção temporal não são comparadas.
+- Pela CLI, 48 execuções repetidas cobrem quatro casos e todos os métodos. Um
+  leitor CSV e verificador geométrico em Python, independente dos módulos C++,
+  reconstrói as soluções exportadas e confere demandas, cópias, orientações,
+  contenção e ausência de sobreposição. Perfil/f7 são conferidos por soma de
+  colunas. O cabeçalho, aplicabilidade das métricas, configuração, LBref,
+  evolução e controle auxiliar também são verificados. Outras 12 chamadas
+  exercitam CPU com e sem inicial, conferindo presença/ausência de arquivos.
+- As execuções de cada teste são sequenciais, com sementes explícitas e saídas
+  temporárias. Não se exigem tempos de CPU iguais entre repetições; exige-se
+  igualdade de soluções e métricas de operações quando o limite temporal não
+  encerra a busca. Não houve calibração, piloto, preflight ou benchmark.

@@ -36,13 +36,14 @@ EstadoReparo perturba_estado(const Instancia& instancia, const EstadoReparo& est
     return candidato;
 }
 
-bool aceita_reducao(const Instancia& instancia, const EstadoReparo& estado, ResultadoHbase& resultado, CronometroCpu& relogio) {
+bool aceita_reducao(const Instancia& instancia, const EstadoReparo& estado, ResultadoHbase& resultado, CronometroCpu& relogio, vector<pair<double, int64_t>>& melhorias) {
     if (calcula_inviabilidade(estado).chapas_inviaveis != 0) return false;
     auto candidata = solucao_do_reparo(instancia, estado);
     if (candidata.chapas.size() >= resultado.solucao.chapas.size()) throw runtime_error("Reparo não reduziu o número de chapas.");
     resultado.solucao = candidata;
     resultado.reducoes_aceitas++;
     resultado.tempo_melhor = relogio.decorrido();
+    melhorias.push_back({resultado.tempo_melhor, static_cast<int64_t>(resultado.solucao.chapas.size())});
     return true;
 }
 
@@ -60,6 +61,7 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
     // Sem solução inicial completa não há resultado factível para devolver.
     resultado.solucao = constroi_solucao_inicial(instancia, &relogio);
     resultado.tempo_melhor = relogio.decorrido();
+    vector<pair<double, int64_t>> melhorias{{resultado.tempo_melhor, static_cast<int64_t>(resultado.solucao.chapas.size())}};
     resultado.limites = calcula_limites(instancia);
     resultado.motivo_parada = "orcamento_reparo";
     OrcamentoVnd orcamento{config.max_avaliacoes_reparo, 0};
@@ -78,7 +80,7 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
                 relogio.verifica();
                 auto descida = executa_vnd(instancia, estado, gerador, &relogio, &orcamento, &mecanismos);
                 estado = descida.estado;
-                if (aceita_reducao(instancia, estado, resultado, relogio)) { reduziu = true; break; }
+                if (aceita_reducao(instancia, estado, resultado, relogio, melhorias)) { reduziu = true; break; }
                 if (descida.limite_reparo || reinicios >= config.max_reinicios || estado.chapas.size() < 2) break;
                 relogio.verifica();
                 auto perturbado = perturba_estado(instancia, estado, config.chapas_perturbadas, gerador, &relogio, &mecanismos);
@@ -86,7 +88,7 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
                 reinicios++;
                 auto reparado = executa_vnd(instancia, perturbado, gerador, &relogio, &orcamento, &mecanismos);
                 if (melhora_estado(reparado.estado, estado)) estado = reparado.estado;
-                if (aceita_reducao(instancia, estado, resultado, relogio)) { reduziu = true; break; }
+                if (aceita_reducao(instancia, estado, resultado, relogio, melhorias)) { reduziu = true; break; }
                 if (reparado.limite_reparo) break;
             }
             acumuladas += orcamento.usadas;
@@ -103,7 +105,9 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
     if (!verificacao.valido) throw runtime_error("Hbase terminou com solução inválida: " + verificacao.erro);
     resultado.orientacao_externa = mecanismos.historico.metricas;
     resultado.orientacao_interna = mecanismos.metricas_internas;
+    resultado.evolucao = calcula_evolucao(melhorias, resultado.limites.referencia);
     resultado.tempo_total = relogio.decorrido();
+    if (resultado.motivo_parada != "limite_inferior" && resultado.tempo_total >= limite_cpu) resultado.motivo_parada = "limite_cpu";
     return resultado;
 }
 

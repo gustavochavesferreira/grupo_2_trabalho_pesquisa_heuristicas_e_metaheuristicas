@@ -3,6 +3,7 @@
 
 #include "vnd.h"
 #include "limites_inferiores.h"
+#include "evolucao.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ struct ResultadoHbase {
     double tempo_total = 0;
     double tempo_melhor = 0;
     string motivo_parada;
+    vector<MarcoEvolucao> evolucao;
 };
 
 EstadoReparo perturba_estado(const Instancia& instancia, const EstadoReparo& estado, size_t quantidade_chapas, mt19937& gerador, CronometroCpu* relogio = nullptr, MecanismosBusca* mecanismos = nullptr);

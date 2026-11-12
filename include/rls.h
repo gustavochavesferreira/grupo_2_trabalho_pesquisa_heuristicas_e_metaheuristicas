@@ -3,6 +3,7 @@
 
 #include "decodificador_ibl.h"
 #include "limites_inferiores.h"
+#include "evolucao.h"
 #include <random>
 #include <utility>
 
@@ -19,12 +20,7 @@ struct MovimentoRls {
     uint64_t sorteios_parceiro = 0;
 };
 
-struct MarcoRls {
-    double tempo = 0;
-    bool disponivel = false;
-    int64_t chapas = 0;
-    double desvio = 0;
-};
+using MarcoRls = MarcoEvolucao;
 
 struct ResultadoRls {
     string metodo = "RLS-f7";

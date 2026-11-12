@@ -22,19 +22,23 @@ Requer GNU Make e GCC (`g++`) com suporte a C++20. Na raiz do repositório:
 
 ```bash
 make
-./bin/tp3
+./bin/tp3 --ajuda
+./bin/tp3 --instancia tests/data/valida.txt --metodo Hcomb \
+  --config config/provisoria.cfg --semente 1001 --cpu 1 \
+  --saida results/teste --salvar-solucao
 ```
 
-O executável apresenta o projeto. As funções C++ `executa_hbase`, `executa_hext`,
-`executa_hint`, `executa_hcomb` e `executa_haleat` estão em `include/hbase.h`;
-`executa_rls`, de `RLS-f7`, está em `include/rls.h`. `Haleat` é um controle auxiliar.
-A interface experimental ainda não está implementada e os parâmetros padrão
-da arquitetura de reparo são provisórios, para calibração.
+Troque o caminho pela instância fornecida manualmente. Métodos: `Hbase`, `Hext`,
+`Hint`, `Hcomb`, `Haleat` (controle auxiliar) e `RLS-f7`. O limite é de CPU em
+segundos. Cada execução gera um CSV validado; salvar a solução é opcional.
+A configuração de exemplo é provisória, ainda sem calibração ou congelamento.
+Argumentos, configuração e campos do CSV: [docs/execucao.md](docs/execucao.md).
 
 Para executar os testes e limpar os artefatos de compilação:
 
 ```bash
 make test
+make integration-test
 make clean
 ```
 

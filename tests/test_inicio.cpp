@@ -13,7 +13,7 @@ int main() {
     string texto = saida.str();
 
     // A apresentação deve distinguir as propostas dos controles e informar o estágio real.
-    for (string trecho : {"TP3", "Hbase, Hext, Hint e Hcomb", "Controle auxiliar: Haleat", "Comparadora da literatura: RLS-f7", "Hbase, Hext, Hint, Hcomb, Haleat e RLS-f7 disponíveis na biblioteca C++", "interface experimental ainda não implementada"}) {
+    for (string trecho : {"TP3", "Hbase, Hext, Hint e Hcomb", "Controle auxiliar: Haleat", "Comparadora da literatura: RLS-f7", "Hbase, Hext, Hint, Hcomb, Haleat e RLS-f7 disponíveis na biblioteca C++", "interface de linha de comando disponível"}) {
         if (texto.find(trecho) == string::npos) {
             throw runtime_error("Apresentação incompleta: " + trecho);
         }
