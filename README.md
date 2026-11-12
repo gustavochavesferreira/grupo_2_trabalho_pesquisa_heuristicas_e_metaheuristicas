@@ -24,14 +24,14 @@ Requer GNU Make e GCC (`g++`) com suporte a C++20. Na raiz do repositório:
 make
 ./bin/tp3 --ajuda
 ./bin/tp3 --instancia tests/data/valida.txt --metodo Hcomb \
-  --config config/provisoria.cfg --semente 1001 --cpu 1 \
+  --config config/congelada_v2.cfg --semente 1001 --cpu 1 \
   --saida results/teste --salvar-solucao
 ```
 
 Troque o caminho pela instância fornecida manualmente. Métodos: `Hbase`, `Hext`,
 `Hint`, `Hcomb`, `Haleat` (controle auxiliar) e `RLS-f7`. O limite é de CPU em
 segundos. Cada execução gera um CSV validado; salvar a solução é opcional.
-A configuração de exemplo é provisória, ainda sem calibração ou congelamento.
+A configuração científica ativa é `config/congelada_v2.cfg`.
 Argumentos, configuração e campos do CSV: [docs/execucao.md](docs/execucao.md).
 
 Para executar os testes e limpar os artefatos de compilação:
@@ -54,16 +54,13 @@ Discrete Applied Mathematics, 118:13–24, 2002 (equação 8, após CUTSQ).
 Para planejar lotes sequenciais e retomáveis, consulte
 [docs/experimentos.md](docs/experimentos.md). As sementes comuns estão em `config/sementes.txt`.
 
-Plano de calibração: [docs/calibracao.md](docs/calibracao.md).
-
-Calibração concluída: [resultado e limites de interpretação](docs/resultado_calibracao.md).
-Configuração comum: `config/congelada_v1.cfg`; confira o selo com
+Configuração do piloto final: `config/congelada_v2.cfg`; confira o selo com
 `python3 scripts/verificar_congelamento.py` antes das próximas etapas.
 
-Pré-execução técnica concluída: [docs/preflight.md](docs/preflight.md).
-
-Piloto formal com execução, retomada e seleção de H*: `python3 scripts/piloto.py`.
+Piloto com progresso, retomada e teto total de sete horas:
+`python3 scripts/piloto.py --max-minutos 420`.
 Veja [docs/piloto.md](docs/piloto.md).
 
 Benchmark final completo com progresso e retomada: `python3 scripts/benchmark.py`.
 Instruções: [docs/benchmark.md](docs/benchmark.md).
+

@@ -18,7 +18,7 @@ dez sementes e até 60 segundos de CPU por execução, sempre sequenciais. A bar
 mostra concluídas/9180 e porcentagem, avançando entre execuções. Na retomada,
 resultados existentes são auditados e contam no progresso quando conferidos.
 
-Resultados são salvos automaticamente em results/final/congelada_v1/execucoes/:
+Resultados são salvos automaticamente em results/final/congelada_v2/execucoes/:
 CSV, solução geométrica, recibo e logs por execução. Contrato, configuração e
 ambiente ficam no diretório do lote. Ao final, uma auditoria independente dos
 arquivos exportados gera integridade_familias.json nesse mesmo diretório.
@@ -43,7 +43,7 @@ python3 scripts/benchmark.py --planejar
 Os resultados finais permanecem ignorados pelo Git por padrão, conforme a regra
 geral de results/. Faça cópia de segurança do diretório completo. Para versionar
 explicitamente ao terminar, revise o tamanho dos dados e use git add -f somente
-em results/final/congelada_v1/execucoes/, contrato.json, ambiente.json,
+em results/final/congelada_v2/execucoes/, contrato.json, ambiente.json,
 config.cfg e integridade_familias.json; não inclua .pendentes/ ou invalidos/.
 
 Preparar o comando não significa executar as Tarefas 24 a 26. Elas estarão

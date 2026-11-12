@@ -21,18 +21,6 @@ __pycache__/
 /PROMPT_MESTRE_TA.md
 /PROMPT_MESTRE.md
 
-# Artefatos científicos da calibração da Tarefa 21.
-!/results/calibration/
-/results/calibration/**/.pendentes/
-/results/calibration/**/invalidos/
-
-# Pré-execução: versionar somente plano e comprovação técnica.
-!/results/preflight/
-/results/preflight/*
-!/results/preflight/plano.json
-!/results/preflight/integridade.json
-!/results/preflight/retomada.json
-
 # Piloto formal: preservar dados brutos, resumos e ambiente no versionamento.
 !/results/pilot/
 /results/pilot/**/.pendentes/

@@ -3,14 +3,13 @@
 Requer Linux, Python 3.9+ (biblioteca padrão), GNU Make e GCC C++20. Na raiz:
 
 ```bash
-python3 scripts/executar_experimentos.py --modo calibration \
-  --config config/provisoria.cfg --planejar
+python3 scripts/piloto.py --planejar
 ```
 
 `--planejar` confere configuração, seleção, sementes e hashes das instâncias e
 mostra a matriz, sem compilar ou executar métodos. Remover essa opção inicia o
-lote. A Tarefa 20 implementa a infraestrutura; não executa a calibração formal,
-que precisa da grade e do critério definidos na Tarefa 21.
+lote. A configuração científica ativa é config/congelada_v2.cfg. Comando com
+teto total de sete horas: `python3 scripts/piloto.py --max-minutos 420`.
 
 | Modo | Instâncias | Métodos | Sementes/CPU |
 |---|---|---|---|
@@ -19,10 +18,10 @@ que precisa da grade e do critério definidos na Tarefa 21.
 | `preflight` | 153 finais, disjuntas do piloto | seis | uma semente comum/CPU curta, padrão 1001/1 segundo: 918 execuções |
 | `final` | 153 finais; aceita subconjunto para separar famílias | seis | dez sementes/60 segundos: 9180 execuções no conjunto completo |
 
-Os modos posteriores à calibração exigem `estado=congelado` e teto da RLS de
-100000000. Essa declaração não faz calibração nem substitui o congelamento da
-Tarefa 21 ou a seleção de H* da Tarefa 22. Não altere manualmente o estado da
-configuração provisória para pular essas etapas.
+Os modos pilot/preflight/final exigem `estado=congelado` e teto da RLS de
+100000000. O piloto verifica o selo v2 e seleciona H* somente após validar sua
+matriz completa. O modo genérico calibration permanece para testes da
+infraestrutura; nenhum estudo histórico depende dele no fluxo ativo.
 
 Opções: `--config ARQUIVO` e `--modo` são obrigatórios; `--saida DIRETORIO`
 padrão `results/`; `--source DIRETORIO` padrão `instances/source/` para os dados

@@ -3,19 +3,19 @@
 import json
 from pathlib import Path
 
-from executar_experimentos import RAIZ, sha
+from executar_experimentos import RAIZ, sha, configuracao
 from validar_execucao import exigir
 
 
 def verificar(config=None, selo=None, sementes=None):
-    config = config or RAIZ / 'config/congelada_v1.cfg'
+    config = config or RAIZ / 'config/congelada_v2.cfg'
     selo = selo or config.with_suffix('.json')
     sementes = sementes or RAIZ / 'config/sementes.txt'
     dados = json.loads(selo.read_text())
     exigir(dados['config_sha256'] == sha(config), 'Configuração congelada foi alterada.')
     exigir(dados['sementes_sha256'] == sha(sementes), 'Sementes comuns foram alteradas.')
-    exigir(dados['plano_sha256'] == sha(RAIZ / 'docs/calibracao.md'), 'Plano de calibração foi alterado.')
-    exigir(dados['execucoes_validas'] == 160, 'Congelamento sem calibração completa.')
+    exigir(dados['versao'] == 2, 'Versão do selo inválida.')
+    exigir(dados['parametros'] == configuracao(config), 'Parâmetros diferem do selo.')
     return dados
 
 

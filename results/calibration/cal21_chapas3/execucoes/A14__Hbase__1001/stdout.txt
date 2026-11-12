@@ -1,1 +1,0 @@
-Resultado validado: /home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_chapas3/.pendentes/A14__Hbase__1001__5byipg6j/A14__Hbase__1001__cal21_chapas3.csv

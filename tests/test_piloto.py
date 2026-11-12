@@ -2,6 +2,9 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import subprocess
+import time
+import json
 from unittest.mock import patch
 
 RAIZ = Path(__file__).resolve().parents[1]
@@ -10,6 +13,28 @@ import piloto
 
 
 class Piloto(unittest.TestCase):
+    def test_prazo_interrompe_filho_silencioso(self):
+        inicio = time.monotonic()
+        with self.assertRaises(TimeoutError):
+            piloto.executar_com_progresso([sys.executable, '-c',
+                'import time,signal; signal.signal(signal.SIGINT, lambda a,b: exit(130)); time.sleep(30)'], inicio+0.25)
+        self.assertLess(time.monotonic()-inicio, 5)
+
+    def test_prazo_vencido_nao_inicia_filho(self):
+        with patch.object(piloto.subprocess, 'Popen') as popen:
+            with self.assertRaises(TimeoutError):
+                piloto.executar_com_progresso(['inexistente'], time.monotonic()-1)
+            popen.assert_not_called()
+
+    def test_plano_v2_sem_executar(self):
+        p = subprocess.run([sys.executable, '-B', str(RAIZ/'scripts/piloto.py'), '--planejar'],
+                           capture_output=True, text=True, check=True)
+        dados = json.loads(p.stdout)
+        self.assertEqual(dados['execucoes'], 400)
+        self.assertEqual(dados['cpu'], 60)
+        self.assertEqual(dados['config']['max_reinicios'], '50000')
+        self.assertEqual(dados['config']['max_avaliacoes_reparo'], '1000000')
+
     def test_progresso_execucao_e_retomada(self):
         self.assertEqual(piloto.progresso_da_linha('[1/400] Executando: caso'), (0, 400))
         self.assertEqual(piloto.progresso_da_linha('[2/400] Executando: caso'), (1, 400))
@@ -36,10 +61,10 @@ class Piloto(unittest.TestCase):
 
     def test_sem_matriz_nao_congela(self):
         with tempfile.TemporaryDirectory() as t:
-            with patch.object(piloto, 'RAIZ', Path(t)), patch.object(piloto, 'verificar'), patch.object(piloto, 'configuracao', return_value={'id':'congelada_v1'}):
+            with patch.object(piloto, 'RAIZ', Path(t)), patch.object(piloto, 'verificar'), patch.object(piloto, 'configuracao', return_value={'id':'congelada_v2'}):
                 with self.assertRaises(FileNotFoundError):
                     piloto.analisar()
-            self.assertFalse((Path(t)/'config/h_estrela_v1.json').exists())
+            self.assertFalse((Path(t)/'config/h_estrela_v2.json').exists())
 
 
 if __name__ == '__main__':

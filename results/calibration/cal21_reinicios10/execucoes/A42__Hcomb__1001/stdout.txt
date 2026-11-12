@@ -1,1 +1,0 @@
-Resultado validado: /home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_reinicios10/.pendentes/A42__Hcomb__1001__vnwkmn2s/A42__Hcomb__1001__cal21_reinicios10.csv

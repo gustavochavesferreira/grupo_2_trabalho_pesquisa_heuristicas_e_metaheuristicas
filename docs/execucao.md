@@ -4,7 +4,7 @@ Na raiz, compile com `make`. `./bin/tp3 --ajuda` lista a interface.
 
 ```bash
 ./bin/tp3 --instancia tests/data/valida.txt --metodo Hcomb \
-  --config config/provisoria.cfg --semente 1001 --cpu 1 \
+  --config config/congelada_v2.cfg --semente 1001 --cpu 1 \
   --saida results/teste --salvar-solucao
 ```
 
@@ -32,18 +32,19 @@ obrigatórias; chaves extras/repetidas são rejeitadas.
 
 ```text
 versao=1
-id=provisoria_v1
-estado=provisorio
+id=congelada_v2
+estado=congelado
 chapas_perturbadas=2
-max_reinicios=5
-max_avaliacoes_reparo=1000
+max_reinicios=50000
+max_avaliacoes_reparo=1000000
 rls_max_avaliacoes=100000000
 ```
 
 `id` começa com letra/número ASCII e usa letras, números, `_`, `-` ou `.`.
 `estado` declara `provisorio` ou `congelado`; o programa não calibra nem congela
-parâmetros. O arquivo fornecido é **provisório**. O congelamento científico será
-feito na Tarefa 21, antes dos experimentos formais. Cada registro inclui todos
+parâmetros. A configuração ativa é config/congelada_v2.cfg, protegida por selo
+SHA-256. config/provisoria.cfg permanece apenas como fixture dos testes automatizados.
+Cada registro inclui todos
 os valores efetivamente carregados, além do caminho, ID e estado da configuração.
 
 `chapas_perturbadas` deve ser pelo menos 2. Reinícios e avaliações de reparo
