@@ -1,5 +1,17 @@
 # Decisões de implementação
 
+## Preparação das Tarefas 24 a 26 — comando único
+
+- A pedido do usuário, scripts/benchmark.py executa a matriz final completa em
+  um único contrato, preservando ordem do manifesto, parâmetros e orquestrador.
+  Reutiliza a barra do piloto e audita as 9180 soluções ao terminar, conferindo
+  2280 A, 600 BENG e 6300 CLASS. Relatório local: integridade_familias.json.
+- A escolha de H* e os hashes de configuração, sementes, manifesto e contrato
+  do piloto são conferidos antes da execução. O ambiente final pode ser o de
+  outra máquina, mas deve permanecer constante durante o lote retomável.
+- Esta preparação não executou o benchmark científico. A verificação usa
+  --planejar, sem iniciar algoritmos cronometrados.
+
 Este registro é cumulativo e preserva as decisões não determinadas diretamente pelo
 TP3, pelas fontes acadêmicas ou pelo código existente. Cada entrada futura deve
 informar a tarefa, a decisão, a justificativa, as alternativas relevantes descartadas

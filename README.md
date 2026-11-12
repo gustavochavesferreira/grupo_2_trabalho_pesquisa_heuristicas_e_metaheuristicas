@@ -64,3 +64,6 @@ Pré-execução técnica concluída: [docs/preflight.md](docs/preflight.md).
 
 Piloto formal com execução, retomada e seleção de H*: `python3 scripts/piloto.py`.
 Veja [docs/piloto.md](docs/piloto.md).
+
+Benchmark final completo com progresso e retomada: `python3 scripts/benchmark.py`.
+Instruções: [docs/benchmark.md](docs/benchmark.md).
