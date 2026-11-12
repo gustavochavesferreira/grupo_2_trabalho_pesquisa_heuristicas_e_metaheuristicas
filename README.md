@@ -49,3 +49,6 @@ Vigo, *A lower bound for the non-oriented two-dimensional bin packing problem*,
 Discrete Applied Mathematics, 118:13–24, 2002 (equação 8, após CUTSQ).
 `LBref` é o maior dos dois. Fórmulas, cuidados e testes estão em
 [docs/limites_inferiores.md](docs/limites_inferiores.md).
+
+Para planejar lotes sequenciais e retomáveis, consulte
+[docs/experimentos.md](docs/experimentos.md). As sementes comuns estão em `config/sementes.txt`.

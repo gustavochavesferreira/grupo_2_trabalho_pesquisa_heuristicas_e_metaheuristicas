@@ -58,8 +58,8 @@ No diretório indicado, o resultado é
 os posicionamentos ficam no arquivo de mesmo prefixo e sufixo `.solucao.csv`,
 no [formato de solução existente](formato_solucao.md). Ambos são recusados se
 já existirem, inclusive links simbólicos. Use outro diretório para repetir uma
-execução. A interface não faz retomada nem coordena processos; isso pertence
-à Tarefa 20. Uma falha de escrita retorna erro e o arquivo não deve ser tratado
+execução. A CLI individual não faz retomada nem coordena processos; use o
+[orquestrador de lotes](experimentos.md) para isso. Uma falha de escrita retorna erro e o arquivo não deve ser tratado
 como execução concluída.
 
 O identificador é o nome da instância sem extensão. Caracteres não ASCII,

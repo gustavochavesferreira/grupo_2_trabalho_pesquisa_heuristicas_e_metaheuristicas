@@ -25,7 +25,7 @@ RLS_TEST_EXE := bin/test_rls
 EXPERIMENT_TEST_EXE := bin/test_experimento
 INTEGRATION_TEST_EXE := bin/test_integracao
 
-.PHONY: all test clean catalog catalog-test integration-test
+.PHONY: all test clean catalog catalog-test integration-test orchestration-test informacoes-build
 
 all: $(EXE)
 
@@ -136,3 +136,14 @@ clean:
 	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) $(HBASE_TEST_EXE) $(HEXT_TEST_EXE) $(HINT_TEST_EXE) $(HALEAT_TEST_EXE) $(HCOMB_TEST_EXE) $(IBL_TEST_EXE) $(RLS_TEST_EXE) $(EXPERIMENT_TEST_EXE) $(INTEGRATION_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
 
 -include $(DEPS)
+
+# As mesmas variáveis usadas na compilação são registradas pelo orquestrador.
+informacoes-build:
+	@echo "CXX=$(CXX)"
+	@echo "CPPFLAGS=$(CPPFLAGS)"
+	@echo "CXXFLAGS=$(CXXFLAGS)"
+	@echo "LDFLAGS=$(LDFLAGS)"
+	@echo "LDLIBS=$(LDLIBS)"
+
+orchestration-test: $(EXE)
+	python3 tests/test_orquestracao.py

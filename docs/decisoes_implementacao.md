@@ -486,3 +486,35 @@ preservação do comportamento.
   temporárias. Não se exigem tempos de CPU iguais entre repetições; exige-se
   igualdade de soluções e métricas de operações quando o limite temporal não
   encerra a busca. Não houve calibração, piloto, preflight ou benchmark.
+
+## Tarefa 20 — Orquestração retomável
+
+- O orquestrador Python usa a CLI existente, sem modificar algoritmos. Os modos
+  calibration/pilot usam somente o piloto; preflight/final somente o conjunto
+  final disjunto. Pilot/final exigem dez sementes comuns e 60 segundos; preflight
+  usa uma semente e CPU curta. Calibration permite subconjuntos e orçamentos
+  reduzidos, sem definir ainda a grade da Tarefa 21. As sementes 1001–1010 são
+  versionadas e conferidas exatamente. O planejamento não executa métodos.
+- Um contrato por modo/configuração preserva plano, parâmetros, hashes de dados,
+  manifestos, sementes, configuração, fontes/executável/scripts e ambiente. Uma
+  mudança exige outro lote, em vez de misturar resultados. Uma assinatura de
+  código/compilador/flags força rebuild quando necessário, evitando atribuir
+  opções novas a objetos antigos. Não se executam comandos Git.
+- Sempre se conserva a solução completa: a retomada não confia apenas no campo
+  validada. Um validador de arquivos confere identidade, parâmetros, métricas,
+  evolução e geometria, além de perfil/f7, complementando o verificador C++.
+  CSV/solução e recibo com hashes são obrigatórios para pular uma execução.
+- Publica-se um diretório completo por renomeação atômica no mesmo filesystem,
+  após validação dos CSVs temporários e retorno zero. Versões inválidas são
+  preservadas em invalidos/ e refeitas; outras execuções não são apagadas.
+  Tentativas interrompidas/falhas ficam em .pendentes/, sem aparência de conclusão.
+- Uma trava global flock serializa orquestradores, inclusive com saídas distintas.
+  O filho cronometrado herda a trava, protegendo contra morte abrupta do pai;
+  Ctrl+C encerra e aguarda o filho. A garantia abrange processos iniciados pelo
+  orquestrador; execuções oficiais devem passar por ele. Não se altera a fronteira
+  de CPU das tarefas anteriores. Compilação e auditoria externa não são busca.
+- Testes usam apenas saídas temporárias, instância real A42 com reparo desligado,
+  corrupção de CSV/geometria, retomada, preservação, mudança de protocolo, trava,
+  herança, interrupção e falha antes da inicial. Os planos completos são testados
+  sem executá-los. Não houve calibração, piloto, preflight ou benchmark formal.
+  O protocolo e os comandos estão em docs/experimentos.md.
