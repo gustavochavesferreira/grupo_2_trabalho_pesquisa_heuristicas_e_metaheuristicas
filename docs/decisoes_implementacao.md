@@ -151,3 +151,23 @@ preservação do comportamento.
   bloqueio apesar da área livre, preservação em falha e rotação em chapa vazia
   e ocupada. Outros 100 casos pequenos com semente 1001 são comparados com um
   oráculo que enumera posições inteiras sem a geometria compartilhada.
+
+## Tarefa 8 — Limites inferiores
+
+- **Fonte e definição:** implementado o limite DMV da equação (8), usando CUTSQ,
+  Lema 2 e Teorema 3 do artigo original de 2002, consultado em texto e nas páginas
+  renderizadas para conferir as desigualdades. `LBref` combina esse limite com
+  a área original, conforme o TP3. O reforço opcional por L4 orientado não foi
+  acrescentado: ele é um limite adicional, não a definição da equação (8).
+- **Representação e cálculo:** quadrados de mesmo lado são agrupados, incluindo
+  demandas. São avaliados zero e os lados distintos até H/2 (Corolário 4),
+  recalculando os conjuntos para manter o código direto, em vez da atualização
+  incremental do artigo. A forma equivalente da equação (7) usa somas de área e
+  desperdício em `uint64_t`, evitando produtos de área por número de chapas e
+  estouro intermediário. Não se usam arredondamentos em ponto flutuante nos limites.
+- **Verificação:** exemplo publicado (área 4, DMV 6), decomposição da Figura 1,
+  casos manuais, 300 comparações com fórmulas literais e todos os limiares e 60
+  ótimos exatos pequenos, com semente 1001. Casos extremos cobrem numeradores acima
+  de int64 e decomposição com muitos quadrados sem expansão em memória.
+  Desvios com LBref não positivo ou K abaixo do limite são rejeitados para não
+  aceitar métricas inconsistentes. Detalhes em `docs/limites_inferiores.md`.

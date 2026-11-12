@@ -34,3 +34,11 @@ Para executar os testes e limpar os artefatos de compilação:
 make test
 make clean
 ```
+
+## Limites inferiores
+
+O projeto usa o limite por área e o limite para rotação de Dell'Amico, Martello e
+Vigo, *A lower bound for the non-oriented two-dimensional bin packing problem*,
+Discrete Applied Mathematics, 118:13–24, 2002 (equação 8, após CUTSQ).
+`LBref` é o maior dos dois. Fórmulas, cuidados e testes estão em
+[docs/limites_inferiores.md](docs/limites_inferiores.md).
