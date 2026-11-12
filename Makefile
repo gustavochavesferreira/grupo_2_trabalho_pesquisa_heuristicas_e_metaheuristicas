@@ -2,11 +2,12 @@ CXX := g++
 CPPFLAGS := -Iinclude
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wpedantic
 
-COMMON_OBJS := obj/apresentacao.o
-OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o
+COMMON_OBJS := obj/apresentacao.o obj/instancia.o
+OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o
 DEPS := $(OBJS:.o=.d)
 EXE := bin/tp3
 TEST_EXE := bin/test_inicio
+INSTANCE_TEST_EXE := bin/test_instancia
 
 .PHONY: all test clean
 
@@ -18,20 +19,24 @@ $(EXE): $(COMMON_OBJS) obj/main.o | bin
 $(TEST_EXE): $(COMMON_OBJS) obj/test_inicio.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+$(INSTANCE_TEST_EXE): obj/instancia.o obj/test_instancia.o | bin
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 obj/%.o: src/%.cpp | obj
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
-obj/test_inicio.o: tests/test_inicio.cpp | obj
+obj/test_%.o: tests/test_%.cpp | obj
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
 bin obj:
 	mkdir -p $@
 
-test: $(EXE) $(TEST_EXE)
+test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE)
 	./$(TEST_EXE)
+	./$(INSTANCE_TEST_EXE)
 	./$(EXE)
 
 clean:
-	$(RM) $(EXE) $(TEST_EXE) $(OBJS) $(DEPS)
+	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(OBJS) $(DEPS)
 
 -include $(DEPS)
