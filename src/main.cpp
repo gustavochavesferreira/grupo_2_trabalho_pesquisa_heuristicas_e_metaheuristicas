@@ -2,7 +2,9 @@
 
 #include <iostream>
 
+using namespace std;
+
 int main() {
-    apresenta_projeto(std::cout);
+    apresenta_projeto(cout);
     return 0;
 }

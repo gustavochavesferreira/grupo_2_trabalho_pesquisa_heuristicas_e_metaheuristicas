@@ -3,6 +3,8 @@
 
 #include <iosfwd>
 
-void apresenta_projeto(std::ostream& saida);
+using namespace std;
+
+void apresenta_projeto(ostream& saida);
 
 #endif

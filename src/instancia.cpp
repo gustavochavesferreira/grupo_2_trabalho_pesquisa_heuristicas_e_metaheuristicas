@@ -7,24 +7,26 @@
 #include <sstream>
 #include <stdexcept>
 
-Instancia le_instancia(const std::string& caminho) {
-    std::ifstream arquivo(caminho);
+using namespace std;
+
+Instancia le_instancia(string caminho) {
+    ifstream arquivo(caminho);
     if (!arquivo.is_open()) {
-        throw std::runtime_error(caminho + ": não foi possível abrir a instância.");
+        throw runtime_error(caminho + ": não foi possível abrir a instância.");
     }
 
     Instancia instancia;
     instancia.caminho = caminho;
-    std::size_t numero_linha = 0;
-    auto falha = [&](const std::string& motivo) {
-        return std::runtime_error(caminho + ": linha " + std::to_string(numero_linha) + ": " + motivo);
+    size_t numero_linha = 0;
+    auto falha = [&](string motivo) {
+        return runtime_error(caminho + ": linha " + to_string(numero_linha) + ": " + motivo);
     };
     auto proxima_linha = [&]() {
-        std::string linha;
-        while (std::getline(arquivo, linha)) {
+        string linha;
+        while (getline(arquivo, linha)) {
             ++numero_linha;
-            if (linha.find_first_not_of(" \t\r\n") != std::string::npos) {
-                return std::istringstream(linha);
+            if (linha.find_first_not_of(" \t\r\n") != string::npos) {
+                return istringstream(linha);
             }
         }
         if (arquivo.bad()) {
@@ -32,14 +34,14 @@ Instancia le_instancia(const std::string& caminho) {
         }
         throw falha("fim prematuro do arquivo.");
     };
-    auto confere_fim_linha = [&](std::istringstream& linha) {
-        linha >> std::ws;
+    auto confere_fim_linha = [&](istringstream& linha) {
+        linha >> ws;
         if (!linha.eof()) {
             throw falha("campos excedentes ou conteúdo inválido.");
         }
     };
 
-    std::int64_t quantidade_tipos;
+    int64_t quantidade_tipos;
     auto linha = proxima_linha();
     if (!(linha >> quantidade_tipos) || quantidade_tipos <= 0) {
         throw falha("quantidade de tipos deve ser um inteiro positivo.");
@@ -51,15 +53,15 @@ Instancia le_instancia(const std::string& caminho) {
         throw falha("dimensões da chapa devem ser inteiros positivos.");
     }
     confere_fim_linha(linha);
-    const auto maximo = std::numeric_limits<std::int64_t>::max();
+    auto maximo = numeric_limits<int64_t>::max();
     if (instancia.largura > maximo / instancia.altura) {
         throw falha("área da chapa excede a capacidade de 64 bits.");
     }
     instancia.area_chapa = instancia.largura * instancia.altura;
 
-    std::set<std::int64_t> ids;
-    std::int64_t total_copias = 0;
-    for (std::int64_t i = 0; i < quantidade_tipos; ++i) {
+    set<int64_t> ids;
+    int64_t total_copias = 0;
+    for (int64_t i = 0; i < quantidade_tipos; ++i) {
         linha = proxima_linha();
         TipoPeca tipo;
         if (!(linha >> tipo.id >> tipo.largura >> tipo.altura >> tipo.demanda >> tipo.limite_copias >> tipo.lucro)) {
@@ -72,7 +74,7 @@ Instancia le_instancia(const std::string& caminho) {
         if (tipo.largura <= 0 || tipo.altura <= 0 || tipo.demanda <= 0) {
             throw falha("dimensões e demanda da peça devem ser inteiros positivos.");
         }
-        if (!std::isfinite(tipo.lucro)) {
+        if (!isfinite(tipo.lucro)) {
             throw falha("lucro deve ser finito.");
         }
         bool cabe_direta = tipo.largura <= instancia.largura && tipo.altura <= instancia.altura;
@@ -91,10 +93,10 @@ Instancia le_instancia(const std::string& caminho) {
         instancia.tipos.push_back(tipo);
     }
 
-    std::string restante;
-    while (std::getline(arquivo, restante)) {
+    string restante;
+    while (getline(arquivo, restante)) {
         ++numero_linha;
-        if (restante.find_first_not_of(" \t\r\n") != std::string::npos) {
+        if (restante.find_first_not_of(" \t\r\n") != string::npos) {
             throw falha("há linhas adicionais após os tipos declarados.");
         }
     }
@@ -103,13 +105,13 @@ Instancia le_instancia(const std::string& caminho) {
     }
 
     // A soma das cópias não excede a área total, pois cada peça tem área positiva inteira.
-    if (static_cast<std::uint64_t>(total_copias) > instancia.copias.max_size()) {
+    if (static_cast<uint64_t>(total_copias) > instancia.copias.max_size()) {
         throw falha("quantidade de cópias excede a capacidade do vetor.");
     }
-    instancia.copias.reserve(static_cast<std::size_t>(total_copias));
-    for (std::size_t indice = 0; indice < instancia.tipos.size(); ++indice) {
-        for (std::int64_t j = 0; j < instancia.tipos[indice].demanda; ++j) {
-            auto id = static_cast<std::int64_t>(instancia.copias.size()) + 1;
+    instancia.copias.reserve(static_cast<size_t>(total_copias));
+    for (size_t indice = 0; indice < instancia.tipos.size(); ++indice) {
+        for (int64_t j = 0; j < instancia.tipos[indice].demanda; ++j) {
+            auto id = static_cast<int64_t>(instancia.copias.size()) + 1;
             instancia.copias.push_back({id, indice});
         }
     }
