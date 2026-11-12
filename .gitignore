@@ -21,3 +21,10 @@ __pycache__/
 !/results/calibration/
 /results/calibration/**/.pendentes/
 /results/calibration/**/invalidos/
+
+# Pré-execução: versionar somente plano e comprovação técnica.
+!/results/preflight/
+/results/preflight/*
+!/results/preflight/plano.json
+!/results/preflight/integridade.json
+!/results/preflight/retomada.json

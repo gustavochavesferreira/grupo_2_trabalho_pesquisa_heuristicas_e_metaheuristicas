@@ -59,3 +59,5 @@ Plano de calibração: [docs/calibracao.md](docs/calibracao.md).
 Calibração concluída: [resultado e limites de interpretação](docs/resultado_calibracao.md).
 Configuração comum: `config/congelada_v1.cfg`; confira o selo com
 `python3 scripts/verificar_congelamento.py` antes das próximas etapas.
+
+Pré-execução técnica concluída: [docs/preflight.md](docs/preflight.md).

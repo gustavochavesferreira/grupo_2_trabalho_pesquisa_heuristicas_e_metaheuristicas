@@ -572,3 +572,22 @@ preservação do comportamento.
   TP3. O ambiente real está registrado, sem alegar execução no hardware previsto.
   Essa diferença deve ser resolvida antes do piloto formal (máquina prevista ou
   alteração expressamente autorizada do protocolo). Não se iniciou a Tarefa 22.
+
+## Tarefa 23 — Pré-execução antes do piloto formal
+
+- Por autorização do usuário, a ordem passou a 21 → 23 → 22, mantendo o piloto
+  formal pendente. O Ryzen 3 foi autorizado para as etapas locais, com ambiente
+  real registrado e sem compensação artificial de CPU entre máquinas.
+- Foram fixados três segundos de CPU e semente 1001 para cada um dos seis métodos
+  nas 153 instâncias finais: 918 execuções, sem interseção com o piloto. O limite
+  curto permite a construção dos casos grandes; não substitui o orçamento formal.
+  A configuração congelada da Tarefa 21 foi preservada e seu selo foi conferido.
+- A passagem terminou com 918 resultados válidos. Uma auditoria completa conferiu
+  matriz, contratos, hashes, CSVs e soluções antes e depois da retomada. Na segunda
+  execução do comando, as 918 foram puladas; nenhum recibo foi alterado. Não houve
+  falha que exigisse modificar algoritmos, parâmetros ou repetir a calibração.
+- O auditor produz somente contagens e comprovação técnica, sem rankings, seleção
+  de H* ou ajuste a partir do conjunto final. Dados brutos permanecem localmente
+  em results/preflight/congelada_v1/, fora dos resultados científicos e do Git;
+  plano, integridade e prova da retomada são versionáveis. Detalhes e comandos
+  constam em docs/preflight.md. Não se iniciou a Tarefa 22.
