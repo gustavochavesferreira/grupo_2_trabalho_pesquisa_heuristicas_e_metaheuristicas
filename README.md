@@ -27,8 +27,9 @@ make
 
 O executável apresenta o projeto. As funções C++ `executa_hbase`, `executa_hext`,
 `executa_hint`, `executa_hcomb` e `executa_haleat` estão em `include/hbase.h`;
-`Haleat` é um controle auxiliar. A interface experimental ainda não está
-implementada e os parâmetros padrão são provisórios, para calibração.
+`executa_rls`, de `RLS-f7`, está em `include/rls.h`. `Haleat` é um controle auxiliar.
+A interface experimental ainda não está implementada e os parâmetros padrão
+da arquitetura de reparo são provisórios, para calibração.
 
 Para executar os testes e limpar os artefatos de compilação:
 

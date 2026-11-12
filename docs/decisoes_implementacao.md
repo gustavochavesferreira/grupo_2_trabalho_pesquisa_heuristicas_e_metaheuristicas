@@ -358,3 +358,72 @@ preservação do comportamento.
   execuções reproduzíveis da configuração combinada. Toda solução final passa
   pelo verificador independente. Não foram executados experimentos formais;
   os parâmetros seguem provisórios e a interface de execução pertence à Tarefa 18.
+
+## Tarefa 16 — IBL e f7
+
+- A Figura 2 e as equações (7)/(9) do artigo local de Zhao et al. foram conferidas
+  no texto e na página renderizada. O IBL usa a base da peça em y=H e a direita
+  em x=W, alternando deslocamentos máximos para baixo e para a esquerda, nessa
+  ordem, até estabilizar. Os deslocamentos saltam até bordas de obstáculos; não
+  enumeram pontos de canto nem permitem atravessar obstáculos até uma posição
+  globalmente melhor. Só se tenta a chapa corrente; uma falha abre outra chapa
+  com a peça em (0,0). Chapas anteriores não são revisitadas.
+- A permutação guarda IDs originais dos tipos, com repetições e sinais. As
+  ocorrências recebem as cópias daquele tipo na ordem da instância, para manter
+  IDs únicos e reprodução. A correção de orientação afeta somente as dimensões
+  e o indicador do posicionamento; não modifica o sinal do genótipo, como na
+  Figura 2. Comprimento, tipos e multiplicidades inválidos são rejeitados.
+- O perfil é integrado entre bordas verticais distintas, usando o maior topo em
+  cada intervalo. Isso equivale à soma por colunas inteiras da equação (7), sem
+  memória/tempo proporcionais a W e sem confundir perfil com área ocupada. f7
+  usa o perfil apenas da última chapa. Como ele está em [1,WH], reduzir K tem
+  prioridade estrita, inclusive comparando perfil cheio com perfil mínimo.
+- Coordenadas e perfil seguem int64. Apenas f7 usa `__uint128_t`, disponível no
+  GCC exigido: WH*(K-1) pode exceder inclusive uint64 em instâncias válidas com
+  peças finas. Descartou-se ponto flutuante, que poderia alterar aceitação por
+  empate. Não se calcula H+altura ao iniciar acima da chapa, evitando estouro.
+- Testes cobrem demandas e IDs fora de ordem, correções de orientação, contatos,
+  descida após deslocamento lateral, cavidades inacessíveis, abertura sequencial,
+  perfil/f7 manuais, prioridade de K e extremos numéricos. Outros 250 casos com
+  semente 1001 comparam a solução a uma simulação literal por unidades, o perfil
+  a uma soma coluna a coluna e a factibilidade ao verificador independente.
+  `make -j2 test` passou antes de iniciar a Tarefa 17.
+
+## Tarefa 17 — RLS-f7
+
+- A RLS é independente da arquitetura de reparo. A inicialização embaralha as
+  ocorrências dos tipos e sorteia sinais independentes com probabilidade 1/2,
+  usando um único mt19937 com semente explícita. Em cada iteração sorteia-se uma
+  posição; com probabilidade 1/2 tenta-se uma troca, sorteando no máximo 10T
+  posições até encontrar valor assinado diferente. Isso permite trocar +i com
+  -i e proíbe trocar duas ocorrências iguais com o mesmo sinal. Sem parceiro,
+  ou sem tentar troca, inverte-se o sinal da primeira posição.
+- Todo candidato é decodificado e validado pelo IBL. Aceita-se f7 menor ou igual,
+  inclusive empates e orientações cujo efeito foi corrigido pelo decodificador.
+  Não se normalizam sinais depois de decodificar: isso alteraria o espaço e os
+  movimentos do artigo. Como f7 prioriza estritamente K, a solução corrente
+  também preserva o melhor K e o melhor f7 já aceitos.
+- O teto padrão publicado é 100000000 avaliações, contando a inicial; valores
+  menores são permitidos explicitamente para testes, sem ultrapassar esse teto.
+  Conta-se uma avaliação quando a decodificação validada e f7 ficam completos.
+  Trocas/inversões contam movimentos iniciados, podendo incluir um candidato
+  interrompido por CPU. Aceitos e melhorias contam somente candidatos completos
+  aceitos; melhorias são reduções estritas de f7. Há parada por LBref, teto ou CPU.
+- O relógio do processo inicia antes da inicialização e inclui limites inferiores,
+  busca, validações e registros. Um candidato que atravessa o prazo não substitui
+  a incumbente. Antes da primeira solução completa, expirar lança TempoEsgotado,
+  como em Hbase; depois dela, devolve-se a última solução aceita. Checagens são
+  cooperativas, com o mesmo cuidado sobre operações atômicas da Tarefa 11.
+- `tempo_melhor` é o primeiro instante do menor K, a medida principal do TP3;
+  melhorar só o perfil ou aceitar empate não o reinicia. Os marcos 0.1, 1, 5,
+  10, 30 e 60 segundos usam eventos de disponibilidade da inicial e reduções
+  de K, nunca eventos futuros. Se a inicial ainda não existia, o marco fica
+  explicitamente indisponível, sem K/desvio fictícios. Após parada antecipada,
+  conserva-se a última incumbente nos marcos seguintes. O resultado é guardado
+  em memória; CSV e interface permanecem na Tarefa 18.
+- Testes conferem multiplicidades/sinais, ambos os operadores, +i/-i, fallback
+  completo de 10T e T=1, comparação exata de f7 acima de 64 bits, orçamento
+  inicial/unitário, aceitação de empates, redução de K, rejeição de piora e
+  reprodução em 30 sementes. Há testes de CPU real, validação independente,
+  configurações inválidas e marcos sintéticos com instantes conhecidos.
+  Não foram executados calibração, piloto ou benchmark.

@@ -2,8 +2,8 @@ CXX := g++
 CPPFLAGS := -Iinclude
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wpedantic
 
-COMMON_OBJS := obj/apresentacao.o obj/instancia.o obj/solucao.o obj/verificador_solucao.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/limites_inferiores.o obj/estado_reparo.o obj/vnd.o obj/tempo_cpu.o obj/hbase.o obj/orientacao_externa.o obj/orientacao_interna.o
-OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/test_solucao.o obj/test_decodificador.o obj/test_empacotador_base.o obj/test_construcao_inicial.o obj/test_limites_inferiores.o obj/test_estado_reparo.o obj/test_vnd.o obj/test_hbase.o obj/test_hext.o obj/test_hint.o obj/test_haleat.o obj/test_hcomb.o obj/metadados_instancia.o
+COMMON_OBJS := obj/apresentacao.o obj/instancia.o obj/solucao.o obj/verificador_solucao.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/limites_inferiores.o obj/estado_reparo.o obj/vnd.o obj/tempo_cpu.o obj/hbase.o obj/orientacao_externa.o obj/orientacao_interna.o obj/decodificador_ibl.o obj/rls.o
+OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/test_solucao.o obj/test_decodificador.o obj/test_empacotador_base.o obj/test_construcao_inicial.o obj/test_limites_inferiores.o obj/test_estado_reparo.o obj/test_vnd.o obj/test_hbase.o obj/test_hext.o obj/test_hint.o obj/test_haleat.o obj/test_hcomb.o obj/test_ibl.o obj/test_rls.o obj/metadados_instancia.o
 DEPS := $(OBJS:.o=.d)
 EXE := bin/tp3
 TEST_EXE := bin/test_inicio
@@ -20,6 +20,8 @@ HEXT_TEST_EXE := bin/test_hext
 HINT_TEST_EXE := bin/test_hint
 HALEAT_TEST_EXE := bin/test_haleat
 HCOMB_TEST_EXE := bin/test_hcomb
+IBL_TEST_EXE := bin/test_ibl
+RLS_TEST_EXE := bin/test_rls
 
 .PHONY: all test clean catalog catalog-test
 
@@ -70,6 +72,12 @@ $(HALEAT_TEST_EXE): $(COMMON_OBJS) obj/test_haleat.o | bin
 $(HCOMB_TEST_EXE): $(COMMON_OBJS) obj/test_hcomb.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+$(IBL_TEST_EXE): obj/instancia.o obj/verificador_solucao.o obj/tempo_cpu.o obj/decodificador_ibl.o obj/test_ibl.o | bin
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+$(RLS_TEST_EXE): obj/instancia.o obj/verificador_solucao.o obj/tempo_cpu.o obj/decodificador_ibl.o obj/limites_inferiores.o obj/rls.o obj/test_rls.o | bin
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 obj/%.o: src/%.cpp | obj
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
@@ -91,7 +99,7 @@ catalog: bin/metadados_instancia
 catalog-test: bin/metadados_instancia
 	python3 tests/test_catalogo.py
 
-test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) $(HBASE_TEST_EXE) $(HEXT_TEST_EXE) $(HINT_TEST_EXE) $(HALEAT_TEST_EXE) $(HCOMB_TEST_EXE)
+test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) $(HBASE_TEST_EXE) $(HEXT_TEST_EXE) $(HINT_TEST_EXE) $(HALEAT_TEST_EXE) $(HCOMB_TEST_EXE) $(IBL_TEST_EXE) $(RLS_TEST_EXE)
 	./$(TEST_EXE)
 	./$(INSTANCE_TEST_EXE)
 	./$(SOLUTION_TEST_EXE)
@@ -106,9 +114,11 @@ test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TES
 	./$(HINT_TEST_EXE)
 	./$(HALEAT_TEST_EXE)
 	./$(HCOMB_TEST_EXE)
+	./$(IBL_TEST_EXE)
+	./$(RLS_TEST_EXE)
 	./$(EXE)
 
 clean:
-	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) $(HBASE_TEST_EXE) $(HEXT_TEST_EXE) $(HINT_TEST_EXE) $(HALEAT_TEST_EXE) $(HCOMB_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
+	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) $(HBASE_TEST_EXE) $(HEXT_TEST_EXE) $(HINT_TEST_EXE) $(HALEAT_TEST_EXE) $(HCOMB_TEST_EXE) $(IBL_TEST_EXE) $(RLS_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
 
 -include $(DEPS)
