@@ -17,6 +17,10 @@ __pycache__/
 
 /materiais_uteis_para_consulta/
 
+# Prompts locais
+/PROMPT_MESTRE_TA.md
+/PROMPT_MESTRE.md
+
 # Artefatos científicos da calibração da Tarefa 21.
 !/results/calibration/
 /results/calibration/**/.pendentes/
