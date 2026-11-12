@@ -1,7 +1,6 @@
 #include "decodificador.h"
 
 #include <stdexcept>
-#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -11,10 +10,11 @@ bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa
     verifica_tempo(relogio);
     TipoPeca tipo = instancia.tipos.at(copia.indice_tipo);
     int64_t id = copia.id;
-    bool encontrou = false;
-    Posicionamento melhor{};
-    auto pontos = pontos_canto(chapa, instancia.largura, instancia.altura, relogio);
-    for (PontoCanto ponto : pontos) {
+    vector<int64_t> xs, ys;
+    coordenadas_canto(chapa, instancia.largura, instancia.altura, xs, ys);
+    // Examina a grade na mesma ordem sem materializar/filtrar todos os cantos.
+    for (int64_t y : ys) for (int64_t x : xs) {
+        PontoCanto ponto{x, y};
         verifica_tempo(relogio);
         for (bool gira : {false, true}) {
             if (gira && tipo.largura == tipo.altura) continue;
@@ -28,14 +28,12 @@ bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa
             anterior = p;
             anterior.x--;
             if (posicao_livre(anterior, chapa, instancia.largura, instancia.altura)) continue;
-            if (!encontrou || tie(p.y, p.x, p.rotacionada) < tie(melhor.y, melhor.x, melhor.rotacionada)) {
-                melhor = p;
-                encontrou = true;
-            }
+            // Os cantos já vêm em (y,x); a orientação original é visitada primeiro.
+            chapa.posicionamentos.push_back(p);
+            return true;
         }
     }
-    if (encontrou) chapa.posicionamentos.push_back(melhor);
-    return encontrou;
+    return false;
 }
 
 ResultadoDecodificacao decodifica_inferior_esquerdo(const Instancia& instancia, const vector<int64_t>& sequencia, size_t indice_chapa, CronometroCpu* relogio) {

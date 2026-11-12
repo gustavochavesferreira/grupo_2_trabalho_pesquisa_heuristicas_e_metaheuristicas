@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <tuple>
+#include <utility>
 #include <unordered_map>
 
 using namespace std;
@@ -63,8 +64,8 @@ void reempacota_chapa(const Instancia& instancia, EstadoReparo& estado, size_t i
         // Sem decodificação por excesso de área: não se inventam rejeições nem posições.
         resultado.sequencia = anterior;
     }
-    chapa.empacotamento = empacotamento;
-    chapa.resultado = resultado;
+    chapa.empacotamento = move(empacotamento);
+    chapa.resultado = move(resultado);
 }
 
 EstadoReparo remove_e_redistribui(const Instancia& instancia, const Solucao& solucao, mt19937& gerador, CronometroCpu* relogio, MecanismosBusca* mecanismos) {

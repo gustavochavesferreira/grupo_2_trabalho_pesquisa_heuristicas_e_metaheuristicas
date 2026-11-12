@@ -39,6 +39,7 @@ Para executar os testes e limpar os artefatos de compilação:
 ```bash
 make test
 make integration-test
+make orchestration-test
 make clean
 ```
 
@@ -52,3 +53,9 @@ Discrete Applied Mathematics, 118:13–24, 2002 (equação 8, após CUTSQ).
 
 Para planejar lotes sequenciais e retomáveis, consulte
 [docs/experimentos.md](docs/experimentos.md). As sementes comuns estão em `config/sementes.txt`.
+
+Plano de calibração: [docs/calibracao.md](docs/calibracao.md).
+
+Calibração concluída: [resultado e limites de interpretação](docs/resultado_calibracao.md).
+Configuração comum: `config/congelada_v1.cfg`; confira o selo com
+`python3 scripts/verificar_congelamento.py` antes das próximas etapas.

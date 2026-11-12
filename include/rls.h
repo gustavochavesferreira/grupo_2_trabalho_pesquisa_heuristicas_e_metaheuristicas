@@ -26,7 +26,7 @@ struct ResultadoRls {
     string metodo = "RLS-f7";
     Solucao solucao;
     vector<int64_t> permutacao;
-    LimitesInferiores limites;
+    LimitesInferiores limites{};
     __uint128_t f7 = 0;
     int64_t area_perfil = 0;
     uint64_t avaliacoes = 0;

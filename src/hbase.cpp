@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <numeric>
+#include <utility>
 #include <stdexcept>
 
 using namespace std;
@@ -40,7 +41,8 @@ bool aceita_reducao(const Instancia& instancia, const EstadoReparo& estado, Resu
     if (calcula_inviabilidade(estado).chapas_inviaveis != 0) return false;
     auto candidata = solucao_do_reparo(instancia, estado);
     if (candidata.chapas.size() >= resultado.solucao.chapas.size()) throw runtime_error("Reparo não reduziu o número de chapas.");
-    resultado.solucao = candidata;
+    relogio.verifica();
+    resultado.solucao = move(candidata);
     resultado.reducoes_aceitas++;
     resultado.tempo_melhor = relogio.decorrido();
     melhorias.push_back({resultado.tempo_melhor, static_cast<int64_t>(resultado.solucao.chapas.size())});
@@ -79,7 +81,7 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
             while (true) {
                 relogio.verifica();
                 auto descida = executa_vnd(instancia, estado, gerador, &relogio, &orcamento, &mecanismos);
-                estado = descida.estado;
+                estado = move(descida.estado);
                 if (aceita_reducao(instancia, estado, resultado, relogio, melhorias)) { reduziu = true; break; }
                 if (descida.limite_reparo || reinicios >= config.max_reinicios || estado.chapas.size() < 2) break;
                 relogio.verifica();
@@ -87,7 +89,7 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
                 resultado.perturbacoes++;
                 reinicios++;
                 auto reparado = executa_vnd(instancia, perturbado, gerador, &relogio, &orcamento, &mecanismos);
-                if (melhora_estado(reparado.estado, estado)) estado = reparado.estado;
+                if (melhora_estado(reparado.estado, estado)) estado = move(reparado.estado);
                 if (aceita_reducao(instancia, estado, resultado, relogio, melhorias)) { reduziu = true; break; }
                 if (reparado.limite_reparo) break;
             }

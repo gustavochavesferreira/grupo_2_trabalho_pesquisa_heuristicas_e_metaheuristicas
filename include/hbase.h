@@ -19,7 +19,7 @@ struct ResultadoHbase {
     MetricasExternas orientacao_externa;
     MetricasInternas orientacao_interna;
     Solucao solucao;
-    LimitesInferiores limites;
+    LimitesInferiores limites{};
     size_t tentativas_reducao = 0;
     size_t reducoes_aceitas = 0;
     size_t perturbacoes = 0;

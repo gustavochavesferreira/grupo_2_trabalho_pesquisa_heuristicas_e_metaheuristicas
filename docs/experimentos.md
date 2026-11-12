@@ -62,7 +62,8 @@ congela uma grade nem escolhe parâmetros: apenas preserva a identidade do lote.
 
 Repita **o mesmo comando** para retomar. Cada resultado concluído é novamente
 conferido: recibo, identidade, configuração, hashes, CSV, métricas, evolução e
-geometria da solução exportada. Só então é pulado. A geometria confere cópias,
+geometria da solução exportada. Só então é pulado. Cabeçalhos completos da versão 1 são obrigatórios; um marco
+posterior ao término deve conservar o K final. A geometria confere cópias,
 demandas, tipo, orientação, contenção e sobreposição; perfil/f7 também são
 recalculados. Essa conferência complementa o verificador independente C++ que
 já valida cada solução no executável.

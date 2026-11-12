@@ -1,0 +1,35 @@
+{
+  "arquivos": {
+    "A42__Hint__1001__cal21_base.csv": "f9c9c67f4714b8bc6c6f7ae912928f9bc28b972b2b21432e6bfda6c500ccc263",
+    "A42__Hint__1001__cal21_base.solucao.csv": "4ba3453d5d8af114cbf6fa2d56e87d4e03018448f27eb55e2d7a9276527ce6e0"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/bin/tp3",
+    "--instancia",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+    "--metodo",
+    "Hint",
+    "--config",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_base/config.cfg",
+    "--semente",
+    "1001",
+    "--cpu",
+    "3",
+    "--saida",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_base/.pendentes/A42__Hint__1001__qi857usd",
+    "--salvar-solucao"
+  ],
+  "contrato_sha256": "b21014fe41c98e8a803c2fcea5e1dbdacc16897e702324e07f8c6f6479380eeb",
+  "fim_utc": "2026-11-12T05:53:04.504406+00:00",
+  "inicio_utc": "2026-11-12T05:53:04.487046+00:00",
+  "tarefa": {
+    "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+    "familia": "A",
+    "instancia": "A42",
+    "metodo": "Hint",
+    "semente": 1001,
+    "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+  },
+  "versao": 1
+}

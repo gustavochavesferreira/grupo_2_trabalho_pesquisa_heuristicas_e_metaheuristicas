@@ -518,3 +518,57 @@ preservação do comportamento.
   herança, interrupção e falha antes da inicial. Os planos completos são testados
   sem executá-los. Não houve calibração, piloto, preflight ou benchmark formal.
   O protocolo e os comandos estão em docs/experimentos.md.
+
+## Revisão antes dos experimentos
+
+- Conferidos o fluxo do TP3, a implementação, os documentos de execução e o
+  estilo do código de exemplo. Mantiveram-se estruturas/funções diretas, nomes
+  em português, using namespace std e referências para estruturas grandes ou
+  modificadas. Move é usado somente para transferir resultados que não voltam a
+  ser consultados, evitando copiar estados com oito empacotamentos por chapa.
+- O inferior-esquerdo agora percorre as coordenadas projetadas de forma preguiçosa
+  e encerra no primeiro canto/orientação admissível, na mesma ordem (y,x,rotação).
+  Não materializa/filtra a grade inteira antes de inserir. A API pontos_canto
+  permanece disponível; os oráculos e testes de desempate protegem a equivalência.
+- No IBL, o relógio é consultado a cada bloco de até 64 obstáculos, além das
+  verificações externas. O perfil usa a mesma frequência no laço interno. Isso
+  reduz o custo de clock_gettime sem alterar coordenadas, orientações, f7 ou RNG.
+  A resposta ao prazo continua cooperativa. A composição para consultar os pesos
+  é calculada uma vez por amostra, sem mudanças nas contagens do histórico.
+- Corrigida a aceitação de uma redução em Hbase após a validação atravessar o
+  prazo: verifica-se CPU antes de substituir a incumbente. Teste dirigido com
+  relógio expirado confere preservação da solução, métricas e eventos.
+- A retomada agora exige o cabeçalho completo da versão 1, inclusive campos
+  inaplicáveis, e o cabeçalho exato da solução. Um marco posterior ao término
+  precisa conservar K final. Foram adicionadas regressões para esses casos.
+  Carimbo auxiliar de compilação inválido provoca rebuild, não interrompe a
+  preparação. Retirou-se a auditoria geométrica duplicada antes de publicar uma
+  execução nova; a retomada continua revalidando cada execução existente.
+- A revisão de desempenho usou orçamento de operações igual, semente 1001 e
+  saídas temporárias: os posicionamentos, K e avaliações foram idênticos antes e
+  depois nos seis casos medidos. Não há resultados formais a refazer. Detalhes,
+  alcance da revisão e prontidão estão em docs/revisao_pre_experimentos.md.
+
+## Tarefa 21 — Calibração e congelamento
+
+- Plano registrado antes da coleta em docs/calibracao.md: quatro opções de um
+  fator por vez em torno de (2 chapas, 5 reinícios, 1000 candidatos), examinando
+  respectivamente 3 chapas, 10 reinícios e 2000 candidatos. Mesma grade para
+  Hbase/Hext/Hint/Hcomb; somente dez instâncias-piloto, semente 1001, três segundos.
+  Uma grade cartesiana grande foi descartada para reduzir custo e sobreajuste;
+  uma semente e ausência de interações são limitações explícitas, não evidência
+  sobre desempenho formal. São 160 execuções válidas, sem uso do conjunto final.
+- Critério prévio comum: menor desvio médio, maior alcance de LBref, menor mediana
+  até melhor K, menor CPU média, ID. Seleciona parâmetros agregando igualmente
+  os quatro métodos; não seleciona H*. Todas as opções empataram em qualidade,
+  e base venceu no desempate temporal, com diferenças pequenas e sem inferência
+  estatística. Foram congelados 2/5/1000 para todas as propostas.
+- Configuração congelada v1 e selo SHA-256 nunca são substituídos por conteúdo
+  diferente; configuração/selo são somente leitura. O verificador confere os
+  hashes de configuração, sementes e plano. A reanálise exige matriz completa,
+  recibos, mesma configuração/ambiente e revalida as soluções. A retomada pulou
+  as 160 execuções já válidas. Resultados brutos e resumos foram preservados.
+- A coleta local ocorreu em Ryzen 3 5300U, diferente do Ryzen 5 5600 previsto no
+  TP3. O ambiente real está registrado, sem alegar execução no hardware previsto.
+  Essa diferença deve ser resolvida antes do piloto formal (máquina prevista ou
+  alteração expressamente autorizada do protocolo). Não se iniciou a Tarefa 22.

@@ -15,15 +15,17 @@ Posicionamento posiciona_ibl(Posicionamento p, const Chapa& chapa, int64_t largu
         verifica_tempo(relogio);
         int64_t x_anterior = p.x, y_anterior = p.y;
         int64_t y = 0;
+        size_t examinados = 0;
         for (auto obstaculo : chapa.posicionamentos) {
-            verifica_tempo(relogio);
+            if (examinados++ % 64 == 0) verifica_tempo(relogio);
             int64_t topo = obstaculo.y + obstaculo.altura;
             if (obstaculo.x < p.x + p.largura && p.x < obstaculo.x + obstaculo.largura && topo <= p.y) y = max(y, topo);
         }
         p.y = y;
         int64_t x = 0;
+        examinados = 0;
         for (auto obstaculo : chapa.posicionamentos) {
-            verifica_tempo(relogio);
+            if (examinados++ % 64 == 0) verifica_tempo(relogio);
             // p.y + p.altura pode exceder int64 quando a peça ainda está acima da chapa.
             bool cruza_vertical = p.y < obstaculo.y + obstaculo.altura && (obstaculo.y <= p.y || obstaculo.y - p.y < p.altura);
             int64_t direita = obstaculo.x + obstaculo.largura;
@@ -49,8 +51,9 @@ int64_t area_perfil_superior(const Chapa& chapa, int64_t largura, int64_t altura
     for (size_t b = 1; b < bordas.size(); b++) {
         verifica_tempo(relogio);
         int64_t topo = 0;
+        size_t examinados = 0;
         for (auto p : chapa.posicionamentos) {
-            verifica_tempo(relogio);
+            if (examinados++ % 64 == 0) verifica_tempo(relogio);
             if (p.x <= bordas[b - 1] && bordas[b - 1] < p.x + p.largura) topo = max(topo, p.y + p.altura);
         }
         area += (bordas[b] - bordas[b - 1]) * topo;

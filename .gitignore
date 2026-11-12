@@ -16,3 +16,8 @@ __pycache__/
 .DS_Store
 
 /materiais_uteis_para_consulta/
+
+# Artefatos científicos da calibração da Tarefa 21.
+!/results/calibration/
+/results/calibration/**/.pendentes/
+/results/calibration/**/invalidos/

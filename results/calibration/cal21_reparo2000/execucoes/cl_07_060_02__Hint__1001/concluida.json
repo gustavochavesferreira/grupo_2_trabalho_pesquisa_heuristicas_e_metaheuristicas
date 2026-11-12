@@ -1,0 +1,35 @@
+{
+  "arquivos": {
+    "cl_07_060_02__Hint__1001__cal21_reparo2000.csv": "a4ae14a9561a6c1147d1474e1b7397b97f8b3f11ae7657183d047186aa06d628",
+    "cl_07_060_02__Hint__1001__cal21_reparo2000.solucao.csv": "a891c8f2eb75ba6173f253f12fbbc22c5f8ca4c94cb27989e904b323d76947db"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/bin/tp3",
+    "--instancia",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+    "--metodo",
+    "Hint",
+    "--config",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_reparo2000/config.cfg",
+    "--semente",
+    "1001",
+    "--cpu",
+    "3",
+    "--saida",
+    "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_reparo2000/.pendentes/cl_07_060_02__Hint__1001__wd76k625",
+    "--salvar-solucao"
+  ],
+  "contrato_sha256": "31ef857d27019c43610129c847de006d2aa1fc91934749b77b38e6e0fafa16d8",
+  "fim_utc": "2026-11-12T05:54:22.480446+00:00",
+  "inicio_utc": "2026-11-12T05:54:22.374209+00:00",
+  "tarefa": {
+    "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+    "familia": "CLASS",
+    "instancia": "cl_07_060_02",
+    "metodo": "Hint",
+    "semente": 1001,
+    "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+  },
+  "versao": 1
+}

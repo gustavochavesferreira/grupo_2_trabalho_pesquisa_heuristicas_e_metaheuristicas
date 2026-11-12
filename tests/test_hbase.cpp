@@ -52,6 +52,8 @@ string retrato_solucao(const Solucao& solucao) {
     return s.str();
 }
 
+bool aceita_reducao(const Instancia&, const EstadoReparo&, ResultadoHbase&, CronometroCpu&, vector<pair<double, int64_t>>&);
+
 int main() {
     auto melhora = linha({4,4,3,3,3,3});
     exige(constroi_solucao_inicial(melhora).chapas.size() == 3, "Exemplo deveria iniciar em três chapas.");
@@ -125,5 +127,16 @@ int main() {
         auto final = executa_hbase(instancia, 1001, 10);
         exige(verifica_solucao(instancia, final.solucao).valido, "Hbase falhou nos casos bidimensionais e com rotação.");
     }
+    // A validação de uma redução não autoriza aceitar depois do prazo.
+    ResultadoHbase incumbente;
+    incumbente.solucao = constroi_solucao_inicial(melhora);
+    auto retrato_antes = retrato_solucao(incumbente.solucao);
+    auto reparo_valido = prepara(melhora, {{1,3,4},{2,5,6}});
+    CronometroCpu expirado(0);
+    vector<pair<double, int64_t>> eventos;
+    parou = false;
+    try { aceita_reducao(melhora, reparo_valido, incumbente, expirado, eventos); }
+    catch (const TempoEsgotado&) { parou = true; }
+    exige(parou && incumbente.reducoes_aceitas == 0 && eventos.empty() && retrato_solucao(incumbente.solucao) == retrato_antes, "Redução foi aceita após o prazo.");
     cout << "Hbase: redução, LBref, VNS, conservação, reprodução, orçamento e CPU: OK\n";
 }

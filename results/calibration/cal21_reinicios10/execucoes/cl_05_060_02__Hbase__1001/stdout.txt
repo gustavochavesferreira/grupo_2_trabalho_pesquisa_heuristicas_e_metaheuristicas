@@ -1,0 +1,1 @@
+Resultado validado: /home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/calibration/cal21_reinicios10/.pendentes/cl_05_060_02__Hbase__1001__i6ins0dj/cl_05_060_02__Hbase__1001__cal21_reinicios10.csv

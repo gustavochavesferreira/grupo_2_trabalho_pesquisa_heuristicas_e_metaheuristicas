@@ -5,6 +5,26 @@ import math
 from pathlib import Path
 
 
+CAMPOS = [
+    'versao', 'instancia', 'caminho_instancia', 'familia',
+    'metodo', 'controle_auxiliar', 'semente', 'config_id',
+    'config_estado', 'config_arquivo', 'chapas_perturbadas', 'max_reinicios',
+    'max_avaliacoes_reparo', 'rls_max_avaliacoes', 'tentativas_basicas', 'max_decodificacoes_extras',
+    'limite_cpu', 'LBarea', 'LBdmv', 'LBref',
+    'K', 'desvio', 'tempo_total', 'tempo_melhor',
+    'alcancou_lb', 'limite_cpu_atingido', 'motivo_parada', 'avaliacoes',
+    'unidade_avaliacoes', 'tentativas_reducao', 'reducoes_aceitas', 'perturbacoes',
+    'historico_atualizacoes', 'historico_reinicios', 'movimentos_orientados', 'melhorias_orientadas',
+    'ativacoes_internas', 'decodificacoes_extras', 'melhorias_internas', 'empacotamentos_completos',
+    'f7', 'area_perfil', 'trocas', 'inversoes',
+    'aceitos_rls', 'melhorias_rls',
+    'K_0_1', 'desvio_0_1', 'K_1', 'desvio_1',
+    'K_5', 'desvio_5', 'K_10', 'desvio_10',
+    'K_30', 'desvio_30', 'K_60', 'desvio_60',
+    'validada', 'solucao_arquivo',
+]
+CAMPOS_SOLUCAO = ['versao', 'copia_id', 'tipo_id', 'chapa', 'x', 'y', 'largura', 'altura', 'rotacionada']
+
 def exigir(condicao, mensagem):
     if not condicao:
         raise ValueError(mensagem)
@@ -14,7 +34,7 @@ def linha_csv(caminho):
     with caminho.open(encoding='utf-8', newline='') as f:
         leitor = csv.DictReader(f, strict=True)
         linhas = list(leitor)
-        exigir(leitor.fieldnames and len(set(leitor.fieldnames)) == len(leitor.fieldnames), 'Cabeçalho inválido.')
+        exigir(leitor.fieldnames == CAMPOS, 'Cabeçalho de resultado incompatível com a versão 1.')
     exigir(len(linhas) == 1 and None not in linhas[0] and None not in linhas[0].values(), 'CSV incompleto ou com registros excedentes.')
     return linhas[0]
 
@@ -58,6 +78,8 @@ def validar(pasta, instancia, esperado, config):
     for t in ['0_1', '1', '5', '10', '30', '60']:
         a, b = r['K_'+t], r['desvio_'+t]
         exigir(bool(a) == bool(b) and (bool(a) or not disponivel), 'Marco parcial ou disponibilidade decrescente.')
+        if float(t.replace('_', '.')) >= total:
+            exigir(a and int(a) == k, 'Marco posterior ao término deve conservar o resultado final.')
         if a:
             n = int(a)
             exigir(n >= k and (anterior is None or n <= anterior) and math.isclose(float(b), desvio(n), abs_tol=1e-10), 'Evolução inconsistente.')
@@ -74,7 +96,9 @@ def validar(pasta, instancia, esperado, config):
         for _ in range(demanda):
             copias[len(copias)+1] = tipo, largura, altura
     with solucao.open(newline='') as f:
-        pecas = list(csv.DictReader(f, strict=True))
+        leitor = csv.DictReader(f, strict=True)
+        exigir(leitor.fieldnames == CAMPOS_SOLUCAO, 'Cabeçalho de solução incompatível.')
+        pecas = list(leitor)
     exigir(len(pecas) == len(copias), 'Demanda incompleta.')
     vistas, chapas = set(), {}
     for linha in pecas:

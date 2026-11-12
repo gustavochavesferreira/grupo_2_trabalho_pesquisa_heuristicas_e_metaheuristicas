@@ -148,7 +148,12 @@ def ambiente():
     conteudo = ''.join(str(p.relative_to(RAIZ))+':'+sha(p)+'\n' for p in fontes)
     assinatura = {'compilador': compilador, 'build': build, 'fontes': hashlib.sha256(conteudo.encode()).hexdigest()}
     carimbo = RAIZ / 'bin/protocolo-build.json'
-    anterior = json.loads(carimbo.read_text()) if carimbo.is_file() else {}
+    try:
+        anterior = json.loads(carimbo.read_text()) if carimbo.is_file() else {}
+        if not isinstance(anterior, dict):
+            anterior = {}
+    except (OSError, ValueError):
+        anterior = {}
     executavel = RAIZ / 'bin/tp3'
     if anterior.get('assinatura') != assinatura or not executavel.is_file() or anterior.get('executavel_sha256') != sha(executavel):
         # Evita atribuir flags novas a objetos antigos compilados com outras opções.
@@ -228,7 +233,6 @@ def executar(args):
             json_atomico(pendente / 'concluida.json', {'versao': 1, 'tarefa': tarefa, 'contrato_sha256': contrato_hash,
                          'inicio_utc': inicio, 'fim_utc': agora(), 'codigo_saida': codigo, 'comando': comando,
                          'arquivos': {p.name: sha(p) for p in [resultado_csv, solucao]}})
-            conferir(pendente, tarefa, config_path, config, cpu, contrato_hash)
             pendente.rename(destino)
         print(f'Lote completo: {len(tarefas)} válidas; {puladas} puladas; {len(tarefas)-puladas} executadas. {lote}', flush=True)
 

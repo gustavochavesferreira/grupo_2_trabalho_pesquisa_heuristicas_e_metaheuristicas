@@ -1,0 +1,361 @@
+{
+  "ambiente": {
+    "build": {
+      "CPPFLAGS": "-Iinclude",
+      "CXX": "g++",
+      "CXXFLAGS": "-std=c++20 -O2 -Wall -Wextra -Wpedantic",
+      "LDFLAGS": "",
+      "LDLIBS": ""
+    },
+    "compilador": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "cpu": "AMD Ryzen 3 5300U with Radeon Graphics",
+    "executavel_sha256": "dbfbf64cffe4a55f6da13610e14919d8254debad9893fb5926c8c3844f3001f0",
+    "fontes_sha256": "37564b72b02f29162acca2b77eee33a93895134206eb91f291965cfc6ea2f80f",
+    "kernel": "6.8.0-149-generic",
+    "orquestrador_sha256": "3ce281edd62ddc851cb07dcd449c794a9c80135f456428fb1dd9de0731959ba5",
+    "python": "3.12.3",
+    "ram": "MemTotal:        7460732 kB",
+    "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+    "validador_sha256": "d30e3b2813044b8245857310aaf81d97f6a9d24b16f049beb5c49ecf8e240afb"
+  },
+  "config": {
+    "chapas_perturbadas": "2",
+    "estado": "provisorio",
+    "id": "cal21_reinicios10",
+    "max_avaliacoes_reparo": "1000",
+    "max_reinicios": "10",
+    "rls_max_avaliacoes": "100000000",
+    "versao": "1"
+  },
+  "config_sha256": "72f47efe8bc1ca48d4384fec651c7cbbea8cecc392c29e95dc8fc46f1ebfceb6",
+  "cpu": 3.0,
+  "manifestos": {
+    "final": "fab4b812f17f4abe488e464348fb5b6acd535e9ca4a3261883ef5fc182a9b86a",
+    "piloto": "1e5700a4770ecd1cea1b840169e1b9dfd9329c4dc1eca5af2a5b7e01d9a88b8d"
+  },
+  "modo": "calibration",
+  "sementes_sha256": "ba8bedbc92d3f5f1d8668e2fb5e194ba379fae442838863b53e3f77a3c69ef8f",
+  "tarefas": [
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A14.ins2D",
+      "familia": "A",
+      "instancia": "A14",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "fa83da3eba2785858a497d0ffb5b691ba087d97c8dc0ba159ecdc83787763f40"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A14.ins2D",
+      "familia": "A",
+      "instancia": "A14",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "fa83da3eba2785858a497d0ffb5b691ba087d97c8dc0ba159ecdc83787763f40"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A14.ins2D",
+      "familia": "A",
+      "instancia": "A14",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "fa83da3eba2785858a497d0ffb5b691ba087d97c8dc0ba159ecdc83787763f40"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A14.ins2D",
+      "familia": "A",
+      "instancia": "A14",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "fa83da3eba2785858a497d0ffb5b691ba087d97c8dc0ba159ecdc83787763f40"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A17.ins2D",
+      "familia": "A",
+      "instancia": "A17",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "ab7c751be267fd653eed7cc24930dd344119d9a9c17b9998029337b9ab551eda"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A17.ins2D",
+      "familia": "A",
+      "instancia": "A17",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "ab7c751be267fd653eed7cc24930dd344119d9a9c17b9998029337b9ab551eda"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A17.ins2D",
+      "familia": "A",
+      "instancia": "A17",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "ab7c751be267fd653eed7cc24930dd344119d9a9c17b9998029337b9ab551eda"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A17.ins2D",
+      "familia": "A",
+      "instancia": "A17",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "ab7c751be267fd653eed7cc24930dd344119d9a9c17b9998029337b9ab551eda"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A23.ins2D",
+      "familia": "A",
+      "instancia": "A23",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "38d02fbe0974d98f0c34294f6867b3df3264fb123b3112820a2346834c77bd68"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A23.ins2D",
+      "familia": "A",
+      "instancia": "A23",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "38d02fbe0974d98f0c34294f6867b3df3264fb123b3112820a2346834c77bd68"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A23.ins2D",
+      "familia": "A",
+      "instancia": "A23",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "38d02fbe0974d98f0c34294f6867b3df3264fb123b3112820a2346834c77bd68"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A23.ins2D",
+      "familia": "A",
+      "instancia": "A23",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "38d02fbe0974d98f0c34294f6867b3df3264fb123b3112820a2346834c77bd68"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A30.ins2D",
+      "familia": "A",
+      "instancia": "A30",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "5e5d76249adf52b1a90a090ba80c91120d863c51afaf80010795e2a685bf269d"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A30.ins2D",
+      "familia": "A",
+      "instancia": "A30",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "5e5d76249adf52b1a90a090ba80c91120d863c51afaf80010795e2a685bf269d"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A30.ins2D",
+      "familia": "A",
+      "instancia": "A30",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "5e5d76249adf52b1a90a090ba80c91120d863c51afaf80010795e2a685bf269d"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A30.ins2D",
+      "familia": "A",
+      "instancia": "A30",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "5e5d76249adf52b1a90a090ba80c91120d863c51afaf80010795e2a685bf269d"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+      "familia": "A",
+      "instancia": "A42",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+      "familia": "A",
+      "instancia": "A42",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+      "familia": "A",
+      "instancia": "A42",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/A/A/A42.ins2D",
+      "familia": "A",
+      "instancia": "A42",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_01_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_01_060_02",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "83d7a9aa19aa4f41ca1fb2e8cd543fd98d47a3647dcc27fdb633cc3881a6d1d2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_01_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_01_060_02",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "83d7a9aa19aa4f41ca1fb2e8cd543fd98d47a3647dcc27fdb633cc3881a6d1d2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_01_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_01_060_02",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "83d7a9aa19aa4f41ca1fb2e8cd543fd98d47a3647dcc27fdb633cc3881a6d1d2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_01_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_01_060_02",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "83d7a9aa19aa4f41ca1fb2e8cd543fd98d47a3647dcc27fdb633cc3881a6d1d2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_03_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_060_02",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "ffafc394e0c5c17b239d944f08f56de025d7791e4f6a32138203a936125b70c8"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_03_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_060_02",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "ffafc394e0c5c17b239d944f08f56de025d7791e4f6a32138203a936125b70c8"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_03_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_060_02",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "ffafc394e0c5c17b239d944f08f56de025d7791e4f6a32138203a936125b70c8"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_03_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_060_02",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "ffafc394e0c5c17b239d944f08f56de025d7791e4f6a32138203a936125b70c8"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_05_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_05_060_02",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "622a9a2b7accfcdc93a20757f8389c1680feee7fae1fa11d0fae935f0ac9f5c6"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_05_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_05_060_02",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "622a9a2b7accfcdc93a20757f8389c1680feee7fae1fa11d0fae935f0ac9f5c6"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_05_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_05_060_02",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "622a9a2b7accfcdc93a20757f8389c1680feee7fae1fa11d0fae935f0ac9f5c6"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_05_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_05_060_02",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "622a9a2b7accfcdc93a20757f8389c1680feee7fae1fa11d0fae935f0ac9f5c6"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_060_02",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_060_02",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_060_02",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_07_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_060_02",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "1a5745dd2deeebd1bd725986d14aa9bdf37e62c33297dc2d84331f30d97ed27f"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_09_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_09_060_02",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "a036dbba86f9c49ebfa6ddc06061ede25c64b758372ae9f8958024b102979bb2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_09_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_09_060_02",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "a036dbba86f9c49ebfa6ddc06061ede25c64b758372ae9f8958024b102979bb2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_09_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_09_060_02",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "a036dbba86f9c49ebfa6ddc06061ede25c64b758372ae9f8958024b102979bb2"
+    },
+    {
+      "caminho_instancia": "/home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/instances/source/CLASS/CLASS/cl_09_060_02.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_09_060_02",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "a036dbba86f9c49ebfa6ddc06061ede25c64b758372ae9f8958024b102979bb2"
+    }
+  ],
+  "versao": 1
+}

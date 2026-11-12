@@ -4,6 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <tuple>
+#include <utility>
 
 using namespace std;
 
@@ -128,7 +129,9 @@ ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoR
     else resultado.bases = amostra_bases_uniforme(estado, origem, instancia.copias.size(), gerador);
     bool escolhida_orientada = false;
     vector<bool> bases_orientadas;
-    for (int64_t base : resultado.bases) bases_orientadas.push_back(mecanismos != nullptr && mecanismos->orientacao_externa && peso_externo(instancia, composicao_chapa(instancia, estado.chapas[origem].pecas), base, mecanismos->historico) > 1);
+    vector<int64_t> composicao;
+    if (mecanismos != nullptr && mecanismos->orientacao_externa) composicao = composicao_chapa(instancia, estado.chapas[origem].pecas);
+    for (int64_t base : resultado.bases) bases_orientadas.push_back(mecanismos != nullptr && mecanismos->orientacao_externa && peso_externo(instancia, composicao, base, mecanismos->historico) > 1);
     size_t indice_base = 0;
     for (int64_t base : resultado.bases) {
         verifica_tempo(relogio);
@@ -140,7 +143,7 @@ ResultadoVizinhanca explora_vizinhanca(const Instancia& instancia, const EstadoR
         resultado.avaliados++;
         if (orcamento != nullptr) orcamento->usadas++;
         if (melhora_estado(candidato, resultado.estado)) {
-            resultado.estado = candidato;
+            resultado.estado = move(candidato);
             resultado.escolhido = movimento;
             resultado.melhorou = true;
             escolhida_orientada = orientada;
@@ -174,7 +177,7 @@ ResultadoVnd executa_vnd(const Instancia& instancia, const EstadoReparo& estado,
         if (passo.interrompida) { resultado.limite_reparo = true; break; }
         resultado.avaliacoes[vizinhanca - 1] += passo.avaliados;
         if (passo.melhorou) {
-            resultado.estado = passo.estado;
+            resultado.estado = move(passo.estado);
             resultado.melhorias[vizinhanca - 1]++;
             resultado.reinicios++;
             vizinhanca = 1;

@@ -128,6 +128,27 @@ class Orquestracao(unittest.TestCase):
             csv, solucao = runner.validar(pasta, instancia, esperado, config)
             self.assertTrue(csv.is_file() and solucao.is_file())
 
+    def test_esquema_e_marcos_corrompidos(self):
+        instancia = RAIZ / 'tests/data/integracao/limite_inicial.txt'
+        pasta = self.raiz / 'schema'
+        cmd = [str(RAIZ / 'bin/tp3'), '--instancia', str(instancia), '--metodo', 'Hbase',
+               '--config', str(self.config), '--semente', '1001', '--cpu', '2', '--saida', str(pasta), '--salvar-solucao']
+        self.rodar(cmd)
+        esperado = {'metodo': 'Hbase'}
+        config = runner.configuracao(self.config)
+        arquivo = next(p for p in pasta.glob('*.csv') if not p.name.endswith('.solucao.csv'))
+        original = arquivo.read_text()
+        linhas = original.splitlines()
+        cab = linhas[0].split(','); valores = linhas[1].split(',')
+        removido = cab.index('tentativas_basicas')
+        arquivo.write_text(','.join(cab[:removido]+cab[removido+1:])+'\n'+','.join(valores[:removido]+valores[removido+1:])+'\n')
+        with self.assertRaises(ValueError):
+            runner.validar(pasta, instancia, esperado, config)
+        valores[cab.index('K_60')] = ''; valores[cab.index('desvio_60')] = ''
+        arquivo.write_text(linhas[0]+'\n'+','.join(valores)+'\n')
+        with self.assertRaises(ValueError):
+            runner.validar(pasta, instancia, esperado, config)
+
     def test_falha_nao_publica(self):
         cmd = self.cmd.copy(); cmd[cmd.index('--cpu')+1] = '1e-300'
         self.rodar(cmd, codigo=1)
