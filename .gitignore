@@ -14,3 +14,5 @@ __pycache__/
 *~
 *.swp
 .DS_Store
+
+/materiais_uteis_para_consulta/
