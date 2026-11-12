@@ -2,8 +2,8 @@ CXX := g++
 CPPFLAGS := -Iinclude
 CXXFLAGS := -std=c++20 -O2 -Wall -Wextra -Wpedantic
 
-COMMON_OBJS := obj/apresentacao.o obj/instancia.o obj/solucao.o obj/verificador_solucao.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/limites_inferiores.o obj/estado_reparo.o
-OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/test_solucao.o obj/test_decodificador.o obj/test_empacotador_base.o obj/test_construcao_inicial.o obj/test_limites_inferiores.o obj/test_estado_reparo.o obj/metadados_instancia.o
+COMMON_OBJS := obj/apresentacao.o obj/instancia.o obj/solucao.o obj/verificador_solucao.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/limites_inferiores.o obj/estado_reparo.o obj/vnd.o
+OBJS := $(COMMON_OBJS) obj/main.o obj/test_inicio.o obj/test_instancia.o obj/test_solucao.o obj/test_decodificador.o obj/test_empacotador_base.o obj/test_construcao_inicial.o obj/test_limites_inferiores.o obj/test_estado_reparo.o obj/test_vnd.o obj/metadados_instancia.o
 DEPS := $(OBJS:.o=.d)
 EXE := bin/tp3
 TEST_EXE := bin/test_inicio
@@ -14,6 +14,7 @@ PACKER_TEST_EXE := bin/test_empacotador_base
 CONSTRUCTION_TEST_EXE := bin/test_construcao_inicial
 BOUNDS_TEST_EXE := bin/test_limites_inferiores
 REPAIR_TEST_EXE := bin/test_estado_reparo
+VND_TEST_EXE := bin/test_vnd
 
 .PHONY: all test clean catalog catalog-test
 
@@ -46,6 +47,9 @@ $(BOUNDS_TEST_EXE): obj/instancia.o obj/limites_inferiores.o obj/test_limites_in
 $(REPAIR_TEST_EXE): obj/instancia.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/estado_reparo.o obj/verificador_solucao.o obj/test_estado_reparo.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+$(VND_TEST_EXE): obj/instancia.o obj/geometria.o obj/decodificador.o obj/empacotador_base.o obj/construcao_inicial.o obj/estado_reparo.o obj/verificador_solucao.o obj/vnd.o obj/test_vnd.o | bin
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 obj/%.o: src/%.cpp | obj
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
@@ -67,7 +71,7 @@ catalog: bin/metadados_instancia
 catalog-test: bin/metadados_instancia
 	python3 tests/test_catalogo.py
 
-test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE)
+test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE)
 	./$(TEST_EXE)
 	./$(INSTANCE_TEST_EXE)
 	./$(SOLUTION_TEST_EXE)
@@ -76,9 +80,10 @@ test: $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TES
 	./$(CONSTRUCTION_TEST_EXE)
 	./$(BOUNDS_TEST_EXE)
 	./$(REPAIR_TEST_EXE)
+	./$(VND_TEST_EXE)
 	./$(EXE)
 
 clean:
-	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
+	$(RM) $(EXE) $(TEST_EXE) $(INSTANCE_TEST_EXE) $(SOLUTION_TEST_EXE) $(DECODER_TEST_EXE) $(PACKER_TEST_EXE) $(CONSTRUCTION_TEST_EXE) $(BOUNDS_TEST_EXE) $(REPAIR_TEST_EXE) $(VND_TEST_EXE) bin/metadados_instancia $(OBJS) $(DEPS)
 
 -include $(DEPS)

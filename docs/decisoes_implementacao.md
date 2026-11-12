@@ -202,3 +202,41 @@ preservação do comportamento.
   redistribuição, excesso, falha geométrica, conservação, rejeição de estados
   inválidos, áreas de 64 bits e reprodução com sementes fixas. Não há VND/VNS
   nesta tarefa.
+
+## Tarefa 10 — VND e vizinhanças externas
+
+- **Origem e amostra:** escolhe-se a maior sobrecarga; sem sobrecarga, a maior
+  área rejeitada. Empates preservam o menor índice. Em cada visita a uma
+  vizinhança, Fisher-Yates parcial sorteia uniformemente e sem reposição
+  `min(ceil(sqrt(T)), peças da origem)` bases; T é o total de cópias da instância.
+  Cada base produz um candidato, salvo se não houver parceiro ou receptora.
+  Não se encerram avaliações ao encontrar a primeira melhoria, nem ao encontrar
+  um candidato factível: toda a amostra é examinada sobre o mesmo estado original.
+- **Receptora e parceiros:** para a área de entrada, usa-se o critério da Tarefa 9:
+  menor excesso resultante, menor folga não negativa e menor índice. Na troca,
+  a escolha é feita para a entrada da peça-base, entre chapas não vazias; depois,
+  o parceiro minimiza a soma das sobrecargas das duas chapas após a troca,
+  desempatando pela diferença absoluta de áreas e pelo menor ID. No par, a segunda
+  peça é sorteada uniformemente entre as outras cópias da origem e a receptora
+  é escolhida para a área conjunta. Não se enumeram todas as receptoras, parceiros
+  ou pares: essas escolhas seguem as regras de construção de candidatos do TP3.
+- **Movimentos e aceitação:** realocação move a base, troca move uma cópia em cada
+  sentido e par move duas cópias distintas. Cada candidato reempacota somente
+  origem e receptora, em ordem crescente de índice, com o gerador explícito.
+  Empates finais preservam o primeiro candidato da amostra. Aceita-se apenas a
+  melhor melhoria estrita e reinicia-se na primeira vizinhança. Sem melhoria,
+  avança-se; o VND termina em estado factível ou após falhar nas três vizinhanças.
+  Os contadores registram avaliações, melhorias por vizinhança e reinícios.
+- **Chapas vazias no reparo:** movimentos podem esvaziar chapas. Elas permanecem
+  como posições do estado durante a descida, mantendo índices estáveis. A conversão
+  para solução agora omite chapas realmente vazias e reindexa as restantes, após
+  conferir os índices originais e as atribuições. O verificador de soluções segue
+  rejeitando chapas vazias. Essa extensão da conversão da Tarefa 9 não modifica
+  soluções anteriores e não requer refazer resultados.
+- **Testes:** há melhorias conhecidas nas três vizinhanças, incluindo uma troca
+  que permite nova melhoria por realocação e testa o reinício. Conferem-se limite
+  e unicidade da amostra, avaliação de todos os candidatos, escolha da melhor,
+  preservação de chapas inalteradas, compactação, conservação, erros de entrada
+  e reprodução. Outros 60 estados com semente fixa passam pela descida; a
+  geometria é conferida independentemente, completando rejeitadas em chapas
+  individuais somente nos testes. Estados reparados passam pela conversão validada.

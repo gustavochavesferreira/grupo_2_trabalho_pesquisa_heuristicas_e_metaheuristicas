@@ -106,14 +106,21 @@ Solucao solucao_do_reparo(const Instancia& instancia, const EstadoReparo& estado
         throw invalid_argument("Estado de reparo ainda inviável.");
     }
     Solucao solucao;
-    for (const ChapaReparo& chapa : estado.chapas) {
+    for (size_t c = 0; c < estado.chapas.size(); c++) {
+        const ChapaReparo& chapa = estado.chapas[c];
         auto atribuicoes = chapa.pecas;
         vector<int64_t> posicionadas;
         for (Posicionamento p : chapa.resultado.chapa.posicionamentos) posicionadas.push_back(p.copia_id);
         sort(atribuicoes.begin(), atribuicoes.end());
         sort(posicionadas.begin(), posicionadas.end());
         if (atribuicoes != posicionadas) throw invalid_argument("Atribuições diferem das cópias posicionadas.");
-        solucao.chapas.push_back(chapa.resultado.chapa);
+        if (atribuicoes.empty()) continue;
+        Chapa usada = chapa.resultado.chapa;
+        for (auto& p : usada.posicionamentos) {
+            if (p.indice_chapa != c) throw invalid_argument("Índice de chapa inconsistente no reparo.");
+            p.indice_chapa = solucao.chapas.size();
+        }
+        solucao.chapas.push_back(usada);
     }
     auto verificacao = verifica_solucao(instancia, solucao);
     if (!verificacao.valido) throw invalid_argument("Reparo não produz solução válida: " + verificacao.erro);
