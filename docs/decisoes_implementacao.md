@@ -171,3 +171,34 @@ preservação do comportamento.
   de int64 e decomposição com muitos quadrados sem expansão em memória.
   Desvios com LBref não positivo ou K abaixo do limite são rejeitados para não
   aceitar métricas inconsistentes. Detalhes em `docs/limites_inferiores.md`.
+
+## Tarefa 9 — Estado de reparo e eliminação de chapa
+
+- **Representação:** cada chapa de reparo mantém sua composição completa, o
+  resultado geométrico atual e as tentativas básicas. A composição é a fonte de
+  todas as peças atribuídas, mesmo quando não há posicionamento. Na conversão
+  de uma solução validada, preservam-se as posições sem simular tentativas.
+  A inviabilidade é calculada sob demanda, evitando um total global desatualizado.
+- **Excesso e rejeições:** chamadas descartadas por área não ganham rejeições
+  geométricas fictícias. Contribuem com excesso e uma chapa inviável; só chamadas
+  efetivamente decodificadas contribuem com área e quantidade rejeitadas. Ao
+  reempacotar com excesso, descartam-se posições antigas e preserva-se apenas a
+  sequência anterior para eventual reutilização. Essa sequência histórica pode
+  diferir da composição atual; o empacotador-base a atualiza quando a área couber.
+  Comparam-se estados estritamente por excesso, área rejeitada, chapas inviáveis
+  e peças rejeitadas, nessa ordem, conforme o TP3.
+- **Remoção e redistribuição:** remove-se a menor área ocupada, desempatando pelo
+  menor índice. As peças removidas seguem área, maior lado, menor lado e ID,
+  todos decrescentes. A receptora minimiza excesso após a atribuição; em empate,
+  minimiza folga não negativa e índice. Isso dá preferência ao melhor encaixe por
+  área e, quando nenhuma chapa comporta a peça por área, à menor sobrecarga.
+  Não se usa aleatoriedade na atribuição nem custo geométrico adicional para
+  escolher receptoras. Somente as receptoras são reempacotadas, uma vez após a
+  redistribuição, em ordem de índice; as demais preservam a geometria reindexada.
+- **Aceitação e testes:** a origem precisa ser uma solução validada com pelo
+  menos duas chapas. A conversão do reparo para solução exige inviabilidade zero,
+  igualdade entre atribuições e posicionamentos por chapa e validação independente.
+  A origem nunca é alterada. Testes cobrem as quatro prioridades, empates,
+  redistribuição, excesso, falha geométrica, conservação, rejeição de estados
+  inválidos, áreas de 64 bits e reprodução com sementes fixas. Não há VND/VNS
+  nesta tarefa.
