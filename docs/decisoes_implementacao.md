@@ -31,3 +31,22 @@ Ainda não há decisões de implementação registradas.
   original é preservada quando somente a rotação cabe. Evitaram-se limites
   arbitrários para o tamanho das instâncias. Os testes cobrem áreas acima de 32
   bits, estouros de produto e soma, campos auxiliares e as duas situações de encaixe.
+
+## Tarefa 3 — Catálogo e seleção
+
+- **Validação compartilhada:** o script Python usa um pequeno executável de
+  metadados ligado ao leitor C++ da Tarefa 2. Evita-se um segundo parser do formato
+  unificado e divergências entre catálogo e algoritmos. Todos os arquivos
+  reconhecidos são validados, inclusive CLASS fora da seleção. Testes usam dados
+  reais e cópias temporárias com remoção, duplicação, nome inválido e corrupção.
+- **Identificação e reprodução:** nomes originais definem a família e os campos
+  de CLASS; caminhos são relativos a `instances/source/`. O identificador é o
+  nome sem extensão, comparado textualmente no desempate das A. CSVs incluem
+  SHA-256 do original e seguem a ordem dos caminhos para reprodução estável.
+  Não se renomeiam arquivos nem se deduz a classe pelas dimensões. Os testes
+  conferem hashes, seleção exata, repetibilidade dos CSVs, contagens e disjunção.
+- **Completude:** exige-se toda a entrada necessária ao piloto/final; CLASS
+  adicionais válidas são catalogadas, sem exigir réplicas não usadas pelo TP3.
+  Descartou-se restringir o catálogo às 163 selecionadas, pois isso ocultaria
+  dados fornecidos. Arquivos auxiliares README e descrição de formato são
+  ignorados explicitamente; outros nomes não reconhecidos causam erro.
