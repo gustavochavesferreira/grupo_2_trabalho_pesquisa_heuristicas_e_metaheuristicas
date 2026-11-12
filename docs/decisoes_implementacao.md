@@ -104,3 +104,30 @@ preservação do comportamento.
   com semente 1001 comparam o resultado com um oráculo que enumera todos os
   pontos inteiros. Ao completar cada resultado com chapas individuais para as
   rejeitadas, verifica-se também a conservação de todas as cópias pelo verificador.
+
+## Tarefa 6 — Empacotador-base multissequência
+
+- **Execução e retorno:** quando a área cabe, são executadas as oito tentativas
+  solicitadas na Tarefa 6, mesmo se alguma já for completa, preservando todos os
+  resultados para os mecanismos posteriores. O índice da melhor identifica o
+  resultado sem duplicá-lo. O excesso de área retorna área total e excesso,
+  vetor de tentativas vazio e índice -1, sem decodificar nem consumir o gerador.
+  Não se atribuem rejeições geométricas fictícias a uma chamada descartada por área.
+- **Escolhas aleatórias:** usa-se `mt19937` recebido por referência, sem fonte
+  interna de sementes. Em cada tentativa aleatória, escolhe-se uniformemente
+  entre as primeiras `min(ceil(sqrt(|S|)), restantes)` peças da lista ordenada;
+  `|S|` é o tamanho inicial do conjunto da chamada. A lista remanescente mantém
+  sua ordem após a remoção, sem reposição. A ordenação inicial é decrescente por
+  área, maior lado, menor lado e ID da cópia.
+- **Sequência anterior:** vetor vazio significa ausência de uma sequência útil,
+  produzindo uma sétima tentativa aleatória além das seis usuais. Caso contrário,
+  remove-se quem saiu do conjunto, preserva-se a ordem relativa de quem ficou e
+  acrescentam-se as novas peças em ordem decrescente. Não se reordena toda a
+  sequência anterior, pois isso perderia a informação reaproveitada. IDs
+  desconhecidos e duplicados são erros; peças válidas que saíram são removidas.
+- **Seleção:** minimiza área rejeitada e depois quantidade de rejeições. Empates
+  finais preservam a tentativa de menor índice, inclusive entre completas.
+  Testes cobrem descarte, oito tentativas, ordenação, atualização, escolhas na
+  lista restrita, seleção, índices de chapa, entradas vazias/inválidas e
+  reprodução. Casos aleatórios usam sementes fixas e as tentativas são conferidas
+  pelo verificador independente após completar as rejeições em chapas individuais.
