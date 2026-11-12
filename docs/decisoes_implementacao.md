@@ -81,3 +81,26 @@ perder seu tipo dinâmico. Os parâmetros de entrada grandes permanecem `const`
 para permitir consulta sem cópia nem alteração. Esse padrão vale para as próximas
 tarefas. A revisão modifica somente o estilo; os testes existentes verificam a
 preservação do comportamento.
+
+## Tarefa 5 — Cantos e decodificação de uma chapa
+
+- **Construção dos candidatos:** cruzam-se as coordenadas das bordas direitas e
+  superiores das peças colocadas, incluindo zero, para obter cantos projetados
+  também entre peças diferentes. Coordenadas repetidas, pontos ocupados e pontos
+  nas bordas superior/direita da chapa são removidos. Para cada orientação,
+  descartam-se candidatos inviáveis e os redundantes que ainda permitem mover
+  uma unidade para baixo ou para a esquerda. Assim, não se depende apenas dos
+  dois vértices imediatamente adjacentes à última peça nem se aplica dominância
+  por coordenadas que possa eliminar um canto útil atrás de um obstáculo.
+- **Desempates:** menor y, menor x e orientação original antes da rotacionada.
+  Quadrados são examinados uma única vez. O decodificador sempre processa toda
+  a sequência, sem abrir chapas nem reordenar peças. IDs desconhecidos ou
+  repetidos são erros; subconjuntos sem repetição são permitidos para reempacotar
+  chapas. O resultado preserva a sequência, colocadas em ordem, rejeitadas em
+  ordem, área rejeitada, ID e posição da primeira rejeição (ambos -1 se ausente).
+- **Verificação:** geometria em módulo próprio, sem reutilização pelo verificador
+  independente. Testes dirigidos cobrem contato, rotação, quadrados, cantos,
+  bloqueios, continuação após rejeição e áreas acima de 32 bits. Outros 200 casos
+  com semente 1001 comparam o resultado com um oráculo que enumera todos os
+  pontos inteiros. Ao completar cada resultado com chapas individuais para as
+  rejeitadas, verifica-se também a conservação de todas as cópias pelo verificador.
