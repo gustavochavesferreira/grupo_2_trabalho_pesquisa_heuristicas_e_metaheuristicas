@@ -131,3 +131,23 @@ preservação do comportamento.
   lista restrita, seleção, índices de chapa, entradas vazias/inválidas e
   reprodução. Casos aleatórios usam sementes fixas e as tentativas são conferidas
   pelo verificador independente após completar as rejeições em chapas individuais.
+
+## Tarefa 7 — Construção inicial
+
+- **Inserção incremental:** a busca da posição inferior-esquerda foi extraída do
+  decodificador para `insere_inferior_esquerdo`, usada também pela construção.
+  Ela insere somente a nova peça e preserva a chapa se falhar. Isso evita duplicar
+  a regra geométrica ou reempacotar peças já posicionadas, o que poderia alterar
+  a construção prevista. Os testes anteriores do decodificador permanecem ativos.
+- **Escolha da chapa:** após ordenar cópias por área, maior lado, menor lado e ID,
+  todos decrescentes, examinam-se chapas por maior área ocupada e menor índice.
+  Para uma peça fixa, isso equivale à menor folga de área após a inserção.
+  Chapas sem área suficiente são descartadas; a primeira com posição geométrica
+  viável recebe a peça. Empates de folga priorizam o índice menor, preservando a
+  ordem de abertura. Não se abre chapa apenas porque uma candidata falhou.
+- **Validação e testes:** toda solução inicial passa pelo verificador independente
+  antes de retornar. Falhar em chapa vazia gera erro, sem devolver solução parcial.
+  Testes cobrem demandas repetidas, ordenação, desempates, melhor aproveitamento,
+  bloqueio apesar da área livre, preservação em falha e rotação em chapa vazia
+  e ocupada. Outros 100 casos pequenos com semente 1001 são comparados com um
+  oráculo que enumera posições inteiras sem a geometria compartilhada.

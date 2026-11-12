@@ -14,6 +14,9 @@ struct ResultadoDecodificacao {
     int64_t area_rejeitada = 0;
 };
 
+// Insere uma cópia sem mover as peças existentes; em falha, preserva a chapa.
+bool insere_inferior_esquerdo(const Instancia& instancia, CopiaPeca copia, Chapa& chapa, size_t indice_chapa = 0);
+
 // A sequência pode ser um subconjunto de cópias, sem repetições.
 ResultadoDecodificacao decodifica_inferior_esquerdo(const Instancia& instancia, const vector<int64_t>& sequencia, size_t indice_chapa = 0);
 
