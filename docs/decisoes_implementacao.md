@@ -591,3 +591,21 @@ preservação do comportamento.
   em results/preflight/congelada_v1/, fora dos resultados científicos e do Git;
   plano, integridade e prova da retomada são versionáveis. Detalhes e comandos
   constam em docs/preflight.md. Não se iniciou a Tarefa 22.
+
+## Tarefa 22 — Preparação para execução pelo usuário
+
+- Por solicitação explícita, não se executou o piloto nesta tarefa. O comando
+  scripts/piloto.py reúne verificação do congelamento, orquestração retomável,
+  auditoria da matriz 10×4×10 e análise/congelamento ao final. São 60 segundos
+  por execução, sem opções que alterem a configuração ou usem o conjunto final.
+- H* é selecionada por desvio médio, alcance de LBref e mediana do tempo até
+  melhor K, nessa ordem. A média do desvio é calculada como fração exata de
+  K/LBref. Em empate exato dos três critérios, escolhe-se a primeira da ordem
+  pública das propostas e registram-se todas as empatadas. Não se acrescenta
+  critério de CPU média ao critério científico da Tarefa 22.
+- O selo h_estrela_v1.json liga a escolha aos resultados, contrato, configuração,
+  sementes, ambiente e manifesto. Conteúdo diferente não sobrescreve o selo.
+  Dados brutos/resumos do piloto são versionáveis; pendências/invalidos não.
+- Testes executados sem experimento formal: critérios, precisão, cem resultados
+  por método, recusa de matriz ausente e planejamento de 400 execuções. O
+  congelamento de H* só existirá depois da execução completa pelo usuário.

@@ -28,3 +28,8 @@ __pycache__/
 !/results/preflight/plano.json
 !/results/preflight/integridade.json
 !/results/preflight/retomada.json
+
+# Piloto formal: preservar dados brutos, resumos e ambiente no versionamento.
+!/results/pilot/
+/results/pilot/**/.pendentes/
+/results/pilot/**/invalidos/

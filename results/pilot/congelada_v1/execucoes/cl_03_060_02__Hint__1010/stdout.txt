@@ -1,0 +1,1 @@
+Resultado validado: /home/gustavo/Documents/ufmg/2026_2/heuristicas_e_metaheuristicas/trabalho_de_pesquisa/codigo_heuristicas_git/results/pilot/congelada_v1/.pendentes/cl_03_060_02__Hint__1010__vs2wcsgx/cl_03_060_02__Hint__1010__congelada_v1.csv

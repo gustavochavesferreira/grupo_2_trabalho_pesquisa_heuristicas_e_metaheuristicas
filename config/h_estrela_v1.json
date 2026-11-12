@@ -1,0 +1,75 @@
+{
+  "H_estrela": "Hint",
+  "ambiente": {
+    "build": {
+      "CPPFLAGS": "-Iinclude",
+      "CXX": "g++",
+      "CXXFLAGS": "-std=c++20 -O2 -Wall -Wextra -Wpedantic",
+      "LDFLAGS": "",
+      "LDLIBS": ""
+    },
+    "compilador": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "cpu": "AMD Ryzen 3 5300U with Radeon Graphics",
+    "executavel_sha256": "dbfbf64cffe4a55f6da13610e14919d8254debad9893fb5926c8c3844f3001f0",
+    "fontes_sha256": "37564b72b02f29162acca2b77eee33a93895134206eb91f291965cfc6ea2f80f",
+    "kernel": "6.8.0-149-generic",
+    "orquestrador_sha256": "3ce281edd62ddc851cb07dcd449c794a9c80135f456428fb1dd9de0731959ba5",
+    "python": "3.12.3",
+    "ram": "MemTotal:        7460732 kB",
+    "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+    "validador_sha256": "d30e3b2813044b8245857310aaf81d97f6a9d24b16f049beb5c49ecf8e240afb"
+  },
+  "config_sha256": "158c5a793162fb716c87cb5fcb34afb47e45fac2da07bfe651e480dd5e96c926",
+  "contrato_sha256": "9b55a7677bddf540fcf4c4ef14c9d7f3c2e11e76239074a26c9bfce7a74b91e0",
+  "criterio": [
+    "menor_desvio_medio",
+    "maior_alcance_lb",
+    "menor_tempo_melhor_mediano"
+  ],
+  "desempate_final": "ordem Hbase, Hext, Hint, Hcomb somente se os tr\u00eas crit\u00e9rios forem id\u00eanticos",
+  "empate_total": [
+    "Hint"
+  ],
+  "execucoes_validas": 400,
+  "piloto_sha256": "1e5700a4770ecd1cea1b840169e1b9dfd9329c4dc1eca5af2a5b7e01d9a88b8d",
+  "resumos": [
+    {
+      "K_medio": 20.6,
+      "alcances_lb": 30,
+      "desvio_exato": "1460383/160992",
+      "desvio_medio": 9.071152603856092,
+      "execucoes": 100,
+      "metodo": "Hbase",
+      "tempo_melhor_mediano": 0.0021455575
+    },
+    {
+      "K_medio": 20.6,
+      "alcances_lb": 30,
+      "desvio_exato": "1460383/160992",
+      "desvio_medio": 9.071152603856092,
+      "execucoes": 100,
+      "metodo": "Hext",
+      "tempo_melhor_mediano": 0.002141652
+    },
+    {
+      "K_medio": 20.6,
+      "alcances_lb": 30,
+      "desvio_exato": "1460383/160992",
+      "desvio_medio": 9.071152603856092,
+      "execucoes": 100,
+      "metodo": "Hint",
+      "tempo_melhor_mediano": 0.0021363725
+    },
+    {
+      "K_medio": 20.6,
+      "alcances_lb": 30,
+      "desvio_exato": "1460383/160992",
+      "desvio_medio": 9.071152603856092,
+      "execucoes": 100,
+      "metodo": "Hcomb",
+      "tempo_melhor_mediano": 0.0021432540000000003
+    }
+  ],
+  "sementes_sha256": "ba8bedbc92d3f5f1d8668e2fb5e194ba379fae442838863b53e3f77a3c69ef8f",
+  "versao": 1
+}

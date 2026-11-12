@@ -61,3 +61,6 @@ Configuração comum: `config/congelada_v1.cfg`; confira o selo com
 `python3 scripts/verificar_congelamento.py` antes das próximas etapas.
 
 Pré-execução técnica concluída: [docs/preflight.md](docs/preflight.md).
+
+Piloto formal com execução, retomada e seleção de H*: `python3 scripts/piloto.py`.
+Veja [docs/piloto.md](docs/piloto.md).
