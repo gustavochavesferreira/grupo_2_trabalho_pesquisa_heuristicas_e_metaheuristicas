@@ -136,5 +136,40 @@ int main() {
     bool parou = false;
     try { decodifica_ibl(i, {1,1,2}, &zero); } catch (const TempoEsgotado&) { parou = true; }
     exige(parou, "IBL ignorou prazo de CPU.");
-    cout << "IBL e f7: regras dirigidas, perfil, 250 oráculos, demandas, rotação, CPU e aritmética extrema: OK\n";
+    // Decodificação incremental: reaproveitar o prefixo e interromper acima de max_chapas
+    // deve reproduzir exatamente a decodificação completa.
+    int incrementais = 0, interrompidas = 0;
+    for (int caso = 0; caso < 300; caso++) {
+        int64_t w = 3 + g()%10, h = 3 + g()%10;
+        vector<TipoPeca> tipos;
+        vector<int64_t> sequencia;
+        int ntipos = 1 + g()%6;
+        for (int t = 1; t <= ntipos; t++) {
+            int64_t demanda = 1 + g()%5;
+            tipos.push_back({t,1 + static_cast<int64_t>(g()%w),1 + static_cast<int64_t>(g()%h),demanda,0,0});
+            for (int d = 0; d < demanda; d++) sequencia.push_back(g()%2 ? t : -t);
+        }
+        i = exemplo(w, h, tipos);
+        shuffle(sequencia.begin(), sequencia.end(), g);
+        DecodificadorIbl decodificador(i);
+        ResultadoIBL base = decodifica_ibl(i, sequencia), saida;
+        for (int passo = 0; passo < 20; passo++) {
+            auto candidata = sequencia;
+            size_t a = g()%candidata.size(), b = g()%candidata.size();
+            if (g()%2) swap(candidata[a], candidata[b]); else { candidata[a] = -candidata[a]; b = a; }
+            size_t inicio = min(a, b);
+            auto completa = decodifica_ibl(i, candidata);
+            bool ok = decodificador.decodifica(candidata, &base, inicio, numeric_limits<size_t>::max(), saida);
+            exige(ok && iguais(saida.solucao, completa.solucao) && saida.f7 == completa.f7 && saida.area_perfil == completa.area_perfil,
+                  "Decodificação incremental divergiu da completa.");
+            incrementais++;
+            size_t limite = base.solucao.chapas.size();
+            ok = decodificador.decodifica(candidata, &base, inicio, limite, saida);
+            exige(ok == (completa.solucao.chapas.size() <= limite), "Interrupção por max_chapas incorreta.");
+            if (!ok) { interrompidas++; exige(completa.f7 > base.f7, "Candidato interrompido não era pior em f7."); }
+            if (g()%2) { sequencia = candidata; base = completa; }
+        }
+    }
+    exige(incrementais == 6000 && interrompidas > 0, "Casos incrementais insuficientes.");
+    cout << "IBL e f7: regras dirigidas, perfil, 250 oráculos, 6000 decodificações incrementais, demandas, rotação, CPU e aritmética extrema: OK\n";
 }

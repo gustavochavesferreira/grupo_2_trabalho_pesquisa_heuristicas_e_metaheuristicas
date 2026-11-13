@@ -68,7 +68,9 @@ ResultadoRls executa_rls(const Instancia& instancia, uint32_t semente, double li
     mt19937 gerador(semente);
     ResultadoRls resultado;
     resultado.permutacao = permutacao_inicial_rls(instancia, gerador, &relogio);
-    auto atual = decodifica_ibl(instancia, resultado.permutacao, &relogio);
+    DecodificadorIbl decodificador(instancia);
+    ResultadoIBL atual, empacotamento;
+    decodificador.decodifica(resultado.permutacao, nullptr, 0, numeric_limits<size_t>::max(), atual, &relogio);
     resultado.avaliacoes = 1;
     resultado.tempo_melhor = relogio.decorrido();
     vector<pair<double, int64_t>> melhorias{{resultado.tempo_melhor, static_cast<int64_t>(atual.solucao.chapas.size())}};
@@ -82,15 +84,18 @@ ResultadoRls executa_rls(const Instancia& instancia, uint32_t semente, double li
             aplica_movimento_rls(candidata, movimento);
             if (movimento.troca) resultado.trocas++;
             else resultado.inversoes++;
-            auto empacotamento = decodifica_ibl(instancia, candidata, &relogio);
+            // As posições antes da primeira alterada não mudam: o IBL recomeça dali.
+            size_t inicio = movimento.troca ? min(movimento.primeira, movimento.segunda) : movimento.primeira;
+            // Com mais chapas que a atual, f7 é estritamente maior e o candidato seria rejeitado.
+            bool completo = decodificador.decodifica(candidata, &atual, inicio, atual.solucao.chapas.size(), empacotamento, &relogio);
             resultado.avaliacoes++;
             // Um candidato que atravessa o prazo não substitui a última solução aceita.
             relogio.verifica();
-            if (aceita_rls(empacotamento.f7, atual.f7)) {
+            if (completo && aceita_rls(empacotamento.f7, atual.f7)) {
                 resultado.aceitos++;
                 if (empacotamento.f7 < atual.f7) resultado.melhorias++;
                 bool reduziu = empacotamento.solucao.chapas.size() < atual.solucao.chapas.size();
-                atual = move(empacotamento);
+                swap(atual, empacotamento);
                 resultado.permutacao = move(candidata);
                 if (reduziu) {
                     resultado.tempo_melhor = relogio.decorrido();
