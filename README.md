@@ -84,14 +84,6 @@ Cada instância tem o mesmo número de sementes. A tabela é descritiva e não
 substitui a análise estatística das hipóteses do TP3. No reduzido, as três
 famílias têm peso igual; não extrapole sua média para o conjunto completo.
 
-Para um colega ajudar agora, basta rodar o **benchmark reduzido** em seu
-computador e devolver a pasta `results/benchmark_reduzido/congelada_v2/` inteira,
-incluindo contrato e ambiente. Essa execução reúne os seis métodos na mesma
-máquina, sem depender do piloto de outro computador. Não junte pastas de lotes
-de máquinas diferentes nem substitua seus próprios resultados: compare-os ou
-guarde-os em locais separados. Tempos e resultados sob prazo podem variar com
-hardware/carga. Retome cada lote na mesma máquina, caminho, código e ambiente.
-
 Resultados de pilotos são versionáveis. Benchmarks permanecem ignorados pelo
 Git por padrão: compartilhe a pasta completa por arquivo compactado/drive e
 faça backup. A conclusão só é anunciada após validar toda a matriz e as soluções.
