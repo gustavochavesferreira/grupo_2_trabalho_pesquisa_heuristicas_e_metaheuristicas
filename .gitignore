@@ -1,8 +1,6 @@
 /bin/
 /obj/
 
-# Instâncias brutas são fornecidas manualmente pelo usuário.
-/instances/source/*
 !/instances/source/README.md
 
 # Resultados gerados; instruções e diretórios permanecem versionados.
