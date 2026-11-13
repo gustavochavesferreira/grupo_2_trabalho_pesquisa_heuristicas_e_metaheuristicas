@@ -35,3 +35,20 @@ As unidades de avaliação de RLS e arquitetura são diferentes.
 Compartilhe com colegas a pasta completa, não apenas a tabela; ela contém o
 ambiente e a comprovação dos resultados. Não misture ou retome blocos de máquinas
 diferentes. Não há alteração ou aproveitamento automático dos pilotos anteriores.
+
+## Variante paralela
+
+Comando: `python3 scripts/benchmark_reduzido_paralelo.py -j 6 --embaralhar 42`.
+Mesmo plano de 108 execuções, mesma validação, recibos, retomada auditada,
+tabela e integridade; a trava global é mantida e herdada por todos os filhos.
+`-j` (padrão: núcleos físicos) e a semente da ordem entram no contrato, e a
+saída fica em results/benchmark_reduzido_j<N>/congelada_v2/: lotes sequenciais
+e paralelos, ou com -j diferentes, nunca se misturam. `--embaralhar` sorteia a
+ordem de forma reproduzível para não correlacionar a interferência entre
+processos com instância/método. Teto nominal: ceil(108/N) minutos de parede
+(--max-minutos, padrão 60). Uma falha interrompe novos inícios, aguarda as
+execuções em andamento e retorna 1.
+
+O limite de 60 s é de CPU, mas processos simultâneos disputam cache e memória:
+execuções que atingem o teto podem diferir das sequenciais. Relate o -j usado.
+Não use mais processos que núcleos físicos.
