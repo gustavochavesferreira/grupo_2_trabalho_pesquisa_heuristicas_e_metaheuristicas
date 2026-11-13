@@ -49,6 +49,12 @@ processos com instância/método. Teto nominal: ceil(108/N) minutos de parede
 (--max-minutos, padrão 60). Uma falha interrompe novos inícios, aguarda as
 execuções em andamento e retorna 1.
 
+Cada processo C++ fica fixo num núcleo físico distinto (uma CPU lógica por núcleo,
+sem usar os dois threads SMT do mesmo núcleo); as execuções saem de uma fila única,
+sorteada por --embaralhar, e cada uma ocupa o núcleo que vagar. A lista de CPUs
+entra no contrato e cada recibo registra a CPU usada. -j não pode exceder o
+número de núcleos físicos (padrão: todos).
+
 O limite de 60 s é de CPU, mas processos simultâneos disputam cache e memória:
 execuções que atingem o teto podem diferir das sequenciais. Relate o -j usado.
 Não use mais processos que núcleos físicos.
