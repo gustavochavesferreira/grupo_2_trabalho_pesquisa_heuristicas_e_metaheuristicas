@@ -31,3 +31,11 @@ __pycache__/
 !/results/ta_v1_extra/
 /results/ta_v1_extra/**/.pendentes/
 /results/ta_v1_extra/**/invalidos/
+
+# Benchmarks paralelos auditados.
+!/results/benchmark_reduzido_j6/
+/results/benchmark_reduzido_j6/**/.pendentes/
+/results/benchmark_reduzido_j6/**/invalidos/
+!/results/benchmark_estendido_s3_j6/
+/results/benchmark_estendido_s3_j6/**/.pendentes/
+/results/benchmark_estendido_s3_j6/**/invalidos/

@@ -1,0 +1,23 @@
+{
+  "contrato_sha256": "92f2c21f89900d83429673c82c4f76d42936c1b98a976574f4c9956afce6637c",
+  "execucoes": 324,
+  "familias": {
+    "A": 108,
+    "BENG": 108,
+    "CLASS": 108
+  },
+  "paralelismo": {
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "processos": 6,
+    "semente_ordem": 42
+  },
+  "uso": "benchmark_estendido_TA_sem_H_estrela",
+  "valido": true
+}

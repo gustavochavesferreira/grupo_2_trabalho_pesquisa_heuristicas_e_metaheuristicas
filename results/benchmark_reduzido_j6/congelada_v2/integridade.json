@@ -1,0 +1,15 @@
+{
+  "contrato_sha256": "f3043352b03c7f585ef60243c1cc92d580c13d1475f8c21f0c7324a5346b08ba",
+  "execucoes": 108,
+  "familias": {
+    "A": 36,
+    "BENG": 36,
+    "CLASS": 36
+  },
+  "paralelismo": {
+    "processos": 6,
+    "semente_ordem": 42
+  },
+  "uso": "benchmark_preliminar_TA_sem_H_estrela_paralelo",
+  "valido": true
+}

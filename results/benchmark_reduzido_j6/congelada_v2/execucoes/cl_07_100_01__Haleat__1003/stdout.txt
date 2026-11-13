@@ -1,0 +1,1 @@
+Resultado validado: /home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_reduzido_j6/congelada_v2/.pendentes/cl_07_100_01__Haleat__1003__dc3g6muj/cl_07_100_01__Haleat__1003__congelada_v2.csv

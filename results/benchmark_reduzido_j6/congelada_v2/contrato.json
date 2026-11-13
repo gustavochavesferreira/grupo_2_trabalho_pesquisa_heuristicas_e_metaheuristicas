@@ -1,0 +1,1011 @@
+{
+  "ambiente": {
+    "build": {
+      "CPPFLAGS": "-Iinclude",
+      "CXX": "g++",
+      "CXXFLAGS": "-std=c++20 -O2 -Wall -Wextra -Wpedantic",
+      "LDFLAGS": "",
+      "LDLIBS": ""
+    },
+    "compilador": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "cpu": "AMD Ryzen 5 5600 6-Core Processor",
+    "executavel_sha256": "63eb6380e5ff4c68a1a24f5950e8db552b117683553981b528036939bf4b508b",
+    "fontes_sha256": "1982d8d1d4f5a46dd40aed192ce7c38e1abe6293d779dcaf4f74b13a9cd3692b",
+    "kernel": "6.8.0-149-generic",
+    "orquestrador_sha256": "3ce281edd62ddc851cb07dcd449c794a9c80135f456428fb1dd9de0731959ba5",
+    "python": "3.12.3",
+    "ram": "MemTotal:       32788892 kB",
+    "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+    "validador_sha256": "d30e3b2813044b8245857310aaf81d97f6a9d24b16f049beb5c49ecf8e240afb"
+  },
+  "base_sha256": "e50b9408ca31f12beeb290e238451d94c5165739ec0bc4d36a980fd9b89ce754",
+  "config_sha256": "469051282cb911d85fbd1f44a936ec44ed7f0753e4e89d6c949fccad4ae32fa1",
+  "cpu": 60,
+  "executor_sha256": "95a9c9a4e2a3d2f53c43f1592c63743ed058efa1f2e7fc4e0f75cdd7952ff465",
+  "manifestos": {
+    "final": "fab4b812f17f4abe488e464348fb5b6acd535e9ca4a3261883ef5fc182a9b86a",
+    "piloto": "1e5700a4770ecd1cea1b840169e1b9dfd9329c4dc1eca5af2a5b7e01d9a88b8d"
+  },
+  "paralelismo": {
+    "ordem_execucao": [
+      "BENG05__Hext__1003",
+      "A36__Hcomb__1001",
+      "A36__Hbase__1002",
+      "BENG05__Hcomb__1003",
+      "cl_07_100_01__Haleat__1001",
+      "A36__RLS-f7__1001",
+      "BENG05__Hint__1003",
+      "BENG05__Haleat__1002",
+      "cl_03_100_01__Haleat__1002",
+      "A32__Hint__1003",
+      "cl_03_100_01__Haleat__1001",
+      "cl_07_100_01__RLS-f7__1003",
+      "A32__Haleat__1001",
+      "A32__Haleat__1003",
+      "BENG05__Haleat__1003",
+      "BENG03__Hint__1003",
+      "BENG05__Hint__1001",
+      "cl_03_100_01__Hcomb__1002",
+      "cl_03_100_01__Hint__1003",
+      "BENG03__Haleat__1003",
+      "BENG03__Hcomb__1003",
+      "BENG05__Hcomb__1001",
+      "BENG05__RLS-f7__1002",
+      "BENG03__Hint__1001",
+      "cl_03_100_01__Hbase__1003",
+      "cl_03_100_01__Hint__1002",
+      "BENG05__Hint__1002",
+      "A36__Hint__1003",
+      "A32__Hext__1001",
+      "BENG03__Hbase__1002",
+      "BENG05__Haleat__1001",
+      "A32__RLS-f7__1001",
+      "A36__Hcomb__1002",
+      "BENG05__Hbase__1003",
+      "BENG05__Hbase__1002",
+      "cl_07_100_01__Hcomb__1002",
+      "BENG03__RLS-f7__1002",
+      "A36__Hint__1001",
+      "BENG03__Hext__1003",
+      "BENG05__Hext__1002",
+      "BENG03__Haleat__1002",
+      "cl_07_100_01__RLS-f7__1002",
+      "cl_03_100_01__Hint__1001",
+      "cl_07_100_01__Hbase__1002",
+      "cl_07_100_01__Hint__1002",
+      "BENG03__Hbase__1001",
+      "A32__Hext__1003",
+      "BENG03__Hext__1001",
+      "BENG03__Hext__1002",
+      "A32__Hbase__1001",
+      "cl_03_100_01__Hcomb__1003",
+      "A36__Hext__1003",
+      "A32__Hint__1001",
+      "A36__Hint__1002",
+      "A32__RLS-f7__1002",
+      "cl_03_100_01__RLS-f7__1001",
+      "BENG03__Hcomb__1002",
+      "A36__Hbase__1003",
+      "BENG03__RLS-f7__1001",
+      "A36__RLS-f7__1002",
+      "BENG03__Hbase__1003",
+      "A32__Hext__1002",
+      "cl_03_100_01__Hbase__1002",
+      "BENG03__Hcomb__1001",
+      "A36__Haleat__1001",
+      "BENG03__Haleat__1001",
+      "cl_03_100_01__RLS-f7__1003",
+      "cl_07_100_01__Hint__1003",
+      "cl_03_100_01__Hbase__1001",
+      "cl_03_100_01__RLS-f7__1002",
+      "A32__Hbase__1002",
+      "cl_03_100_01__Hext__1002",
+      "BENG03__Hint__1002",
+      "cl_07_100_01__Hbase__1003",
+      "A32__Hbase__1003",
+      "A36__Hbase__1001",
+      "cl_07_100_01__Haleat__1002",
+      "cl_07_100_01__Hext__1001",
+      "BENG05__Hext__1001",
+      "cl_07_100_01__Hcomb__1003",
+      "BENG03__RLS-f7__1003",
+      "cl_07_100_01__Hext__1003",
+      "A32__Hint__1002",
+      "BENG05__RLS-f7__1003",
+      "cl_07_100_01__Hbase__1001",
+      "cl_03_100_01__Hext__1003",
+      "BENG05__Hcomb__1002",
+      "A32__Hcomb__1003",
+      "A32__Hcomb__1001",
+      "cl_07_100_01__Hint__1001",
+      "cl_07_100_01__RLS-f7__1001",
+      "A36__Hext__1002",
+      "BENG05__Hbase__1001",
+      "cl_03_100_01__Hext__1001",
+      "A36__Hcomb__1003",
+      "BENG05__RLS-f7__1001",
+      "cl_07_100_01__Hcomb__1001",
+      "cl_03_100_01__Haleat__1003",
+      "A36__Haleat__1002",
+      "cl_07_100_01__Haleat__1003",
+      "A36__RLS-f7__1003",
+      "A32__Hcomb__1002",
+      "A32__Haleat__1002",
+      "A32__RLS-f7__1003",
+      "cl_07_100_01__Hext__1002",
+      "A36__Hext__1001",
+      "A36__Haleat__1003",
+      "cl_03_100_01__Hcomb__1001"
+    ],
+    "processos": 6,
+    "semente_ordem": 42
+  },
+  "sementes_sha256": "ba8bedbc92d3f5f1d8668e2fb5e194ba379fae442838863b53e3f77a3c69ef8f",
+  "tarefas": [
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A36.ins2D",
+      "familia": "A",
+      "instancia": "A36",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "4d62e50c71b908fd06c51a00ce4d583abec3b25880f70a886336e32e48d03830"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A32.ins2D",
+      "familia": "A",
+      "instancia": "A32",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "807c06d45eaebdfe2985c6dcebd9d87b72c4d886a6c6c6d61b2bd902c008bd13"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG03.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG03",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "7363334ccc6be9be1eb3ced588b24a22ff93ef4682d0715bdebf6958b26505af"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/BENG/BENG/BENG05.ins2D",
+      "familia": "BENG",
+      "instancia": "BENG05",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "e9ea228c7218c6606e8d9da304376bbc6e3e0f68c3b434592c7bf43af57454b3"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_03_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_03_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "1b7706bd48eabaae42f4b549795499ffd85529fe839c6c542d663ed313b3eae8"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hbase",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hbase",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hbase",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hext",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hext",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hext",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hint",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hint",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hint",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hcomb",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hcomb",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Hcomb",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Haleat",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Haleat",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "Haleat",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1001,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1002,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    },
+    {
+      "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+      "familia": "CLASS",
+      "instancia": "cl_07_100_01",
+      "metodo": "RLS-f7",
+      "semente": 1003,
+      "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+    }
+  ],
+  "uso": "benchmark_preliminar_TA_sem_H_estrela_paralelo"
+}
