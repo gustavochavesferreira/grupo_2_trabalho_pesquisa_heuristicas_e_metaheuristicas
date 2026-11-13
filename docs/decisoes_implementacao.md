@@ -1,5 +1,14 @@
 # Decisões de implementação — registro ativo
 
+- Adicionado benchmark_paralelo.py como módulo exploratório independente. Uma
+  instância por trabalhador, afinidade em núcleos físicos, métodos/sementes
+  sequenciais dentro da instância. Usa trava global e resultados em results/paralelo/.
+  Não altera executores sequenciais ou o C++; o regime não substitui o TP3.
+- monitor_ram.py amostra a árvore de processos a cada segundo, registra/mostra
+  a cada minuto RSS atual e picos observados, memória disponível e swap.
+  É medida amostrada; RSS agregado pode contar memória compartilhada em duplicata.
+  Detalhes, comandos e limitações: docs/execucao_paralela.md.
+
 - Para colaboração e TA, adicionado benchmark reduzido de 108 execuções: seis
   métodos, seis instâncias finais selecionadas por regra documentada e três
   sementes. Teto 60 s CPU por execução e 120 min de parede por chamada, retomável.
