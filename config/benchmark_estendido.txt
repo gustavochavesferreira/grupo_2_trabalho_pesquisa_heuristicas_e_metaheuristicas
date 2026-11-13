@@ -1,0 +1,20 @@
+# Benchmark estendido: instâncias do manifesto final, na ordem de execução do plano.
+# Seleção feita pelo grupo; documentar o critério no TE. A32 também integra o reduzido.
+A4
+A10
+A28
+A32
+A18
+A9
+BENG01
+BENG02
+BENG04
+BENG08
+BENG09
+BENG10
+cl_01_020_01
+cl_03_020_01
+cl_05_060_01
+cl_07_060_01
+cl_08_100_01
+cl_10_100_01
