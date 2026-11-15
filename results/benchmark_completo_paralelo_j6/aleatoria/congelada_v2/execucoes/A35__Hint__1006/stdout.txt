@@ -1,0 +1,1 @@
+Resultado validado: /home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_completo_paralelo_j6/aleatoria/congelada_v2/.pendentes/A35__Hint__1006___0vn1u2b/A35__Hint__1006__congelada_v2.csv

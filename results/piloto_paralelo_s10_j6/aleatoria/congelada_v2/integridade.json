@@ -1,0 +1,22 @@
+{
+  "contrato_sha256": "e9a3177598d05b1aabb927a941d130643e3e10bbe63e1ec2cc15ff42fb54dc01",
+  "execucoes": 400,
+  "familias": {
+    "A": 200,
+    "CLASS": 200
+  },
+  "paralelismo": {
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "processos": 6,
+    "semente_ordem": 42
+  },
+  "uso": "piloto_paralelo_exploratorio_sem_H_estrela_inicial_aleatoria",
+  "valido": true
+}

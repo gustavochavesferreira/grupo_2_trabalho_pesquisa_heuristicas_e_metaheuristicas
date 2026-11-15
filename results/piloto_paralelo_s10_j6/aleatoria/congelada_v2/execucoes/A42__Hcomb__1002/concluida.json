@@ -1,0 +1,38 @@
+{
+  "arquivos": {
+    "A42__Hcomb__1002__congelada_v2.csv": "1788640b4be0ec610baf26b399db7eb2f91e3af5c2899ccd3c159de60bb57246",
+    "A42__Hcomb__1002__congelada_v2.solucao.csv": "def1dfb2d6f8323d0067694d4330257da6e937f5dc2357373df3facb1d3c3b30"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/bin/tp3",
+    "--instancia",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A42.ins2D",
+    "--metodo",
+    "Hcomb",
+    "--config",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/piloto_paralelo_s10_j6/aleatoria/congelada_v2/config.cfg",
+    "--semente",
+    "1002",
+    "--cpu",
+    "60",
+    "--saida",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/piloto_paralelo_s10_j6/aleatoria/congelada_v2/.pendentes/A42__Hcomb__1002__lizoknej",
+    "--salvar-solucao",
+    "--inicial",
+    "aleatoria"
+  ],
+  "contrato_sha256": "e9a3177598d05b1aabb927a941d130643e3e10bbe63e1ec2cc15ff42fb54dc01",
+  "cpu_logica": 0,
+  "fim_utc": "2026-11-13T04:24:14.111426+00:00",
+  "inicio_utc": "2026-11-13T04:23:56.368209+00:00",
+  "tarefa": {
+    "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A42.ins2D",
+    "familia": "A",
+    "instancia": "A42",
+    "metodo": "Hcomb",
+    "semente": 1002,
+    "sha256_instancia": "328fbef2cff34c587f265cd8ee1387bcafcef265cd2eb20ea8d22536294de9ae"
+  },
+  "versao": 1
+}

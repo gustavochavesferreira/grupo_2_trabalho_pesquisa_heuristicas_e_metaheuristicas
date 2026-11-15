@@ -1,0 +1,22 @@
+{
+  "contrato_sha256": "530a0a80258903739d1792d0d90f7f6f8a4b971ae90eeeb2fd9e402e65f12a67",
+  "execucoes": 400,
+  "familias": {
+    "A": 200,
+    "CLASS": 200
+  },
+  "paralelismo": {
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "processos": 6,
+    "semente_ordem": 42
+  },
+  "uso": "piloto_paralelo_exploratorio_sem_H_estrela_inicial_gulosa",
+  "valido": true
+}

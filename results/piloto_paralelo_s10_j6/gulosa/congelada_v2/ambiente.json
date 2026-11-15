@@ -1,0 +1,20 @@
+{
+  "build": {
+    "CPPFLAGS": "-Iinclude",
+    "CXX": "g++",
+    "CXXFLAGS": "-std=c++20 -O2 -Wall -Wextra -Wpedantic",
+    "LDFLAGS": "",
+    "LDLIBS": ""
+  },
+  "compilador": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "cpu": "AMD Ryzen 5 5600 6-Core Processor",
+  "data_utc": "2026-11-13T03:48:58.840380+00:00",
+  "executavel_sha256": "aeec8e120e6ff0b0fd81a9b480b83a9c2f04c166465be7bb0e15bc5ba4eb6bb8",
+  "fontes_sha256": "5183889852242d0248e5fd49321438fdf05111eaffee566ea7f5cb2057f599f7",
+  "kernel": "6.8.0-149-generic",
+  "orquestrador_sha256": "3ce281edd62ddc851cb07dcd449c794a9c80135f456428fb1dd9de0731959ba5",
+  "python": "3.12.3",
+  "ram": "MemTotal:       32788892 kB",
+  "sistema": "Linux-6.8.0-149-generic-x86_64-with-glibc2.39",
+  "validador_sha256": "d30e3b2813044b8245857310aaf81d97f6a9d24b16f049beb5c49ecf8e240afb"
+}

@@ -39,3 +39,9 @@ __pycache__/
 !/results/benchmark_estendido_s3_j6/
 /results/benchmark_estendido_s3_j6/**/.pendentes/
 /results/benchmark_estendido_s3_j6/**/invalidos/
+!/results/piloto_paralelo_s10_j6/
+/results/piloto_paralelo_s10_j6/**/.pendentes/
+!/results/benchmark_completo_paralelo_j6/
+/results/benchmark_completo_paralelo_j6/**/.pendentes/
+/results/benchmark_completo_paralelo_j6/**/invalidos/
+

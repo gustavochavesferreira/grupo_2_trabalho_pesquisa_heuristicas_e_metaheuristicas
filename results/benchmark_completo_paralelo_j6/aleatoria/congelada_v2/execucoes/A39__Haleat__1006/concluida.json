@@ -1,0 +1,42 @@
+{
+  "arquivos": {
+    "A39__Haleat__1006__congelada_v2.csv": "913425aa8ec9e7364227efdbe6e79f781215543588b146c9475540f2f3ccad92",
+    "A39__Haleat__1006__congelada_v2.solucao.csv": "9c3af4eee549d79437e9b3d1034577df280ee08a56d63e9deaf7d2a8d5982499"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/bin/tp3",
+    "--instancia",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A39.ins2D",
+    "--metodo",
+    "Haleat",
+    "--config",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_completo_paralelo_j6/aleatoria/congelada_v2/config.cfg",
+    "--semente",
+    "1006",
+    "--cpu",
+    "60",
+    "--saida",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_completo_paralelo_j6/aleatoria/congelada_v2/.pendentes/A39__Haleat__1006__ko8gn588",
+    "--salvar-solucao",
+    "--inicial",
+    "aleatoria"
+  ],
+  "contrato_sha256": "94651fadec7373bc4edea766dc5f87f1eb7223747b58f5773f4c43ae6c267799",
+  "cpu_logica": 0,
+  "fim_utc": "2026-11-13T14:09:01.705853+00:00",
+  "inicio_utc": "2026-11-13T14:09:01.617682+00:00",
+  "tarefa": {
+    "args_extras": [
+      "--inicial",
+      "aleatoria"
+    ],
+    "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/A/A/A39.ins2D",
+    "familia": "A",
+    "instancia": "A39",
+    "metodo": "Haleat",
+    "semente": 1006,
+    "sha256_instancia": "e142e1271badad59dc853e1d5e0274ce6566ce07515cb0dd2d538eb1d3d440b6"
+  },
+  "versao": 1
+}

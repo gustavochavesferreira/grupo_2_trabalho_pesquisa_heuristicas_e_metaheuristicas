@@ -1,0 +1,55 @@
+{
+  "H_estrela": "Hbase",
+  "criterio": [
+    "menor_desvio_medio",
+    "maior_alcance_lb",
+    "menor_tempo_melhor_mediano"
+  ],
+  "desempate_final": "ordem Hbase, Hext, Hint, Hcomb somente se os três critérios forem idênticos",
+  "empate_total": [
+    "Hbase"
+  ],
+  "execucoes_validas": 400,
+  "inicial": "aleatoria",
+  "origem": "piloto paralelo, inicial aleatoria (aceito pelo grupo como piloto válido)",
+  "piloto_contrato_sha256": "e9a3177598d05b1aabb927a941d130643e3e10bbe63e1ec2cc15ff42fb54dc01",
+  "piloto_lote": "results/piloto_paralelo_s10_j6/aleatoria/congelada_v2",
+  "resumos": [
+    {
+      "K_medio": 22.04,
+      "alcances_lb": 52,
+      "desvio_exato": "1629883/160992",
+      "desvio_medio": 10.12399995030809,
+      "execucoes": 100,
+      "metodo": "Hbase",
+      "tempo_melhor_mediano": 0.632329539
+    },
+    {
+      "K_medio": 22.51,
+      "alcances_lb": 55,
+      "desvio_exato": "263501/24768",
+      "desvio_medio": 10.638767764857882,
+      "execucoes": 100,
+      "metodo": "Hext",
+      "tempo_melhor_mediano": 0.8608250845000001
+    },
+    {
+      "K_medio": 23.36,
+      "alcances_lb": 53,
+      "desvio_exato": "1961929/160992",
+      "desvio_medio": 12.18649995030809,
+      "execucoes": 100,
+      "metodo": "Hint",
+      "tempo_melhor_mediano": 0.6774147589999999
+    },
+    {
+      "K_medio": 23.01,
+      "alcances_lb": 50,
+      "desvio_exato": "425781/35776",
+      "desvio_medio": 11.901302549194991,
+      "execucoes": 100,
+      "metodo": "Hcomb",
+      "tempo_melhor_mediano": 0.7151898544999999
+    }
+  ]
+}
