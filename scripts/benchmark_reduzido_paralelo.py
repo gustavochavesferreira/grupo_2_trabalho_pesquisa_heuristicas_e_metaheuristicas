@@ -92,7 +92,9 @@ class Lote:
         temp = Path(tempfile.mkdtemp(prefix=d.name+'__', dir=pend))
         comando = [str(RAIZ/'bin/tp3'), '--instancia', t['caminho_instancia'], '--metodo', t['metodo'],
                    '--config', str(self.cfg_path), '--semente', str(t['semente']), '--cpu', '60',
-                   '--saida', str(temp), '--salvar-solucao', *self.p.get('args_extras', [])]
+                   '--saida', str(temp), '--salvar-solucao',
+                   # Argumentos por tarefa (se houver) têm precedência sobre os do lote.
+                   *t.get('args_extras', self.p.get('args_extras', []))]
         inicio = agora()
         cpu = self.cpus_livres.get()
         try:
