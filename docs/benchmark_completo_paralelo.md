@@ -15,12 +15,21 @@ de parede; execuções que atingem o LBref terminam antes. Sem teto por padrão;
 
 ## Solução inicial (`--inicial`, padrão `aleatoria`)
 
-- `aleatoria`: as propostas e o Haleat partem da mesma inicial aleatória da RLS-f7
-  (`--inicial aleatoria`, mesma semente). A comparação com a RLS-f7 fica justa,
-  porque todos partem do mesmo ponto.
-- `gulosa`: as propostas e o Haleat partem da construção gulosa.
+A partida é a mesma para todos os métodos, inclusive a RLS-f7:
 
-Nas duas variantes, a RLS-f7 é idêntica: o executável recusa `--inicial` para ela.
+- `aleatoria`: as propostas e o Haleat partem da inicial aleatória da RLS-f7
+  (`--inicial aleatoria`, mesma semente). A RLS-f7 é a versão publicada.
+- `gulosa`: as propostas e o Haleat partem da construção gulosa. A RLS-f7 recebe
+  `--inicial gulosa`, uma variante diagnóstica que não é a RLS-f7 publicada:
+  - a solução gulosa entra como incumbente, e a RLS só devolve outra se o f7 dela
+    for menor;
+  - a busca parte de uma permutação induzida pela gulosa. Para cada chapa,
+    procura-se uma ordem e uma orientação das peças que o IBL empacote numa chapa
+    só: até 1000 tentativas por chapa, todas contadas como avaliações.
+  - O IBL (next-fit) nem sempre reproduz o layout best-fit da gulosa. Nas 153
+    instâncias finais, a permutação induzida começa com o mesmo K em 98 e com
+    1 a 5 chapas a mais em 55. Por isso a gulosa é mantida como incumbente.
+
 O argumento é definido por tarefa e fica registrado no contrato e em cada recibo.
 
 ## H*

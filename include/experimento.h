@@ -16,7 +16,8 @@ struct OpcoesExecucao {
     double limite_cpu = 0;
     string saida;
     bool salvar_solucao = false;
-    string inicial = "gulosa";
+    // Vazio: padrão do método (gulosa nas propostas; aleatória na RLS-f7).
+    string inicial;
 };
 
 struct ConfigExperimento {

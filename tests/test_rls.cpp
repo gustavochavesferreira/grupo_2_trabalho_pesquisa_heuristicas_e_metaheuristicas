@@ -1,4 +1,5 @@
 #include "rls.h"
+#include "construcao_inicial.h"
 
 #include <algorithm>
 #include <cmath>
@@ -127,5 +128,31 @@ int main() {
         auto final = executa_rls(bidimensional, 1001, 10, {40});
         exige(verifica_solucao(bidimensional, final.solucao).valido && decodifica_ibl(bidimensional, final.permutacao).f7 == final.f7, "RLS inválida nos casos bidimensionais.");
     }
-    cout << "RLS-f7: repetições/sinais, operadores, fallback 10T, aceitação, 30 sementes, avaliações, LBref, CPU e evolução: OK\n";
+    // Variante gulosa: a gulosa é a incumbente; nunca devolve solução pior que ela.
+    for (string caminho : {"tests/data/valida.txt", "tests/data/area_64bits.txt", "tests/data/integracao/reducao.txt",
+                           "tests/data/integracao/limite_inicial.txt", "tests/data/integracao/orcamento.txt"}) {
+        auto inst = le_instancia(caminho);
+        auto gulosa = constroi_solucao_inicial(inst);
+        ConfigRls cfg; cfg.max_avaliacoes = 200; cfg.inicial_gulosa = true;
+        auto a = executa_rls(inst, 1001, 10, cfg), b = executa_rls(inst, 1001, 10, cfg);
+        exige(verifica_solucao(inst, a.solucao).valido && a.solucao.chapas.size() <= gulosa.chapas.size(), "RLS gulosa piorou a incumbente: " + caminho);
+        exige(a.f7 == calcula_f7(inst.area_chapa, a.solucao.chapas.size(), area_perfil_superior(a.solucao.chapas.back(), inst.largura, inst.altura)), "f7 da RLS gulosa não corresponde à solução devolvida.");
+        exige(a.avaliacoes >= 1 && a.avaliacoes <= cfg.max_avaliacoes && retrato(a.solucao) == retrato(b.solucao) && a.f7 == b.f7, "RLS gulosa não reproduzível ou fora do teto.");
+        exige((a.motivo_parada == "limite_inferior") == (static_cast<int64_t>(a.solucao.chapas.size()) == a.limites.referencia), "Parada da RLS gulosa incoerente com LBref.");
+        // Permutação induzida: completa, decodificável e respeitando o limite de tentativas.
+        mt19937 g(7); uint64_t usadas = 0;
+        auto p = permutacao_da_solucao(inst, gulosa, g, 50, 1000000, usadas);
+        exige(p.size() == inst.copias.size() && verifica_solucao(inst, decodifica_ibl(inst, p).solucao).valido, "Permutação induzida inválida.");
+        exige(usadas >= gulosa.chapas.size() && usadas <= 50 * gulosa.chapas.size(), "Contagem de tentativas da indução incorreta.");
+        uint64_t poucas = 0; mt19937 h(7);
+        permutacao_da_solucao(inst, gulosa, h, 50, 1, poucas);
+        exige(poucas == 1, "Indução ultrapassou o limite de avaliações.");
+    }
+    {   // Uma chapa por item: a gulosa empata com a busca e a permutação induzida a reproduz.
+        auto inst = linha({6,6,6});
+        ConfigRls cfg; cfg.max_avaliacoes = 64; cfg.inicial_gulosa = true;
+        auto r2 = executa_rls(inst, 1001, 10, cfg);
+        exige(r2.solucao.chapas.size() == 3 && r2.motivo_parada == "limite_avaliacoes" && r2.avaliacoes == 64, "RLS gulosa em caso impossível incorreta.");
+    }
+    cout << "RLS-f7: repetições/sinais, operadores, fallback 10T, aceitação, 30 sementes, avaliações, LBref, CPU, evolução e variante gulosa: OK\n";
 }

@@ -77,7 +77,7 @@ $(HCOMB_TEST_EXE): $(COMMON_OBJS) obj/test_hcomb.o | bin
 $(IBL_TEST_EXE): obj/instancia.o obj/verificador_solucao.o obj/tempo_cpu.o obj/decodificador_ibl.o obj/test_ibl.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-$(RLS_TEST_EXE): obj/instancia.o obj/verificador_solucao.o obj/tempo_cpu.o obj/decodificador_ibl.o obj/limites_inferiores.o obj/rls.o obj/evolucao.o obj/test_rls.o | bin
+$(RLS_TEST_EXE): $(COMMON_OBJS) obj/test_rls.o | bin
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 $(EXPERIMENT_TEST_EXE): $(COMMON_OBJS) obj/test_experimento.o | bin

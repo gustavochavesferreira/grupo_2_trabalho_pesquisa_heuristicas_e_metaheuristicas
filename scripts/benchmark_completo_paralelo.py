@@ -3,10 +3,12 @@
 Matriz idêntica à do benchmark.py: 153 instâncias finais × 6 métodos (Hbase, Hext,
 Hint, Hcomb, Haleat, RLS-f7) × 10 sementes comuns = 9180 execuções de até 60 s de CPU.
 
-Solução inicial (--inicial, padrão aleatoria): na aleatória, as propostas e o Haleat
-partem da mesma inicial aleatória da RLS-f7 (--inicial aleatoria, mesma semente), o
-que torna a comparação com a RLS-f7 justa; a RLS-f7 é idêntica nas duas variantes.
-Na gulosa, as propostas e o Haleat partem da construção gulosa (padrão do executável).
+Solução inicial (--inicial, padrão aleatoria), a mesma para todos os métodos:
+- aleatoria: propostas e Haleat partem da inicial aleatória da RLS-f7 (--inicial
+  aleatoria, mesma semente); a RLS-f7 é a publicada.
+- gulosa: propostas e Haleat partem da construção gulosa (padrão do executável); a
+  RLS-f7 recebe --inicial gulosa: a gulosa é sua incumbente e a busca parte de uma
+  permutação induzida por ela (variante diagnóstica, não a RLS-f7 publicada).
 
 H* vem do lote do piloto paralelo com a MESMA inicial
 (results/piloto_paralelo_s10_j6/<inicial>), reauditado por inteiro a cada chamada,
@@ -60,8 +62,11 @@ def saida_padrao(jobs, inicial):
 
 
 def args_tarefa(metodo, inicial):
-    # A RLS-f7 já parte de uma inicial aleatória e o executável recusa --inicial para ela.
-    return [] if metodo == 'RLS-f7' else ARGS_INICIAL[inicial]
+    # Padrões do executável: propostas/Haleat partem da gulosa; RLS-f7, da aleatória.
+    # Só se passa --inicial quando a variante difere do padrão do método.
+    if metodo == 'RLS-f7':
+        return ['--inicial', 'gulosa'] if inicial == 'gulosa' else []
+    return ARGS_INICIAL[inicial]
 
 
 def resumir(metodo, linhas):
@@ -214,8 +219,8 @@ def main():
         if a.planejar:
             print(f'{TOTAL} execuções: 153 instâncias finais × 6 métodos × 10 sementes × até 60 s CPU '
                   f'(A 2280, BENG 600, CLASS 6300). Inicial: {a.inicial} '
-                  + ('(propostas e Haleat com --inicial aleatoria; RLS-f7 inalterada).' if a.inicial == 'aleatoria'
-                     else '(construção gulosa; RLS-f7 parte do aleatório).'))
+                  + ('(propostas e Haleat com --inicial aleatoria; RLS-f7 publicada).' if a.inicial == 'aleatoria'
+                     else '(todos partem da construção gulosa; RLS-f7 com --inicial gulosa).'))
             print(f'{a.jobs} processos em núcleos físicos {p["paralelismo"]["cpus"]}; teto nominal '
                   f'~{math.ceil(TOTAL/a.jobs)} min (~{TOTAL/a.jobs/60:.1f} h) de parede. Ordem: '
                   + (f'embaralhada (semente {a.embaralhar})' if a.embaralhar is not None else 'do plano'))

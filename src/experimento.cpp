@@ -47,7 +47,9 @@ void apresenta_uso(ostream& saida) {
           << "Configuração: arquivo chave=valor; exemplo em config/provisoria.cfg.\n"
           << "Gera um CSV por execução validada; recusa sobrescrever resultados ou soluções.\n"
           << "--salvar-solucao grava também os posicionamentos em CSV. --ajuda ou --help mostra esta ajuda.\n"
-          << "--inicial aleatoria (diagnóstico, exceto RLS-f7) parte da inicial aleatória da RLS-f7; padrão: gulosa.\n";
+          << "--inicial: solução inicial (diagnóstico). Padrão: gulosa nas propostas e aleatória na RLS-f7.\n"
+          << "  aleatoria: as propostas partem da inicial aleatória da RLS-f7 (mesma semente).\n"
+          << "  gulosa: a RLS-f7 parte da construção gulosa (incumbente) via permutação induzida.\n";
 }
 
 OpcoesExecucao le_opcoes(const vector<string>& argumentos) {
@@ -82,7 +84,6 @@ OpcoesExecucao le_opcoes(const vector<string>& argumentos) {
     if (valores.count("--inicial")) {
         opcoes.inicial = valores.at("--inicial");
         if (opcoes.inicial != "gulosa" && opcoes.inicial != "aleatoria") throw invalid_argument("--inicial deve ser gulosa ou aleatoria.");
-        if (opcoes.metodo == "RLS-f7") throw invalid_argument("--inicial não se aplica à RLS-f7, que já parte de uma inicial aleatória.");
     }
     return opcoes;
 }
@@ -136,7 +137,11 @@ ResultadoExecucao executa_metodo(const Instancia& instancia, const OpcoesExecuca
     else if (opcoes.metodo == "Hint") resultado.busca = executa_hint(instancia, opcoes.semente, opcoes.limite_cpu, busca);
     else if (opcoes.metodo == "Hcomb") resultado.busca = executa_hcomb(instancia, opcoes.semente, opcoes.limite_cpu, busca);
     else if (opcoes.metodo == "Haleat") resultado.busca = executa_haleat(instancia, opcoes.semente, opcoes.limite_cpu, busca);
-    else if (opcoes.metodo == "RLS-f7") resultado.rls = executa_rls(instancia, opcoes.semente, opcoes.limite_cpu, config.rls);
+    else if (opcoes.metodo == "RLS-f7") {
+        auto rls = config.rls;
+        rls.inicial_gulosa = opcoes.inicial == "gulosa";
+        resultado.rls = executa_rls(instancia, opcoes.semente, opcoes.limite_cpu, rls);
+    }
     else throw invalid_argument("Método desconhecido: " + opcoes.metodo);
     return resultado;
 }

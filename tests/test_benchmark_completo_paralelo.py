@@ -66,7 +66,10 @@ class BenchmarkCompletoParalelo(unittest.TestCase):
             self.assertEqual(dict(Counter(t['familia'] for t in p['tarefas'])), bc.FAMILIAS)
             self.assertEqual(p['metodos'], ['Hbase', 'Hext', 'Hint', 'Hcomb', 'Haleat', 'RLS-f7'])
             for t in p['tarefas']:
-                esperado = [] if t['metodo'] == 'RLS-f7' or inicial == 'gulosa' else ['--inicial', 'aleatoria']
+                if t['metodo'] == 'RLS-f7':
+                    esperado = ['--inicial', 'gulosa'] if inicial == 'gulosa' else []
+                else:
+                    esperado = [] if inicial == 'gulosa' else ['--inicial', 'aleatoria']
                 self.assertEqual(t['args_extras'], esperado)
             with self.assertRaises(ValueError):
                 bc.plano(6, 42, {'inicial': 'gulosa' if inicial == 'aleatoria' else 'aleatoria'}, inicial)
