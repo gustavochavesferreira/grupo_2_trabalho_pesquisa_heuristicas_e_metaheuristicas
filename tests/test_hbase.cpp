@@ -1,5 +1,6 @@
 #include "hbase.h"
 #include "construcao_inicial.h"
+#include "rls.h"
 
 #include <algorithm>
 #include <iostream>
@@ -138,5 +139,18 @@ int main() {
     try { aceita_reducao(melhora, reparo_valido, incumbente, expirado, eventos); }
     catch (const TempoEsgotado&) { parou = true; }
     exige(parou && incumbente.reducoes_aceitas == 0 && eventos.empty() && retrato_solucao(incumbente.solucao) == retrato_antes, "Redução foi aceita após o prazo.");
-    cout << "Hbase: redução, LBref, VNS, conservação, reprodução, orçamento e CPU: OK\n";
+    // Diagnóstico com inicial aleatória: parte da inicial da RLS-f7 com a mesma semente,
+    // é reproduzível, termina válida e nunca piora o ponto de partida.
+    auto bidimensional = linha({3,3,3,2,2,2,1,1,1,4,4,5,5,6,7});
+    for (uint32_t s : {1001u, 1002u, 1003u}) {
+        mt19937 g(s);
+        auto inicial = decodifica_ibl(bidimensional, permutacao_inicial_rls(bidimensional, g)).solucao.chapas.size();
+        ConfigHbase aleatoria{2, 5, 1000, true};
+        for (auto executa : {executa_hbase, executa_hext, executa_hint, executa_hcomb, executa_haleat}) {
+            auto r = executa(bidimensional, s, 10, aleatoria), b = executa(bidimensional, s, 10, aleatoria);
+            exige(verifica_solucao(bidimensional, r.solucao).valido && retrato_solucao(r.solucao) == retrato_solucao(b.solucao), "Inicial aleatória inválida ou não reproduzível.");
+            exige(r.solucao.chapas.size() + r.reducoes_aceitas == inicial, "Inicial aleatória não é a da RLS-f7.");
+        }
+    }
+    cout << "Hbase: redução, LBref, VNS, conservação, reprodução, orçamento, CPU e inicial aleatória: OK\n";
 }

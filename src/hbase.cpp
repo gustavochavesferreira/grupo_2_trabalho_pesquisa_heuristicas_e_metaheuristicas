@@ -1,5 +1,6 @@
 #include "hbase.h"
 #include "construcao_inicial.h"
+#include "rls.h"
 
 #include <algorithm>
 #include <cmath>
@@ -61,7 +62,14 @@ ResultadoHbase executa_arquitetura(const Instancia& instancia, uint32_t semente,
     resultado.controle_auxiliar = controle_aleatorio;
     resultado.metodo = controle_aleatorio ? "Haleat" : (orientacao_interna ? (orientacao_externa ? "Hcomb" : "Hint") : (orientacao_externa ? "Hext" : "Hbase"));
     // Sem solução inicial completa não há resultado factível para devolver.
-    resultado.solucao = constroi_solucao_inicial(instancia, &relogio);
+    if (config.inicial_aleatoria) {
+        // Mesmo ponto de partida da RLS-f7: permutação assinada aleatória decodificada pelo IBL.
+        // Gerador próprio, para a inicial depender só da semente e ser igual entre os métodos.
+        mt19937 gerador_inicial(semente);
+        resultado.solucao = decodifica_ibl(instancia, permutacao_inicial_rls(instancia, gerador_inicial, &relogio), &relogio).solucao;
+    } else {
+        resultado.solucao = constroi_solucao_inicial(instancia, &relogio);
+    }
     resultado.tempo_melhor = relogio.decorrido();
     vector<pair<double, int64_t>> melhorias{{resultado.tempo_melhor, static_cast<int64_t>(resultado.solucao.chapas.size())}};
     resultado.limites = calcula_limites(instancia);

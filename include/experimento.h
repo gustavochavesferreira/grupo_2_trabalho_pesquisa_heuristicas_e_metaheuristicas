@@ -16,6 +16,7 @@ struct OpcoesExecucao {
     double limite_cpu = 0;
     string saida;
     bool salvar_solucao = false;
+    string inicial = "gulosa";
 };
 
 struct ConfigExperimento {

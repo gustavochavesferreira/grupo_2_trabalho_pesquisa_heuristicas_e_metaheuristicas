@@ -35,6 +35,30 @@ class BenchmarkEstendido(unittest.TestCase):
         self.assertEqual(sorted(p['paralelismo']['ordem_execucao']), sorted(par.nome(t) for t in p['tarefas']))
         self.assertEqual(len(est.plano(6, None, 10)['tarefas']), 18*6*10)
 
+    def test_plano_inicial_aleatoria(self):
+        p = est.plano(6, 42, 3, inicial='aleatoria')
+        self.assertEqual(p['metodos'], ['Hbase', 'Hext', 'Hint', 'Hcomb', 'Haleat'])
+        self.assertEqual(p['args_extras'], ['--inicial', 'aleatoria'])
+        self.assertEqual(len(p['tarefas']), 18*5*3)
+        self.assertNotIn('RLS-f7', {t['metodo'] for t in p['tarefas']})
+        # A variante gulosa (padrão) mantém o formato de plano do lote já executado.
+        self.assertNotIn('args_extras', est.plano(6, 42, 3))
+
+    def test_execucao_inicial_aleatoria_passa_opcao(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            raiz = Path(tmp); saida = raiz/'resultados'
+            p = est.plano(6, None, 1, inicial='aleatoria')
+            for t in p['tarefas']:
+                origem = raiz/(t['instancia']+'.ins2D')
+                origem.write_bytes((est.RAIZ/'tests/data/integracao/limite_inicial.txt').read_bytes())
+                t['caminho_instancia'] = str(origem); t['sha256_instancia'] = est.sha(origem)
+            par.executar(p, None, False, saida, 6)
+            recibos = [json.loads(f.read_text()) for f in saida.glob('execucoes/*/concluida.json')]
+            self.assertEqual(len(recibos), 90)
+            self.assertTrue(all(r['comando'][-2:] == ['--inicial', 'aleatoria'] for r in recibos))
+            with (saida/'tabela_comparacao.csv').open() as f:
+                self.assertEqual([r['metodo'] for r in csv.DictReader(f)], ['Hbase', 'Hext', 'Hint', 'Hcomb', 'Haleat'])
+
     def test_lista_invalida_recusada(self):
         with tempfile.TemporaryDirectory() as tmp:
             for conteudo in ['A4\nA4\n', 'A14\n', 'XYZ\n', '# vazia\n']:

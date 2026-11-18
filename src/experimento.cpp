@@ -41,11 +41,13 @@ double cpu_opcao(string texto) {
 void apresenta_uso(ostream& saida) {
     saida << "Uso: ./bin/tp3 --instancia ARQUIVO --metodo METODO --config ARQUIVO\n"
           << "              --semente INTEIRO --cpu SEGUNDOS --saida DIRETORIO [--salvar-solucao]\n"
+          << "              [--inicial gulosa|aleatoria]\n"
           << "Métodos: Hbase, Hext, Hint, Hcomb, Haleat (controle auxiliar), RLS-f7.\n"
           << "A semente deve estar entre 0 e 4294967295; CPU usa ponto decimal e deve ser positiva.\n"
           << "Configuração: arquivo chave=valor; exemplo em config/provisoria.cfg.\n"
           << "Gera um CSV por execução validada; recusa sobrescrever resultados ou soluções.\n"
-          << "--salvar-solucao grava também os posicionamentos em CSV. --ajuda ou --help mostra esta ajuda.\n";
+          << "--salvar-solucao grava também os posicionamentos em CSV. --ajuda ou --help mostra esta ajuda.\n"
+          << "--inicial aleatoria (diagnóstico, exceto RLS-f7) parte da inicial aleatória da RLS-f7; padrão: gulosa.\n";
 }
 
 OpcoesExecucao le_opcoes(const vector<string>& argumentos) {
@@ -55,7 +57,7 @@ OpcoesExecucao le_opcoes(const vector<string>& argumentos) {
         return opcoes;
     }
     map<string, string> valores;
-    set<string> conhecidas{"--instancia", "--metodo", "--config", "--semente", "--cpu", "--saida", "--salvar-solucao"};
+    set<string> conhecidas{"--instancia", "--metodo", "--config", "--semente", "--cpu", "--saida", "--salvar-solucao", "--inicial"};
     for (size_t i = 0; i < argumentos.size(); i++) {
         string opcao = argumentos[i];
         if (!conhecidas.count(opcao)) throw invalid_argument("Opção desconhecida: " + opcao);
@@ -77,6 +79,11 @@ OpcoesExecucao le_opcoes(const vector<string>& argumentos) {
     opcoes.limite_cpu = cpu_opcao(valores.at("--cpu"));
     opcoes.saida = valores.at("--saida");
     opcoes.salvar_solucao = valores.count("--salvar-solucao") > 0;
+    if (valores.count("--inicial")) {
+        opcoes.inicial = valores.at("--inicial");
+        if (opcoes.inicial != "gulosa" && opcoes.inicial != "aleatoria") throw invalid_argument("--inicial deve ser gulosa ou aleatoria.");
+        if (opcoes.metodo == "RLS-f7") throw invalid_argument("--inicial não se aplica à RLS-f7, que já parte de uma inicial aleatória.");
+    }
     return opcoes;
 }
 
@@ -122,11 +129,13 @@ ConfigExperimento le_configuracao(string caminho) {
 ResultadoExecucao executa_metodo(const Instancia& instancia, const OpcoesExecucao& opcoes, const ConfigExperimento& config) {
     ResultadoExecucao resultado;
     resultado.metodo = opcoes.metodo;
-    if (opcoes.metodo == "Hbase") resultado.busca = executa_hbase(instancia, opcoes.semente, opcoes.limite_cpu, config.busca);
-    else if (opcoes.metodo == "Hext") resultado.busca = executa_hext(instancia, opcoes.semente, opcoes.limite_cpu, config.busca);
-    else if (opcoes.metodo == "Hint") resultado.busca = executa_hint(instancia, opcoes.semente, opcoes.limite_cpu, config.busca);
-    else if (opcoes.metodo == "Hcomb") resultado.busca = executa_hcomb(instancia, opcoes.semente, opcoes.limite_cpu, config.busca);
-    else if (opcoes.metodo == "Haleat") resultado.busca = executa_haleat(instancia, opcoes.semente, opcoes.limite_cpu, config.busca);
+    auto busca = config.busca;
+    busca.inicial_aleatoria = opcoes.inicial == "aleatoria";
+    if (opcoes.metodo == "Hbase") resultado.busca = executa_hbase(instancia, opcoes.semente, opcoes.limite_cpu, busca);
+    else if (opcoes.metodo == "Hext") resultado.busca = executa_hext(instancia, opcoes.semente, opcoes.limite_cpu, busca);
+    else if (opcoes.metodo == "Hint") resultado.busca = executa_hint(instancia, opcoes.semente, opcoes.limite_cpu, busca);
+    else if (opcoes.metodo == "Hcomb") resultado.busca = executa_hcomb(instancia, opcoes.semente, opcoes.limite_cpu, busca);
+    else if (opcoes.metodo == "Haleat") resultado.busca = executa_haleat(instancia, opcoes.semente, opcoes.limite_cpu, busca);
     else if (opcoes.metodo == "RLS-f7") resultado.rls = executa_rls(instancia, opcoes.semente, opcoes.limite_cpu, config.rls);
     else throw invalid_argument("Método desconhecido: " + opcoes.metodo);
     return resultado;

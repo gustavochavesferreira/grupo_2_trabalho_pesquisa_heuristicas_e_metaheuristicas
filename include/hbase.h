@@ -11,6 +11,9 @@ struct ConfigHbase {
     size_t chapas_perturbadas = 2;
     size_t max_reinicios = 5;
     size_t max_avaliacoes_reparo = 1000;
+    // Experimento de diagnóstico: partir da solução inicial aleatória da RLS-f7
+    // (mesma semente) em vez da construção gulosa. Não faz parte da configuração congelada.
+    bool inicial_aleatoria = false;
 };
 
 struct ResultadoHbase {

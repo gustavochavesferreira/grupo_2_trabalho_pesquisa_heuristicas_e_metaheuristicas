@@ -16,11 +16,13 @@ import time
 
 import benchmark_reduzido as base
 import benchmark_reduzido_paralelo as par
-from executar_experimentos import RAIZ, METODOS, SEMENTES, ler_manifesto, sha
+from executar_experimentos import RAIZ, METODOS, PROPOSTAS, SEMENTES, ler_manifesto, sha
 from validar_execucao import exigir
 from verificar_congelamento import verificar
 
 LISTA = RAIZ/'config/benchmark_estendido.txt'
+# Diagnóstico: os métodos da arquitetura partem da inicial aleatória da RLS-f7 (mesma semente).
+METODOS_INICIAL_ALEATORIA = PROPOSTAS + ['Haleat']
 
 
 def ler_lista(caminho):
@@ -29,7 +31,7 @@ def ler_lista(caminho):
     return ids
 
 
-def plano(jobs, semente_ordem, n_sementes, lista=LISTA):
+def plano(jobs, semente_ordem, n_sementes, lista=LISTA, inicial='gulosa'):
     verificar()
     exigir(1 <= n_sementes <= len(SEMENTES), f'Use de 1 a {len(SEMENTES)} sementes.')
     sementes = SEMENTES[:n_sementes]
@@ -39,17 +41,20 @@ def plano(jobs, semente_ordem, n_sementes, lista=LISTA):
     fora = [i for i in ids if i not in final]
     exigir(not fora, f'Instâncias fora do manifesto final: {", ".join(fora)}')
     exigir(not set(ids) & piloto, 'Interseção com piloto.')
+    metodos = METODOS if inicial == 'gulosa' else METODOS_INICIAL_ALEATORIA
     tarefas = []
     for i in ids:
         r = final[i]
         origem = (RAIZ/'instances/source'/r['caminho']).resolve()
         exigir(origem.is_relative_to((RAIZ/'instances/source').resolve()) and sha(origem) == r['sha256'],
                f'Instância ausente/alterada: {i}')
-        for m in METODOS:
+        for m in metodos:
             for s in sementes:
                 tarefas.append(dict(instancia=i, familia=r['familia'], metodo=m, semente=s,
                                     caminho_instancia=str(origem), sha256_instancia=r['sha256']))
-    return dict(uso='benchmark_estendido_TA_sem_H_estrela', cpu=60, tarefas=tarefas, sementes=sementes,
+    extras = {} if inicial == 'gulosa' else dict(inicial=inicial, metodos=metodos, args_extras=['--inicial', inicial])
+    return dict(uso='benchmark_estendido_TA_sem_H_estrela' + ('' if inicial == 'gulosa' else '_inicial_' + inicial),
+                cpu=60, tarefas=tarefas, sementes=sementes, **extras,
                 lista=ids, lista_sha256=sha(lista), config_sha256=sha(base.CONFIG),
                 sementes_sha256=sha(RAIZ/'config/sementes.txt'),
                 manifestos={n: sha(RAIZ/f'instances/manifests/{n}.csv') for n in ['piloto', 'final']},
@@ -65,6 +70,8 @@ def main():
     parser.add_argument('--embaralhar', type=int, metavar='SEMENTE', nargs='?', const=1,
                         help='ordem aleatória reproduzível (padrão da semente: 1); sem a opção, ordem do plano')
     parser.add_argument('--sementes', type=int, default=3, help='quantas sementes comuns usar (1001..), padrão 3')
+    parser.add_argument('--inicial', choices=['gulosa', 'aleatoria'], default='gulosa',
+                        help='aleatoria: diagnóstico com a inicial aleatória da RLS-f7, sem a RLS-f7 (padrão: gulosa)')
     parser.add_argument('--max-minutos', type=float, help='Teto total de parede; padrão: teto nominal + 30 min.')
     g = parser.add_mutually_exclusive_group()
     g.add_argument('--planejar', action='store_true')
@@ -72,9 +79,10 @@ def main():
     a = parser.parse_args()
     if a.jobs < 1:
         parser.error('-j deve ser positivo.')
-    saida = RAIZ/f'results/benchmark_estendido_s{a.sementes}_j{a.jobs}/congelada_v2'
+    sufixo = '' if a.inicial == 'gulosa' else f'_inicial_{a.inicial}'
+    saida = RAIZ/f'results/benchmark_estendido_s{a.sementes}_j{a.jobs}{sufixo}/congelada_v2'
     try:
-        p = plano(a.jobs, a.embaralhar, a.sementes)
+        p = plano(a.jobs, a.embaralhar, a.sementes, inicial=a.inicial)
     except (OSError, ValueError, KeyError) as e:
         print(f'Erro: {e}', file=sys.stderr); return 1
     total = len(p['tarefas'])
@@ -83,9 +91,10 @@ def main():
     if not math.isfinite(max_minutos) or max_minutos <= 0:
         parser.error('Teto deve ser positivo e finito.')
     if a.planejar:
-        print(f'{total} execuções: {len(p["lista"])} instâncias finais × {len(METODOS)} métodos × '
+        print(f'{total} execuções: {len(p["lista"])} instâncias finais × {len(p.get("metodos", METODOS))} métodos × '
               f'{len(p["sementes"])} sementes × até 60 s CPU.')
         print('Instâncias:', ', '.join(p['lista']))
+        print('Inicial:', a.inicial, '| Métodos:', ', '.join(p.get('metodos', METODOS)))
         print(f'{a.jobs} processos simultâneos; teto nominal ~{nominal} min de parede '
               f'(--max-minutos {max_minutos:g}). Ordem: '
               + (f'embaralhada (semente {a.embaralhar})' if a.embaralhar is not None else 'do plano'))

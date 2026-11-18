@@ -92,7 +92,7 @@ class Lote:
         temp = Path(tempfile.mkdtemp(prefix=d.name+'__', dir=pend))
         comando = [str(RAIZ/'bin/tp3'), '--instancia', t['caminho_instancia'], '--metodo', t['metodo'],
                    '--config', str(self.cfg_path), '--semente', str(t['semente']), '--cpu', '60',
-                   '--saida', str(temp), '--salvar-solucao']
+                   '--saida', str(temp), '--salvar-solucao', *self.p.get('args_extras', [])]
         inicio = agora()
         cpu = self.cpus_livres.get()
         try:
@@ -211,7 +211,7 @@ def executar(p, prazo, somente_analisar, saida, jobs):
         conferir_prazo(prazo)
         rows = [linha_csv(next(f for f in (saida/'execucoes'/nome(t)).glob('*.csv')
                                if not f.name.endswith('.solucao.csv'))) for t in p['tarefas']]
-        gravar_tabela(saida/'tabela_comparacao.csv', rows, METODOS, {t['instancia'] for t in p['tarefas']}, sementes)
+        gravar_tabela(saida/'tabela_comparacao.csv', rows, p.get('metodos', METODOS), {t['instancia'] for t in p['tarefas']}, sementes)
         json_atomico(saida/'integridade.json', dict(valido=True, execucoes=total, contrato_sha256=digest,
             uso=p['uso'], paralelismo={k: v for k, v in p['paralelismo'].items() if k != 'ordem_execucao'},
             familias=dict(Counter(t['familia'] for t in p['tarefas']))))
