@@ -1,0 +1,37 @@
+{
+  "arquivos": {
+    "cl_07_100_01__Hint__1001__congelada_v2.csv": "6dcf4d4fcf5952ac40c0f89baccbaff9a46f62ee3ca20bb57dbd682590769ab5",
+    "cl_07_100_01__Hint__1001__congelada_v2.solucao.csv": "8a1c2bf836d20737cafe2c3c75e21eecad6bee3c6fea66fea2c705670f805e6c"
+  },
+  "codigo_saida": 0,
+  "comando": [
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/bin/tp3",
+    "--instancia",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+    "--metodo",
+    "Hint",
+    "--config",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_completo_paralelo_j6/gulosa/congelada_v2/config.cfg",
+    "--semente",
+    "1001",
+    "--cpu",
+    "60",
+    "--saida",
+    "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/results/benchmark_completo_paralelo_j6/gulosa/congelada_v2/.pendentes/cl_07_100_01__Hint__1001__biphdyom",
+    "--salvar-solucao"
+  ],
+  "contrato_sha256": "7a089d9fb30aa33e248bfdc31ae2dc8b645465eb6abeeb5537b7de52d34a5b4c",
+  "cpu_logica": 1,
+  "fim_utc": "2026-11-18T13:12:29.643438+00:00",
+  "inicio_utc": "2026-11-18T13:11:29.633508+00:00",
+  "tarefa": {
+    "args_extras": [],
+    "caminho_instancia": "/home/fgomide/Documents/Courses/heuris/tp/grupo_2_trabalho_pesquisa_heuristicas_e_metaheuristicas/instances/source/CLASS/CLASS/cl_07_100_01.ins2D",
+    "familia": "CLASS",
+    "instancia": "cl_07_100_01",
+    "metodo": "Hint",
+    "semente": 1001,
+    "sha256_instancia": "de1c23f8b30865c714891ed5452cabdfd209f2bfb9529984a872d8a9268dc598"
+  },
+  "versao": 1
+}

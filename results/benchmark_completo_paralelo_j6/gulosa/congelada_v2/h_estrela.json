@@ -1,0 +1,55 @@
+{
+  "H_estrela": "Hbase",
+  "criterio": [
+    "menor_desvio_medio",
+    "maior_alcance_lb",
+    "menor_tempo_melhor_mediano"
+  ],
+  "desempate_final": "ordem Hbase, Hext, Hint, Hcomb somente se os três critérios forem idênticos",
+  "empate_total": [
+    "Hbase"
+  ],
+  "execucoes_validas": 400,
+  "inicial": "gulosa",
+  "origem": "piloto paralelo, inicial gulosa (aceito pelo grupo como piloto válido)",
+  "piloto_contrato_sha256": "530a0a80258903739d1792d0d90f7f6f8a4b971ae90eeeb2fd9e402e65f12a67",
+  "piloto_lote": "results/piloto_paralelo_s10_j6/gulosa/congelada_v2",
+  "resumos": [
+    {
+      "K_medio": 20.3,
+      "alcances_lb": 55,
+      "desvio_exato": "28537/4128",
+      "desvio_medio": 6.913032945736434,
+      "execucoes": 100,
+      "metodo": "Hbase",
+      "tempo_melhor_mediano": 0.0027853099999999996
+    },
+    {
+      "K_medio": 20.32,
+      "alcances_lb": 54,
+      "desvio_exato": "29225/4128",
+      "desvio_medio": 7.0796996124031,
+      "execucoes": 100,
+      "metodo": "Hext",
+      "tempo_melhor_mediano": 0.00291732
+    },
+    {
+      "K_medio": 20.37,
+      "alcances_lb": 53,
+      "desvio_exato": "10315/1376",
+      "desvio_medio": 7.496366279069767,
+      "execucoes": 100,
+      "metodo": "Hint",
+      "tempo_melhor_mediano": 0.0027633500000000004
+    },
+    {
+      "K_medio": 20.35,
+      "alcances_lb": 54,
+      "desvio_exato": "30257/4128",
+      "desvio_medio": 7.3296996124031,
+      "execucoes": 100,
+      "metodo": "Hcomb",
+      "tempo_melhor_mediano": 0.00279911
+    }
+  ]
+}
